@@ -18,9 +18,7 @@ export default function Home() {
             <div className="space-y-6 pt-8">
 
               <div className="flex flex-col items-center space-y-4 w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
-                      <iframe style={{borderRadius: "24px"}} src="https://untitled.stream/embed/IqcnraRHM0Xo" className="w-full h-48 sm:h-52 md:h-56 lg:h-64" allowFullScreen allow="picture-in-picture" frameBorder="0" loading="lazy"></iframe>
-                      <iframe style={{borderRadius: "24px"}} src="https://untitled.stream/embed/BOjrNRytCE9W" className="w-full h-48 sm:h-52 md:h-56 lg:h-64" allowFullScreen allow="picture-in-picture" frameBorder="0" loading="lazy"></iframe>
-                      <iframe style={{borderRadius: "24px"}} src="https://untitled.stream/embed/UYeblQmbx1gX" className="w-full h-48 sm:h-52 md:h-56 lg:h-64" allowFullScreen allow="picture-in-picture" frameBorder="0" loading="lazy"></iframe>
+                <iframe style={{borderRadius: "24px"}} src="https://untitled.stream/embed/ZnROlQlv9Yer" width="100%" height="344" allowFullScreen allow="picture-in-picture" frameBorder="0" loading="lazy"></iframe>
               </div>
             </div>
           </div>
