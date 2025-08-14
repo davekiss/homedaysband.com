@@ -1,4 +1,5 @@
 import Footer from './components/Footer';
+import Shows from './components/Shows';
 
 export default function Home() {
   return (
@@ -27,6 +28,8 @@ export default function Home() {
                 <iframe style={{borderRadius: "24px"}} src="https://untitled.stream/embed/ZnROlQlv9Yer" width="100%" height="344" allowFullScreen allow="picture-in-picture" frameBorder="0" loading="lazy"></iframe>
               </div>
             </div>
+
+            <Shows />
           </div>
         </div>
 
