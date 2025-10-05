@@ -2,13 +2,17 @@ type Show = {
   date: string;
   venue: string;
   location: string;
+  supportingActs?: string[];
+  ticketsUrl?: string;
 };
 
 const shows: Show[] = [
-  // Add show objects here with properties like date, venue, location, etc.
-  // Example:
-  // { date: "2024-09-15", venue: "The Local Bar", location: "Portland, OR" },
-  // { date: "2024-09-22", venue: "Main Street Venue", location: "Seattle, WA" },
+  {
+    date: "November 22, 2025",
+    venue: "Brother's Lounge",
+    location: "Cleveland, OH",
+    supportingActs: ["Isles", "Rusted Hearts", "Archangel"],
+  }
 ];
 
 export default function Shows() {
@@ -19,14 +23,31 @@ export default function Shows() {
         {shows.length > 0 ? (
           <div className="space-y-4 w-full">
             {shows.map((show, index) => (
-              <div key={index} className="bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-orange-200/30 shadow-lg">
+              <div key={index} className="bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-orange-200/30">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                   <div>
                     <h3 className="text-xl font-semibold text-orange-700">{show.venue}</h3>
-                    <p className="text-orange-600">{show.location}</p>
+                    <p className="text-orange-600">
+                      {show.location}
+                      {show.supportingActs && show.supportingActs.length > 0 && (
+                        <span className="text-orange-500/80 text-sm block sm:inline sm:before:content-['\00a0\2022\00a0']">
+                          with {show.supportingActs.join(", ")}
+                        </span>
+                      )}
+                    </p>
                   </div>
-                  <div className="mt-2 sm:mt-0">
+                  <div className="mt-2 sm:mt-0 flex flex-col items-end">
                     <p className="text-lg font-medium text-orange-800">{show.date}</p>
+                    {show.ticketsUrl && (
+                      <a
+                        href={show.ticketsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 px-4 py-1.5 bg-orange-500 hover:bg-orange-600 text-white rounded-md text-sm transition-colors duration-200"
+                      >
+                        Tickets
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
