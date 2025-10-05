@@ -201,7 +201,7 @@ export default function EPKPage() {
               {/* Video embed placeholder */}
               <div className="aspect-video bg-gradient-to-br from-orange-200 to-amber-200 rounded-xl mb-6 flex items-center justify-center border border-orange-200 shadow-inner overflow-hidden">
                 <div className="text-center text-orange-700 p-8">
-                  <iframe width="1264" height="711" src="https://www.youtube.com/embed/PO7K8GsUnug" title="Homedays - Calico + Cinematheque - 9/21/25 Brothers Lounge" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                  <iframe width="1264" height="711" src="https://www.youtube.com/embed/PO7K8GsUnug" title="Homedays - Calico + Cinematheque - 9/21/25 Brothers Lounge" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 </div>
               </div>
 
