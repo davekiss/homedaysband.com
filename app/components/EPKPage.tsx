@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 type PressQuote = {
   quote: string;
@@ -69,12 +70,12 @@ export default function EPKPage() {
               <h1 className="bitcount-homedays text-3xl sm:text-4xl font-bold text-orange-800 tracking-wide">
                 Homedays
               </h1>
-              <a
+              <Link
                 href="/"
                 className="text-sm text-orange-600 hover:text-orange-800 transition-colors"
               >
                 ← Back to site
-              </a>
+              </Link>
             </div>
             <p className="text-sm text-orange-600 mt-1">Electronic Press Kit</p>
           </div>
@@ -105,7 +106,7 @@ export default function EPKPage() {
                   Homedays is a Cleveland-based band writing songs for the moments that slip away too fast: the unfiltered delight of being snowed in, the quiet pull of your own comforter on a cold morning.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  Their sound bridges post-rock's spaciousness, emo indie's ache, and alt-pop's shimmer, building tension and release. Formed in early 2025, Homedays is just beginning to share their growing collection of songs, each one reaching for that fleeting feeling of being fully present before it's gone.
+                  Their sound bridges post-rock&apos;s spaciousness, emo indie&apos;s ache, and alt-pop&apos;s shimmer, building tension and release. Formed in early 2025, Homedays is just beginning to share their growing collection of songs, each one reaching for that fleeting feeling of being fully present before it&apos;s gone.
                 </p>
               </div>
             </div>
