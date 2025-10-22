@@ -23,7 +23,7 @@ const shows: Show[] = [
 
 export default function Shows() {
   return (
-    <div className="space-y-6 pt-12">
+    <div className="space-y-6 py-12">
       <h2 className="text-3xl sm:text-4xl font-bold text-center text-[#a41b77] mb-8">Upcoming shows</h2>
       <div className="flex flex-col items-center w-full max-w-2xl mx-auto px-4">
         {shows.length > 0 ? (

@@ -41,6 +41,25 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Parallax lift for section below hero using CSS scroll-driven animations */
+@keyframes lift-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-160px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-lift { animation: none !important; }
+}
+
+@supports (animation-timeline: scroll()) {
+  .parallax-lift {
+    will-change: transform;
+    animation: lift-up linear both;
+    /* Start a bit before it enters view and finish shortly after */
+    animation-timeline: view(-120px);
+  }
+}
+
 .film-grain {
   position: fixed;
   top: 0;

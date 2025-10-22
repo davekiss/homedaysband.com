@@ -18,18 +18,20 @@ export default function Home() {
                   className="w-full h-full object-cover opacity-50"
                 />
               </div>
-              <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] uppercase text-[#3a4232]">
+              <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] uppercase text-[#3a4232] relative z-10">
                 Homedays
               </h1>
             </div>
 
-            <div className="space-y-6 pt-8">
-              <div className="flex flex-col items-center space-y-4 w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
-                <iframe style={{borderRadius: "24px"}} src="https://untitled.stream/embed/ZnROlQlv9Yer" width="100%" height="344" allowFullScreen allow="picture-in-picture" frameBorder="0" loading="lazy"></iframe>
+            <div className="parallax-lift relative z-0" style={{ background: "var(--background)" }}>
+              <div className="space-y-6 pt-8">
+                <div className="flex flex-col items-center space-y-4 w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
+                  <iframe style={{borderRadius: "24px"}} src="https://untitled.stream/embed/ZnROlQlv9Yer" width="100%" height="344" allowFullScreen allow="picture-in-picture" frameBorder="0" loading="lazy"></iframe>
+                </div>
               </div>
-            </div>
 
-            <Shows />
+              <Shows />
+            </div>
           </div>
         </div>
 
