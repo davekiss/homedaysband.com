@@ -54,30 +54,30 @@ export default function EPKPage() {
   const [activeSection, setActiveSection] = useState<string>('overview');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 relative">
+    <div className="min-h-screen relative">
       {/* Subtle texture overlay */}
       <div className="film-grain opacity-30"></div>
 
       {/* Ambient blobs */}
-      <div className="absolute top-40 left-20 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-40 right-20 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl"></div>
+      <div className="absolute top-40 left-20 w-96 h-96 bg-[#a41b77]/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-40 right-20 w-96 h-96 bg-[#a41b77]/10 rounded-full blur-3xl"></div>
 
       <div className="relative z-10">
         {/* Header */}
-        <header className="border-b border-orange-200/50 bg-white/40 backdrop-blur-md sticky top-0 z-50">
+        <header className="border-b border-[#a41b77]/30 bg-white/40 backdrop-blur-md sticky top-0 z-50">
           <div className="max-w-6xl mx-auto px-6 py-6">
             <div className="flex items-center justify-between">
-              <h1 className="bitcount-homedays text-3xl sm:text-4xl font-bold text-orange-800 tracking-wide">
+              <h1 className="bitcount-homedays text-3xl sm:text-4xl font-bold text-[#a41b77] tracking-wide">
                 Homedays
               </h1>
               <Link
                 href="/"
-                className="text-sm text-orange-600 hover:text-orange-800 transition-colors"
+                className="text-sm text-[#a41b77] hover:text-[#a41b77]/80 transition-colors"
               >
                 ← Back to site
               </Link>
             </div>
-            <p className="text-sm text-orange-600 mt-1">Electronic Press Kit</p>
+            <p className="text-sm text-[#a41b77] mt-1">Electronic Press Kit</p>
           </div>
         </header>
 
@@ -86,19 +86,19 @@ export default function EPKPage() {
 
           {/* Overview */}
           <section id="overview" className="scroll-mt-20">
-            <div className="bg-white/60 backdrop-blur-sm rounded-sm p-8 sm:p-12 border border-orange-200/50 shadow-sm">
-              <div className="space-y-4 text-orange-900/80">
+            <div className="bg-white/60 backdrop-blur-sm rounded-sm p-8 sm:p-12 border border-[#a41b77]/30 shadow-sm">
+              <div className="space-y-4 text-[#a41b77]">
                 <div className="flex flex-wrap gap-3 mb-6">
-                  <span className="px-4 py-2 bg-orange-100 rounded-full text-sm font-medium text-orange-800">
+                  <span className="px-4 py-2 bg-[#a41b77]/10 rounded-full text-sm font-medium text-[#a41b77]">
                     Pop Alt
                   </span>
-                  <span className="px-4 py-2 bg-orange-100 rounded-full text-sm font-medium text-orange-800">
+                  <span className="px-4 py-2 bg-[#a41b77]/10 rounded-full text-sm font-medium text-[#a41b77]">
                     Post-Rock
                   </span>
-                  <span className="px-4 py-2 bg-orange-100 rounded-full text-sm font-medium text-orange-800">
+                  <span className="px-4 py-2 bg-[#a41b77]/10 rounded-full text-sm font-medium text-[#a41b77]">
                     Emo Indie
                   </span>
-                  <span className="px-4 py-2 bg-orange-100 rounded-full text-sm font-medium text-orange-800">
+                  <span className="px-4 py-2 bg-[#a41b77]/10 rounded-full text-sm font-medium text-[#a41b77]">
                     Cleveland, OH
                   </span>
                 </div>
@@ -114,17 +114,17 @@ export default function EPKPage() {
 
           {/* Promo Photos */}
           <section id="photos" className="scroll-mt-20">
-            <h2 className="text-4xl sm:text-5xl font-bold text-orange-900 mb-8 bitcount-homedays">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#a41b77] mb-8 bitcount-homedays">
               Promo Photos
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="aspect-[4/3] bg-gradient-to-br from-orange-200 to-amber-200 rounded-xl border border-orange-200/50 flex items-center justify-center shadow-sm overflow-hidden">
-                <div className="text-center text-orange-700 p-8">
+              <div className="aspect-[4/3] bg-gradient-to-br from-[#a41b77]/15 to-[#a41b77]/5 rounded-xl border border-[#a41b77]/30 flex items-center justify-center shadow-sm overflow-hidden">
+                <div className="text-center text-[#a41b77] p-8">
                   <img src="/images/homedays-epk-photo-1.png" alt="Homedays EPK Photo 1" />
                 </div>
               </div>
-              <div className="aspect-[4/3] bg-gradient-to-br from-amber-200 to-orange-300 rounded-xl border border-orange-200/50 flex items-center justify-center shadow-sm overflow-hidden">
-                <div className="text-center text-orange-700 p-8">
+              <div className="aspect-[4/3] bg-gradient-to-br from-[#a41b77]/10 to-[#a41b77]/20 rounded-xl border border-[#a41b77]/30 flex items-center justify-center shadow-sm overflow-hidden">
+                <div className="text-center text-[#a41b77] p-8">
                   <img src="/images/homedays-epk-photo-2.png" alt="Homedays EPK Photo 2" />
                 </div>
               </div>
@@ -152,28 +152,28 @@ export default function EPKPage() {
 
           {/* Music */}
           <section id="music" className="scroll-mt-20">
-            <h2 className="text-4xl sm:text-5xl font-bold text-orange-900 mb-8 bitcount-homedays">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#a41b77] mb-8 bitcount-homedays">
               Music
             </h2>
-            <div className="bg-white/60 backdrop-blur-sm rounded-sm p-8 border border-orange-200/50 shadow-sm">
+            <div className="bg-white/60 backdrop-blur-sm rounded-sm p-8 border border-[#a41b77]/30 shadow-sm">
               {/* Audio player placeholder */}
-              <div className="aspect-[16/9] sm:aspect-[21/9] bg-gradient-to-br from-orange-100 to-amber-100 rounded-xl mb-8 flex items-center justify-center border border-orange-200">
-                <div className="text-center text-orange-700 p-8 w-full">
+              <div className="aspect-[16/9] sm:aspect-[21/9] bg-gradient-to-br from-[#a41b77]/10 to-[#a41b77]/5 rounded-xl mb-8 flex items-center justify-center border border-[#a41b77]/30">
+                <div className="text-center text-[#a41b77] p-8 w-full">
                   <iframe style={{ borderRadius: '24px' }} src="https://untitled.stream/embed/GK6nX9GmDZsN" width="100%" height="344" allowFullScreen allow="picture-in-picture" frameBorder="0" loading="lazy"></iframe>
                 </div>
               </div>
 
               {/* Track list */}
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-orange-900 mb-4">Latest releases</h3>
+                <h3 className="text-xl font-bold text-[#a41b77] mb-4">Latest releases</h3>
                 {tracks.map((track, index) => (
-                  <div key={index} className="flex items-start gap-4 p-4 bg-orange-50/50 rounded-lg border border-orange-100">
-                    <div className="flex-shrink-0 w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center text-orange-800 font-bold">
+                  <div key={index} className="flex items-start gap-4 p-4 bg-[#a41b77]/5 rounded-lg border border-[#a41b77]/20">
+                    <div className="flex-shrink-0 w-10 h-10 bg-[#a41b77]/20 rounded-full flex items-center justify-center text-[#a41b77] font-bold">
                       {index + 1}
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-orange-900">{track.title}</h4>
-                      <p className="text-sm text-orange-700/80 mt-1">{track.description}</p>
+                      <h4 className="font-semibold text-[#a41b77]">{track.title}</h4>
+                      <p className="text-sm text-[#a41b77]/80 mt-1">{track.description}</p>
                     </div>
                   </div>
                 ))}
@@ -195,13 +195,13 @@ export default function EPKPage() {
 
           {/* Live Performance */}
           <section id="live" className="scroll-mt-20">
-            <h2 className="text-4xl sm:text-5xl font-bold text-orange-900 mb-8 bitcount-homedays">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#a41b77] mb-8 bitcount-homedays">
               Live Performance
             </h2>
-            <div className="bg-white/60 backdrop-blur-sm rounded-sm p-8 border border-orange-200/50 shadow-sm">
+            <div className="bg-white/60 backdrop-blur-sm rounded-sm p-8 border border-[#a41b77]/30 shadow-sm">
               {/* Video embed placeholder */}
-              <div className="aspect-video bg-gradient-to-br from-orange-200 to-amber-200 rounded-xl mb-6 flex items-center justify-center border border-orange-200 shadow-inner overflow-hidden">
-                <div className="text-center text-orange-700 p-8">
+              <div className="aspect-video bg-gradient-to-br from-[#a41b77]/15 to-[#a41b77]/5 rounded-xl mb-6 flex items-center justify-center border border-[#a41b77]/30 shadow-inner overflow-hidden">
+                <div className="text-center text-[#a41b77] p-8">
                   <iframe width="1264" height="711" src="https://www.youtube.com/embed/PO7K8GsUnug" title="Homedays - Calico + Cinematheque - 9/21/25 Brothers Lounge" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 </div>
               </div>
@@ -215,11 +215,11 @@ export default function EPKPage() {
                 </p>
               </div> */}
 
-              <div className="mt-8 pt-6 border-t border-orange-200">
-                <h3 className="font-bold text-orange-900 mb-3">Recent Notable Shows</h3>
-                <ul className="space-y-2 text-orange-800">
+              <div className="mt-8 pt-6 border-t border-[#a41b77]/30">
+                <h3 className="font-bold text-[#a41b77] mb-3">Recent Notable Shows</h3>
+                <ul className="space-y-2 text-[#a41b77]">
                   <li className="flex items-start gap-3">
-                    <span className="text-orange-500 mt-1">•</span>
+                    <span className="text-[#a41b77] mt-1">•</span>
                     <span>Brothers Lounge (Cleveland) — Co-headline with local favorites, September 2025</span>
                   </li>
                 </ul>
@@ -265,16 +265,16 @@ export default function EPKPage() {
 
           {/* Technical Info */}
           <section id="technical" className="scroll-mt-20">
-            <h2 className="text-4xl sm:text-5xl font-bold text-orange-900 mb-8 bitcount-homedays">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#a41b77] mb-8 bitcount-homedays">
               Technical Info
             </h2>
-            <div className="bg-white/60 backdrop-blur-sm rounded-sm p-8 border border-orange-200/50 shadow-sm">
+            <div className="bg-white/60 backdrop-blur-sm rounded-sm p-8 border border-[#a41b77]/30 shadow-sm">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-xl font-bold text-orange-900 mb-4">Stage requirements</h3>
-                  <ul className="space-y-3 text-orange-800">
+                  <h3 className="text-xl font-bold text-[#a41b77] mb-4">Stage requirements</h3>
+                  <ul className="space-y-3 text-[#a41b77]">
                     <li className="flex items-start gap-3">
-                      <span className="text-orange-500 font-bold">•</span>
+                      <span className="text-[#a41b77] font-bold">•</span>
                       <span><strong>Lineup:</strong> 3-piece (guitar, bass, drums)</span>
                     </li>
                     {/* <li className="flex items-start gap-3">
@@ -286,36 +286,36 @@ export default function EPKPage() {
                       <span><strong>Input list:</strong> <a href="#" className="underline hover:text-orange-600">Download PDF</a></span>
                     </li> */}
                     <li className="flex items-start gap-3">
-                      <span className="text-orange-500 font-bold">•</span>
+                      <span className="text-[#a41b77] font-bold">•</span>
                       <span><strong>Set length:</strong> 35-45 minutes (flexible)</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-orange-500 font-bold">•</span>
+                      <span className="text-[#a41b77] font-bold">•</span>
                       <span><strong>Load-in:</strong> Can adapt to most schedules</span>
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-orange-900 mb-4">Contact & booking</h3>
-                  <div className="space-y-4 text-orange-800">
+                  <h3 className="text-xl font-bold text-[#a41b77] mb-4">Contact & booking</h3>
+                  <div className="space-y-4 text-[#a41b77]">
                     <div>
                       <p className="font-semibold mb-1">Booking inquiries:</p>
-                      <a href="mailto:booking@homedaysband.com" className="text-orange-600 hover:text-orange-800 underline">
+                      <a href="mailto:booking@homedaysband.com" className="text-[#a41b77] hover:text-[#a41b77]/80 underline">
                         booking@homedaysband.com
                       </a>
                     </div>
                     <div>
                       <p className="font-semibold mb-1">General contact:</p>
-                      <a href="mailto:hello@homedaysband.com" className="text-orange-600 hover:text-orange-800 underline">
+                      <a href="mailto:hello@homedaysband.com" className="text-[#a41b77] hover:text-[#a41b77]/80 underline">
                         hello@homedaysband.com
                       </a>
                     </div>
                     <div>
                       <p className="font-semibold mb-1">Social media:</p>
                       <div className="flex flex-wrap gap-4 mt-2">
-                        <a href="https://www.instagram.com/homedaysband" className="text-orange-600 hover:text-orange-800 underline text-sm">Instagram</a>
-                        <a href="https://www.tiktok.com/@homedaysband" className="text-orange-600 hover:text-orange-800 underline text-sm">TikTok</a>
+                        <a href="https://www.instagram.com/homedaysband" className="text-[#a41b77] hover:text-[#a41b77]/80 underline text-sm">Instagram</a>
+                        <a href="https://www.tiktok.com/@homedaysband" className="text-[#a41b77] hover:text-[#a41b77]/80 underline text-sm">TikTok</a>
                       </div>
                     </div>
                   </div>
@@ -359,10 +359,10 @@ export default function EPKPage() {
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-orange-200/50 bg-white/40 backdrop-blur-md mt-20">
-          <div className="max-w-6xl mx-auto px-6 py-8 text-center text-sm text-orange-700">
+        <footer className="border-t border-[#a41b77]/30 bg-white/40 backdrop-blur-md mt-20">
+          <div className="max-w-6xl mx-auto px-6 py-8 text-center text-sm text-[#a41b77]">
             <p className="mb-2">© 2025 Homedays. All rights reserved.</p>
-            <p>For all inquiries: <a href="mailto:hello@homedaysband.com" className="underline hover:text-orange-900">hello@homedaysband.com</a></p>
+            <p>For all inquiries: <a href="mailto:hello@homedaysband.com" className="underline hover:text-[#a41b77]/80">hello@homedaysband.com</a></p>
           </div>
         </footer>
       </div>

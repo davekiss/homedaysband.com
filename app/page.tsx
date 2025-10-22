@@ -3,9 +3,9 @@ import Shows from './components/Shows';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-100 via-pink-50 to-purple-100 relative">
+    <div className="min-h-screen relative">
       <div className="film-grain"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-orange-200/30 via-transparent to-pink-200/20 blur-3xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#a41b77]/10 via-transparent to-[#a41b77]/5 blur-3xl"></div>
 
       <div className="relative z-10 flex flex-col w-full">
         <div className="flex-1 flex flex-col items-center justify-center min-h-screen">
@@ -13,12 +13,12 @@ export default function Home() {
             <div className="space-y-4 relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] flex items-center justify-center">
               <div className="absolute inset-0 -z-10">
                 <img
-                  src="/ride.jpg"
+                  src="/images/pond.jpeg"
                   alt="Homedays band"
                   className="w-full h-full object-cover opacity-50"
                 />
               </div>
-              <h1 className="bitcount-homedays text-5xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[12rem] uppercase tracking-wider text-transparent bg-gradient-to-r from-orange-400 via-yellow-400 to-orange-500 bg-clip-text drop-shadow-[0_0_30px_rgba(255,165,0,0.5)] animate-pulse mix-blend-screen">
+              <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] uppercase text-[#3a4232]">
                 Homedays
               </h1>
             </div>
@@ -36,9 +36,7 @@ export default function Home() {
         <Footer />
       </div>
 
-      <div className="absolute top-20 left-10 w-32 h-32 bg-pink-300/20 rounded-full blur-xl"></div>
-      <div className="absolute top-40 right-20 w-24 h-24 bg-purple-300/20 rounded-full blur-xl"></div>
-      <div className="absolute bottom-40 left-1/4 w-20 h-20 bg-orange-300/20 rounded-full blur-xl"></div>
+      {/* Ambient blobs removed to let new background color come through */}
     </div>
   );
 }

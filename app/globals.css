@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #e3e0cc;
+  --foreground: #a41b77;
 }
 
 @theme inline {
@@ -12,16 +12,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
-.bitcount-homedays {
-  font-family: "Bitcount", system-ui;
-  font-optical-sizing: auto;
-  font-weight: 400;
+/* Register local heading font */
+@font-face {
+  font-family: "Theseasons";
+  src: url("/fonts/theseasons-bd.otf") format("opentype");
   font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "CRSV" 0.5,
-    "ELSH" 0,
-    "ELXP" 0;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Use local font for headings and the existing heading utility class */
+.bitcount-homedays,
+h1, h2, h3 {
+  font-family: "Theseasons", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 700;
 }
 
 @media (prefers-color-scheme: dark) {
