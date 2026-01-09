@@ -8,21 +8,15 @@ type Show = {
 
 const shows: Show[] = [
   {
-    date: "December 11, 2025",
-    venue: "Live in Cleveland",
-    location: "Cleveland, OH",
-  },
-  {
-    date: "January 3, 2026",
-    venue: "Musica",
-    location: "Akron, OH",
-    supportingActs: ["Blind Boxing", "Negative Mental Attitude"],
-  },
-  {
     date: "January 16, 2026",
     venue: "Grog Shop",
     location: "Cleveland, OH",
-  }
+  },
+  {
+    date: "February 12, 2026",
+    venue: "Dunlap's",
+    location: "Cleveland, OH",
+  },
 ];
 
 export default function Shows() {
