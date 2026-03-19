@@ -9,13 +9,17 @@ type Show = {
 const shows: Show[] = [];
 
 export default function Shows() {
+  const upcomingShows = shows.filter(
+    (show) => new Date(show.date) >= new Date(new Date().toDateString())
+  );
+
   return (
     <div className="space-y-6 py-12">
       <h2 className="text-3xl sm:text-4xl font-bold text-center text-[#a41b77] mb-8">Upcoming shows</h2>
       <div className="flex flex-col items-center w-full max-w-2xl mx-auto px-4">
-        {shows.length > 0 ? (
+        {upcomingShows.length > 0 ? (
           <div className="space-y-4 w-full">
-            {shows.map((show, index) => (
+            {upcomingShows.map((show, index) => (
               <div key={index} className="bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-[#a41b77]/30">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                   <div>
