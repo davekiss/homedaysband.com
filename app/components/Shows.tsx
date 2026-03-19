@@ -6,18 +6,7 @@ type Show = {
   ticketsUrl?: string;
 };
 
-const shows: Show[] = [
-  {
-    date: "January 16, 2026",
-    venue: "Grog Shop",
-    location: "Cleveland, OH",
-  },
-  {
-    date: "February 12, 2026",
-    venue: "Dunlap's",
-    location: "Cleveland, OH",
-  },
-];
+const shows: Show[] = [];
 
 export default function Shows() {
   return (
