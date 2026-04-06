@@ -56,7 +56,14 @@ export default function EPKPage() {
   return (
     <div className="min-h-screen relative">
       {/* Subtle texture overlay */}
-      <div className="film-grain opacity-30"></div>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="fixed inset-0 w-full h-full object-cover pointer-events-none z-[1] opacity-30 mix-blend-overlay"
+        src="/videos/grain.mp4"
+      />
 
       {/* Ambient blobs */}
       <div className="absolute top-40 left-20 w-96 h-96 bg-[#a41b77]/20 rounded-full blur-3xl"></div>

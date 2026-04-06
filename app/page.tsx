@@ -4,7 +4,14 @@ import Shows from './components/Shows';
 export default function Home() {
   return (
     <div className="min-h-screen relative">
-      <div className="film-grain"></div>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="fixed inset-0 w-full h-full object-cover pointer-events-none z-[1] opacity-40 mix-blend-overlay"
+        src="/videos/grain.mp4"
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-[#a41b77]/10 via-transparent to-[#a41b77]/5 blur-3xl"></div>
 
       <div className="relative z-10 flex flex-col w-full">
