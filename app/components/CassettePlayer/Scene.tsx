@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useCallback, useMemo, Suspense, useEffect } from "react";
+import { useRef, useCallback, Suspense, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Sparkles, useTexture, useVideoTexture, OrbitControls, useFBO, Image, Decal } from "@react-three/drei";
+import { Sparkles, useTexture, useVideoTexture, OrbitControls, useFBO, Image } from "@react-three/drei";
 import { RectAreaLightUniformsLib } from "three/examples/jsm/lights/RectAreaLightUniformsLib.js";
 import { EffectComposer, Noise, Bloom, Vignette, DepthOfField } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
@@ -12,6 +12,18 @@ import TapeDeck from "./TapeDeck";
 import TransportControls from "./TransportControls";
 import VUMeter from "./VUMeter";
 import StringLights from "./StringLights";
+import GuitarAmp from "./GuitarAmp";
+import GuitarCable from "./GuitarCable";
+import Polaroid from "./Polaroid";
+import NotebookPaper from "./NotebookPaper";
+import PostItNote from "./PostItNote";
+import Pen from "./Pen";
+import CoffeeMug from "./CoffeeMug";
+import FloorLamp from "./FloorLamp";
+import DoorWithFrame from "./DoorWithFrame";
+import DoorStopper from "./DoorStopper";
+import FloatingShelf from "./FloatingShelf";
+import Rug from "./Rug";
 import type { Track, PlayerState } from "./useAudioPlayer";
 
 type SceneProps = {
@@ -108,9 +120,17 @@ function Walls() {
         {wallMaterial}
       </mesh>
       {/* Baseboards */}
-      {/* Front */}
-      <mesh position={[0, -1.35, 5.95]} rotation={[0, Math.PI, 0]}>
-        <boxGeometry args={[16, 0.3, 0.1]} />
+      {/* Front — split into two pieces so the door frame at x ≈ [-5.56,
+          -3.44] (door center -4.5, DOOR_W 1.8, FRAME_TRIM_W 0.16) sits in
+          a clean gap instead of being run through by the baseboard. */}
+      {/* Front-left: from x=-8 to x=-5.56, width 2.44, center -6.78 */}
+      <mesh position={[-6.78, -1.35, 5.95]} rotation={[0, Math.PI, 0]}>
+        <boxGeometry args={[2.44, 0.3, 0.1]} />
+        <meshStandardMaterial color="#f0ece4" roughness={0.6} metalness={0.05} />
+      </mesh>
+      {/* Front-right: from x=-3.44 to x=8, width 11.44, center 2.28 */}
+      <mesh position={[2.28, -1.35, 5.95]} rotation={[0, Math.PI, 0]}>
+        <boxGeometry args={[11.44, 0.3, 0.1]} />
         <meshStandardMaterial color="#f0ece4" roughness={0.6} metalness={0.05} />
       </mesh>
       {/* Back */}
@@ -129,111 +149,6 @@ function Walls() {
         <meshStandardMaterial color="#f0ece4" roughness={0.6} metalness={0.05} />
       </mesh>
     </group>
-  );
-}
-
-// Mural on the left wall — remove <Mural /> from Scene to disable
-function Mural() {
-  const muralTexture = useMemo(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 512;
-    canvas.height = 512;
-    const ctx = canvas.getContext("2d")!;
-
-    // Deep navy background
-    ctx.fillStyle = "#1a2233";
-    ctx.fillRect(0, 0, 512, 512);
-
-    // Large sun/moon circle — warm gold
-    const cx = 256, cy = 200, r = 120;
-    const sunGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-    sunGrad.addColorStop(0, "#f5c870");
-    sunGrad.addColorStop(0.7, "#e8a040");
-    sunGrad.addColorStop(1, "#c47020");
-    ctx.fillStyle = sunGrad;
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Horizontal stripes through the sun (vintage print effect)
-    for (let y = cy - r; y < cy + r; y += 8) {
-      ctx.fillStyle = `rgba(26,34,51,${0.1 + Math.random() * 0.15})`;
-      ctx.fillRect(cx - r, y, r * 2, 3);
-    }
-
-    // Mountain silhouettes
-    ctx.fillStyle = "#2a3a4a";
-    ctx.beginPath();
-    ctx.moveTo(0, 350);
-    ctx.lineTo(80, 260);
-    ctx.lineTo(180, 310);
-    ctx.lineTo(260, 230);
-    ctx.lineTo(340, 290);
-    ctx.lineTo(420, 240);
-    ctx.lineTo(512, 300);
-    ctx.lineTo(512, 512);
-    ctx.lineTo(0, 512);
-    ctx.closePath();
-    ctx.fill();
-
-    // Foreground ridge
-    ctx.fillStyle = "#1a2a38";
-    ctx.beginPath();
-    ctx.moveTo(0, 400);
-    ctx.lineTo(100, 360);
-    ctx.lineTo(200, 380);
-    ctx.lineTo(300, 340);
-    ctx.lineTo(400, 370);
-    ctx.lineTo(512, 350);
-    ctx.lineTo(512, 512);
-    ctx.lineTo(0, 512);
-    ctx.closePath();
-    ctx.fill();
-
-    // Subtle radiating lines from sun
-    ctx.strokeStyle = "rgba(245,200,112,0.12)";
-    ctx.lineWidth = 1.5;
-    for (let i = 0; i < 24; i++) {
-      const angle = (i / 24) * Math.PI * 2;
-      ctx.beginPath();
-      ctx.moveTo(cx + Math.cos(angle) * (r + 10), cy + Math.sin(angle) * (r + 10));
-      ctx.lineTo(cx + Math.cos(angle) * 300, cy + Math.sin(angle) * 300);
-      ctx.stroke();
-    }
-
-    // Worn/aged overlay
-    for (let i = 0; i < 4000; i++) {
-      const x = Math.random() * 512;
-      const y = Math.random() * 512;
-      ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.03})`;
-      ctx.fillRect(x, y, 1, 1);
-    }
-
-    const tex = new THREE.CanvasTexture(canvas);
-    tex.needsUpdate = true;
-    return tex;
-  }, []);
-
-  return (
-    <mesh position={[-7.94, 1.8, -2]} rotation={[0, Math.PI / 2, 0]}>
-      <planeGeometry args={[2.5, 2.5]} />
-      <meshStandardMaterial color="#4a5a52" roughness={0.95} metalness={0.0} />
-      <Decal
-        position={[0, 0, 0.001]}
-        rotation={[0, 0, 0]}
-        scale={[2.4, 2.4, 1]}
-        map={muralTexture}
-      >
-        <meshStandardMaterial
-          map={muralTexture}
-          roughness={0.85}
-          metalness={0.0}
-          toneMapped
-          polygonOffset
-          polygonOffsetFactor={-1}
-        />
-      </Decal>
-    </mesh>
   );
 }
 
@@ -527,7 +442,61 @@ export default function Scene({
       {/* Window */}
       <Window />
 
+      {/* Guitar amp in the corner near the window */}
+      <GuitarAmp position={[6.2, -0.8, -4.3]} rotation={[0, -Math.PI / 3.5, 0]} />
+
+      {/* Scandinavian tripod floor lamp in the front-right corner — diagonally
+          opposite where it used to live. Easy to remove — just delete this
+          line and the ./FloorLamp import above. */}
+      <FloorLamp position={[6.5, -1.5, 4.5]} rotation={[0, -Math.PI * 0.75, 0]} />
+
+      {/* Coiled tweed guitar cable resting on the floor near the amp */}
+      <GuitarCable position={[4.2, -1.49, -4.9]} rotation={[0, 0.4, 0]} />
+
+      {/* Aged Polaroid of the band sitting on the table */}
+      <Polaroid
+        photoUrl="/images/band.png"
+        position={[3.3, -0.437, 1.9]}
+        rotation={[0, 0.25, 0]}
+      />
+
+      {/* Diner-style coffee mug in the back-left corner of the table with
+          a coffee ring stain next to it. y=-0.44 is exactly the top surface
+          of the tabletop, so the mug's flat cylindrical bottom sits flush. */}
+      <CoffeeMug position={[-4.0, -0.44, -2.3]} rotation={[0, 0.9, 0]} />
+
+      {/* Yellow post-it with handwritten to-do list */}
+      <PostItNote
+        position={[-3.2, -0.437, 2.45]}
+        rotation={[0, 0.32, 0]}
+      />
+
+      {/* Click pen resting next to the post-it */}
+      <Pen position={[-2.5, -0.415, 2.25]} rotation={[0, -0.45, 0]} />
+
+      {/* Typewriter page with Homedays blurb */}
+      <NotebookPaper
+        text={"The submerged bubble-sizzle of elephant ear dough hitting the deep fryer. The unfiltered delight of being snowed in with no end in sight. The yearning in your gut to pull your own bed's comforter to your chin. You remember when it all felt lighter, before the world started swinging and never really stopped.\n\nHomedays makes music for that ache. Palm-muted crunch giving way to choruses that won't leave your head. For anyone still here, still standing, still trying to hold onto something soft before it's gone."}
+        position={[2.1, -0.437, 2.0]}
+        rotation={[0, -0.18, 0]}
+      />
+
       {/* Dust motes — disabled for now */}
+
+      {/* Six-panel white door on the FRONT wall, sitting between the center
+          and the front-left corner. Rotated π so the casing and slab face
+          into the room. Easy to remove — delete this line and the
+          ./DoorWithFrame import above. */}
+      <DoorWithFrame position={[-4.5, -1.5, 5.95]} rotation={[0, Math.PI, 0]} />
+
+      {/* Spring-loaded baseboard doorstop on the LEFT wall near the
+          front-left corner — close to the door so it could (in theory)
+          stop the door from swinging into this wall. Click it to flick
+          the spring and watch it boing. */}
+      <DoorStopper
+        position={[-7.9, -1.3, 4.3]}
+        rotation={[0, Math.PI / 2, 0]}
+      />
 
       {/* Youth Pallet poster on back wall */}
       <Image
@@ -538,11 +507,30 @@ export default function Scene({
         color="#888888"
       />
 
-      {/* Mural on left wall — remove this line to disable */}
-      <Mural />
+      {/* Homedays Musica poster on back wall */}
+      <Image
+        url="/images/HOMEDAYS_MUSICA_1.3.26.jpg"
+        scale={[1.8, 2.3]}
+        position={[3, 1.8, -5.94]}
+        toneMapped
+        color="#888888"
+      />
+
+      {/* Floating shelf on the left wall — holds a pothos, a globe lamp,
+          and a couple of leaning vinyl records. Easy to remove: delete
+          this line and the ./FloatingShelf import above. To remove or
+          rearrange the items on the shelf, edit FloatingShelf.tsx. */}
+      <FloatingShelf
+        position={[-7.94, 1.8, -2]}
+        rotation={[0, Math.PI / 2, 0]}
+        scale={2}
+      />
 
       {/* Tabletop surface */}
       <Tabletop />
+
+      {/* Area rug under the table — sits just above the hardwood floor */}
+      <Rug position={[0, -1.49, 0.05]} rotation={0} />
 
       {/* Hardwood floor beneath the table */}
       <Floor />

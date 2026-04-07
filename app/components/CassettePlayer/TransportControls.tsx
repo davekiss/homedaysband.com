@@ -2,7 +2,6 @@
 
 import { useRef, useState, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Decal } from "@react-three/drei";
 import * as THREE from "three";
 import type { PlayerState } from "./useAudioPlayer";
 
@@ -122,6 +121,21 @@ function drawEject(ctx: CanvasRenderingContext2D, s: number) {
   ctx.fillRect(s * 0.15, s * 0.68, s * 0.7, s * 0.15);
 }
 
+// Shared click-sound audio element. One instance is reused across all
+// transport buttons (and tape clicks) so rapid-fire presses just
+// restart the sample. Exported so clicking a tape can also play the
+// same click that the transport buttons play.
+let clickAudio: HTMLAudioElement | null = null;
+export function playClickSound() {
+  if (typeof window === "undefined") return;
+  if (!clickAudio) {
+    clickAudio = new Audio("/music/click.wav");
+    clickAudio.volume = 0.7;
+  }
+  clickAudio.currentTime = 0;
+  clickAudio.play().catch(() => {});
+}
+
 type ButtonProps = {
   position: [number, number, number];
   onClick: () => void;
@@ -150,6 +164,7 @@ function RockerButton({ position, onClick, isActive, iconTexture }: ButtonProps)
             castShadow
             onClick={(e) => {
               e.stopPropagation();
+              playClickSound();
               onClick();
             }}
             onPointerDown={(e) => {
@@ -170,22 +185,6 @@ function RockerButton({ position, onClick, isActive, iconTexture }: ButtonProps)
               roughness={0.4}
               metalness={0.65}
             />
-
-            {/* Icon decal on top of button */}
-            <Decal
-              position={[0, 0, INDENT_Z_OFFSET]}
-              rotation={[-Math.PI / 2, 0, 0]}
-              scale={[0.065, 0.065, 0.065]}
-            >
-              <meshStandardMaterial
-                map={iconTexture}
-                map-anisotropy={16}
-                transparent
-                polygonOffset
-                polygonOffsetFactor={-1}
-                depthTest={false}
-              />
-            </Decal>
           </mesh>
 
           {/* Circular finger indent */}
@@ -195,6 +194,21 @@ function RockerButton({ position, onClick, isActive, iconTexture }: ButtonProps)
               color={hovered ? "#706c68" : "#5a5650"}
               roughness={0.7}
               metalness={0.4}
+            />
+          </mesh>
+
+          {/* Icon plane sitting just above the indent's top face — avoids the
+              z-fighting the Decal had when zoomed in */}
+          <mesh
+            position={[0, BUTTON_H / 2 + 0.003, INDENT_Z_OFFSET]}
+            rotation={[-Math.PI / 2, 0, 0]}
+          >
+            <planeGeometry args={[INDENT_RADIUS * 1.6, INDENT_RADIUS * 1.6]} />
+            <meshStandardMaterial
+              map={iconTexture}
+              map-anisotropy={16}
+              transparent
+              depthWrite={false}
             />
           </mesh>
         </group>

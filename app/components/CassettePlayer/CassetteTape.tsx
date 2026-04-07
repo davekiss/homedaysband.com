@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo, useEffect, Suspense } from "react";
+import { useRef, useMemo, useEffect, useLayoutEffect, Suspense } from "react";
 import { useFrame } from "@react-three/fiber";
 import { MeshTransmissionMaterial, RoundedBox, useVideoTexture } from "@react-three/drei";
 import * as THREE from "three";
@@ -345,15 +345,21 @@ export default function CassetteTape({
     return tex;
   }, []);
 
-  // Animation state: tracks progress 0→1 for insert, 1→0 for eject
+  // Animation state: tracks progress 0→1 for insert, 1→0 for eject.
+  // Start at 1 (fully settled) so the tape doesn't animate on mount —
+  // the parabolic arc would otherwise make every tape float up and drop
+  // back into place on page load, even when startPos === endPos.
   const animRef = useRef({
-    progress: isInserted ? 1 : 0,
+    progress: 1,
     startPos: [...position] as [number, number, number],
     startRotZ: tableRotation,
   });
 
-  // Set position/rotation once on mount
-  useEffect(() => {
+  // Set position/rotation once on mount. useLayoutEffect (not useEffect)
+  // so the transform is applied synchronously before r3f renders the
+  // first frame — otherwise the tape flashes at the origin with identity
+  // rotation for one frame before snapping into place.
+  useLayoutEffect(() => {
     if (!groupRef.current) return;
     groupRef.current.position.set(position[0], position[1], position[2]);
     groupRef.current.rotation.set(-Math.PI / 2, 0, tableRotation);
