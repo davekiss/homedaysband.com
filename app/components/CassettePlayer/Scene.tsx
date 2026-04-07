@@ -18,6 +18,7 @@ import Polaroid from "./Polaroid";
 import NotebookPaper from "./NotebookPaper";
 import PostItNote from "./PostItNote";
 import Pen from "./Pen";
+import VinylSticker from "./VinylSticker";
 import CoffeeMug from "./CoffeeMug";
 import FloorLamp from "./FloorLamp";
 import DoorWithFrame from "./DoorWithFrame";
@@ -46,6 +47,26 @@ type SceneProps = {
 };
 
 const TAPE_COLORS = ["#c4956a", "#7a8c6e", "#8a7a6a", "#6a7a8c", "#9c8a6a", "#7c6a5a", "#6a8a7a", "#8c7a7a", "#7a6a5a", "#6a7a6a"];
+
+// Per-tape body shell style (indexes into BODY_STYLES inside CassetteTape):
+//   0 = smoke black (default), 1 = charcoal gray,
+//   2 = clear smoke (translucent dark), 3 = vintage cream/ivory.
+// Easy to undo: replace with all 0s, or delete this constant and the
+// `bodyStyleIndex` prop on the <CassetteTape /> below.
+const TAPE_BODY_STYLES: number[] = [
+  0, // smoke black
+  1, // charcoal gray
+  0, // smoke black
+  2, // clear smoke
+  0, // smoke black
+  0, // smoke black
+  3, // cream
+  1, // charcoal gray
+  0, // smoke black
+  2, // clear smoke
+  0, // smoke black
+  3, // cream
+];
 
 // Scattered positions on the table for tapes not inserted
 // Spread across the table: left, right, above (behind), below (in front) of the deck
@@ -431,6 +452,8 @@ export default function Scene({
               transmissionBuffer={transmissionFBO.texture}
               position={[TABLE_POSITIONS[i % TABLE_POSITIONS.length][0], TABLE_POSITIONS[i % TABLE_POSITIONS.length][1], TABLE_POSITIONS[i % TABLE_POSITIONS.length][2]]}
               tableRotation={TABLE_POSITIONS[i % TABLE_POSITIONS.length][3]}
+              bodyStyleIndex={TAPE_BODY_STYLES[i % TAPE_BODY_STYLES.length]}
+              labelVideoUrl={track.labelVideoUrl}
             />
           ))}
         </group>
@@ -473,6 +496,12 @@ export default function Scene({
 
       {/* Click pen resting next to the post-it */}
       <Pen position={[-2.5, -0.415, 2.25]} rotation={[0, -0.45, 0]} />
+
+      {/* Die-cut "Homedays" vinyl sticker on the table — wordmark in the
+          band's Theseasons font, like a printed test sticker the band
+          left lying around. Lays flat in the back-right corner of the
+          desk. */}
+      <VinylSticker position={[3.8, -0.435, -2.35]} rotation={-0.22} />
 
       {/* Typewriter page with Homedays blurb */}
       <NotebookPaper

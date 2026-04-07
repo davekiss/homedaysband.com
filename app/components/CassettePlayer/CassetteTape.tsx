@@ -17,7 +17,76 @@ type CassetteTapeProps = {
   position: [number, number, number];
   tableRotation?: number;
   transmissionBuffer?: THREE.Texture;
+  bodyStyleIndex?: number;
+  // Per-tape override for the dreamy video that plays over the label
+  // while the tape is inserted and playing. Falls back to clouds.mp4.
+  labelVideoUrl?: string;
 };
+
+// Cassette body palettes — index 0 is the original dark smoke plastic,
+// the others mix in some 90s translucent colors and a gray for variety.
+// To revert to all-black tapes, set every entry in TAPE_BODY_STYLES
+// (Scene.tsx) to 0, or delete the bodyStyleIndex prop from the
+// <CassetteTape /> call site.
+type BodyStyle = {
+  color: string;
+  attenuationColor: string;
+  transmission: number;
+  attenuationDistance: number;
+  background: string;
+  roughness: number;
+  clearcoat: number;
+  clearcoatRoughness: number;
+};
+
+const BODY_STYLES: BodyStyle[] = [
+  // 0 — Smoke black (original)
+  {
+    color: "#4a4a46",
+    attenuationColor: "#2a2a28",
+    transmission: 0.92,
+    attenuationDistance: 1.5,
+    background: "#1a1816",
+    roughness: 0.55,
+    clearcoat: 0.15,
+    clearcoatRoughness: 0.5,
+  },
+  // 1 — Charcoal gray
+  {
+    color: "#7c7a74",
+    attenuationColor: "#3e3c36",
+    transmission: 0.93,
+    attenuationDistance: 1.4,
+    background: "#2e2c28",
+    roughness: 0.55,
+    clearcoat: 0.15,
+    clearcoatRoughness: 0.5,
+  },
+  // 2 — Clear smoke (dark see-through, classic 90s "you can see the
+  // reels" look but tuned to read as dull plastic, not glass)
+  {
+    color: "#5e5c58",
+    attenuationColor: "#1c1a18",
+    transmission: 0.62,
+    attenuationDistance: 0.65,
+    background: "#1a1816",
+    roughness: 0.85,
+    clearcoat: 0,
+    clearcoatRoughness: 1,
+  },
+  // 3 — Vintage cream/ivory — opaque matte plastic, ties into the
+  // warm lamp lighting and the polaroid white frame
+  {
+    color: "#dcc9a4",
+    attenuationColor: "#8a6e3a",
+    transmission: 0.08,
+    attenuationDistance: 0.3,
+    background: "#5a4830",
+    roughness: 0.85,
+    clearcoat: 0,
+    clearcoatRoughness: 1,
+  },
+];
 
 // Build reel hub geometry: a ring with 6 teeth around the center hole
 function useReelHubGeometry(outerRadius: number, holeRadius: number) {
@@ -169,12 +238,21 @@ function TapeWindow({
 
 // Dreamy video overlay that fades in over the label when playing
 // Remove <DreamyLabelOverlay /> from CassetteTape to disable
-function DreamyVideoLayer({ isPlaying }: { isPlaying: boolean }) {
+function DreamyVideoLayer({
+  isPlaying,
+  videoUrl,
+}: {
+  isPlaying: boolean;
+  videoUrl: string;
+}) {
   const matRef = useRef<THREE.MeshStandardMaterial>(null);
-  const videoTexture = useVideoTexture("/videos/clouds.mp4", {
+  // Keyed on videoUrl so swapping tapes with different backgrounds
+  // re-mounts the suspending video-texture hook cleanly.
+  const videoTexture = useVideoTexture(videoUrl, {
     muted: true,
     loop: true,
     playsInline: true,
+    crossOrigin: "anonymous",
   });
 
   useFrame((_, delta) => {
@@ -201,10 +279,20 @@ function DreamyVideoLayer({ isPlaying }: { isPlaying: boolean }) {
   );
 }
 
-function DreamyLabelOverlay({ isPlaying }: { isPlaying: boolean }) {
+function DreamyLabelOverlay({
+  isPlaying,
+  videoUrl,
+}: {
+  isPlaying: boolean;
+  videoUrl?: string;
+}) {
+  const url = videoUrl ?? "/videos/clouds.mp4";
   return (
     <Suspense fallback={null}>
-      <DreamyVideoLayer isPlaying={isPlaying} />
+      {/* key forces a fresh Suspense boundary + hook mount per URL so a
+          tape with a custom Mux background doesn't try to reuse the
+          clouds texture instance. */}
+      <DreamyVideoLayer key={url} isPlaying={isPlaying} videoUrl={url} />
     </Suspense>
   );
 }
@@ -220,10 +308,13 @@ export default function CassetteTape({
   position,
   tableRotation = 0,
   transmissionBuffer,
+  bodyStyleIndex = 0,
+  labelVideoUrl,
 }: CassetteTapeProps) {
   const groupRef = useRef<THREE.Group>(null);
   const reelProgress = duration > 0 ? progress / duration : 0;
   const isPlaying = playerState === "playing" || playerState === "fast-forwarding";
+  const bodyStyle = BODY_STYLES[bodyStyleIndex] ?? BODY_STYLES[0];
 
   const labelTexture = useMemo(() => {
     const canvas = document.createElement("canvas");
@@ -380,8 +471,21 @@ export default function CassetteTape({
     }
   }, [isInserted]);
 
-  const deckPos: [number, number, number] = [0.70, 0.05, -0.2];
+  // Y=-0.02 drops the tape into the recessed well cavity — bottom of
+  // the cassette (−0.08) sits just above the well floor and only the
+  // top 0.04 of the shell peeks above the deck surface, so it reads as
+  // "inside the machine" instead of resting on top.
+  const deckPos: [number, number, number] = [0.70, -0.02, -0.2];
   const arcHeight = 1.2; // How high the tape lifts over the deck
+
+  // Per-tape random pickup tilt — both magnitude and direction vary so
+  // every cassette rocks a little differently when picked up and dropped
+  // back. Stable for the lifetime of this tape instance.
+  const tiltPeak = useMemo(() => {
+    const magnitude = 0.3 + Math.random() * 0.5; // 0.30..0.80 rad (~17..46°)
+    const sign = Math.random() > 0.5 ? 1 : -1;
+    return magnitude * sign;
+  }, []);
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
@@ -410,6 +514,16 @@ export default function CassetteTape({
 
     // Rotation eases smoothly
     groupRef.current.rotation.z = anim.startRotZ + (endRotZ - anim.startRotZ) * ease;
+
+    // Pickup tilt — rotate around local Y so the tape "rocks" on its
+    // edge as it travels through the arc, the way it would if a hand
+    // were carrying it. Peaks at the midpoint of the move and returns
+    // to flat (0) at both ends, so the resting and final poses are
+    // unaffected. With the Euler XYZ order and the lay-flat X rotation
+    // already applied, local Y maps to a tilt around the tape's short
+    // edge — a natural-looking roll, not a top-down spin. tiltPeak is
+    // randomized per tape so they don't all rock identically.
+    groupRef.current.rotation.y = tiltPeak * Math.sin(Math.PI * ease);
   });
 
   return (
@@ -424,19 +538,19 @@ export default function CassetteTape({
           backside
           samples={6}
           resolution={512}
-          transmission={0.92}
-          roughness={0.55}
+          transmission={bodyStyle.transmission}
+          roughness={bodyStyle.roughness}
           roughnessMap={scuffTexture}
           thickness={0.8}
           ior={1.1}
           chromaticAberration={0.01}
           anisotropy={0}
-          clearcoat={0.15}
-          clearcoatRoughness={0.5}
-          attenuationDistance={1.5}
-          attenuationColor="#2a2a28"
-          color="#4a4a46"
-          background={new THREE.Color("#1a1816")}
+          clearcoat={bodyStyle.clearcoat}
+          clearcoatRoughness={bodyStyle.clearcoatRoughness}
+          attenuationDistance={bodyStyle.attenuationDistance}
+          attenuationColor={bodyStyle.attenuationColor}
+          color={bodyStyle.color}
+          background={new THREE.Color(bodyStyle.background)}
         />
       </RoundedBox>
 
@@ -447,7 +561,7 @@ export default function CassetteTape({
       </mesh>
 
       {/* Dreamy video overlay on label — remove this line to disable */}
-      <DreamyLabelOverlay isPlaying={isPlaying} />
+      <DreamyLabelOverlay isPlaying={isPlaying} videoUrl={labelVideoUrl} />
 
       {/* Tape window (visible reels) */}
       <TapeWindow

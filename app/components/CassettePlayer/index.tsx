@@ -85,7 +85,14 @@ const TRACKS: Track[] = [
   { title: "High Fly Ball", src: "/music/hi-fly-ball-3.mp3" },
   { title: "I Love a Rainbow", src: "/music/i-love-a-rainbow.mp3" },
   { title: "Imposter", src: "/music/imposter-v5.mp3" },
-  { title: "Movement", src: "/music/movement.mp3" },
+  {
+    title: "Movement",
+    src: "/music/movement.mp3",
+    // Mux static MP4 rendition — drives the dreamy video that plays over
+    // the Movement tape's label while it's inserted in the deck.
+    labelVideoUrl:
+      "https://stream.mux.com/BV3YZtogl89mg9VcNBhhnHm02Y34zI1nlMuMQfAbl3dM/medium.mp4",
+  },
   { title: "Overflow", src: "/music/overflow-v4.mp3" },
   { title: "Reckless", src: "/music/reckless-v3.mp3" },
   { title: "Spiral", src: "/music/spiral-v1.mp3" },
