@@ -176,11 +176,16 @@ function RockerButton({ position, onClick, isActive, iconTexture }: ButtonProps)
               position={[0, 0, INDENT_Z_OFFSET]}
               rotation={[-Math.PI / 2, 0, 0]}
               scale={[0.065, 0.065, 0.065]}
-              map={iconTexture}
-              map-anisotropy={16}
-              depthTest={false}
-              depthWrite={false}
-            />
+            >
+              <meshStandardMaterial
+                map={iconTexture}
+                map-anisotropy={16}
+                transparent
+                polygonOffset
+                polygonOffsetFactor={-1}
+                depthTest={false}
+              />
+            </Decal>
           </mesh>
 
           {/* Circular finger indent */}
