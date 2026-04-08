@@ -19,10 +19,10 @@ const bitcount = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Homedays band | Cleveland, OH",
+  title: "Homedays | Just a band from Cleveland, Ohio",
   description: "Coming soon to a CD-RW near you",
   openGraph: {
-    title: "Homedays band | Cleveland, OH",
+    title: "Homedays | Just a band from Cleveland, Ohio",
     description: "Coming soon to a CD-RW near you",
     images: [
       {
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Homedays band | Cleveland, OH",
+    title: "Homedays | Just a band from Cleveland, Ohio",
     description: "Coming soon to a CD-RW near you",
     images: ["/images/og.jpg"],
   },
