@@ -20,10 +20,12 @@ import PostItNote from "./PostItNote";
 import Pen from "./Pen";
 import VinylSticker from "./VinylSticker";
 import CoffeeMug from "./CoffeeMug";
+import GuitarPicks from "./GuitarPicks";
 import FloorLamp from "./FloorLamp";
 import DoorWithFrame from "./DoorWithFrame";
 import DoorStopper from "./DoorStopper";
 import FloatingShelf from "./FloatingShelf";
+import Bookcase from "./Bookcase";
 import Rug from "./Rug";
 import type { Track, PlayerState } from "./useAudioPlayer";
 
@@ -140,9 +142,34 @@ function Walls() {
         <planeGeometry args={[16, 10]} />
         {wallMaterial}
       </mesh>
-      {/* Front wall (behind camera) */}
-      <mesh position={[0, 3, 6]} rotation={[0, Math.PI, 0]} receiveShadow>
-        <planeGeometry args={[16, 10]} />
+      {/* Front wall (behind camera) — split into a frame around a
+          rectangular cutout for the built-in bookcase. The bookcase
+          spans x [-1.5, 0.5] (center -0.5, width 2.0) and y [-1.5, 1.2]
+          (bottom on floor, height 2.7). We leave a matching hole in the
+          wall plane so the case sits in a real recessed alcove instead
+          of z-fighting the wall. The bookcase's crown cap overhangs 0.03
+          on each side and on top, so the seam between the wall and the
+          case is covered by the trim. */}
+      {/* Front wall: left strip (x = -8 → -1.5, width 6.5) */}
+      <mesh position={[-4.75, 3, 6]} rotation={[0, Math.PI, 0]} receiveShadow>
+        <planeGeometry args={[6.5, 10]} />
+        {wallMaterial}
+      </mesh>
+      {/* Front wall: right strip (x = 0.5 → 8, width 7.5) */}
+      <mesh position={[4.25, 3, 6]} rotation={[0, Math.PI, 0]} receiveShadow>
+        <planeGeometry args={[7.5, 10]} />
+        {wallMaterial}
+      </mesh>
+      {/* Front wall: top strip over the cutout (y = 1.2 → 8, height 6.8) */}
+      <mesh position={[-0.5, 4.6, 6]} rotation={[0, Math.PI, 0]} receiveShadow>
+        <planeGeometry args={[2, 6.8]} />
+        {wallMaterial}
+      </mesh>
+      {/* Alcove back panel — closes off the recess behind the bookcase
+          so the camera can't see through to empty space. Sits just
+          behind the bookcase's own back panel. */}
+      <mesh position={[-0.5, -0.15, 6.4]} rotation={[0, Math.PI, 0]} receiveShadow>
+        <planeGeometry args={[2, 2.7]} />
         {wallMaterial}
       </mesh>
       {/* Baseboards */}
@@ -154,9 +181,16 @@ function Walls() {
         <boxGeometry args={[2.44, 0.3, 0.1]} />
         <meshStandardMaterial color="#f0ece4" roughness={0.6} metalness={0.05} />
       </mesh>
-      {/* Front-right: from x=-3.44 to x=8, width 11.44, center 2.28 */}
-      <mesh position={[2.28, -1.35, 5.95]} rotation={[0, Math.PI, 0]}>
-        <boxGeometry args={[11.44, 0.3, 0.1]} />
+      {/* Front-right: split again around the built-in bookcase cutout at
+          x [-1.5, 0.5] so the baseboard doesn't cross through the case. */}
+      {/* Front-right-a: from x=-3.44 to x=-1.5, width 1.94, center -2.47 */}
+      <mesh position={[-2.47, -1.35, 5.95]} rotation={[0, Math.PI, 0]}>
+        <boxGeometry args={[1.94, 0.3, 0.1]} />
+        <meshStandardMaterial color="#f0ece4" roughness={0.6} metalness={0.05} />
+      </mesh>
+      {/* Front-right-b: from x=0.5 to x=8, width 7.5, center 4.25 */}
+      <mesh position={[4.25, -1.35, 5.95]} rotation={[0, Math.PI, 0]}>
+        <boxGeometry args={[7.5, 0.3, 0.1]} />
         <meshStandardMaterial color="#f0ece4" roughness={0.6} metalness={0.05} />
       </mesh>
       {/* Back */}
@@ -514,6 +548,11 @@ export default function Scene({
       {/* Click pen resting next to the post-it */}
       <Pen position={[-2.5, -0.415, 2.25]} rotation={[0, -0.45, 0]} />
 
+      {/* Little pile of 3 guitar picks on the table. Sits at the tabletop
+          surface (y=-0.44); easy to remove by deleting this line and the
+          ./GuitarPicks import above. */}
+      <GuitarPicks position={[-0.7, -0.44, 2.55]} rotation={[0, 0.3, 0]} />
+
       {/* Die-cut "Homedays" vinyl sticker on the table — wordmark in the
           band's Theseasons font, like a printed test sticker the band
           left lying around. Lays flat in the back-right corner of the
@@ -534,6 +573,12 @@ export default function Scene({
           into the room. Easy to remove — delete this line and the
           ./DoorWithFrame import above. */}
       <DoorWithFrame position={[-4.5, -1.5, 5.95]} rotation={[0, Math.PI, 0]} />
+
+      {/* Built-in bookcase on the FRONT wall, tucked between the door
+          (left of it) and the floor lamp (far right of it). Bottom of
+          the case sits on the floor at y=-1.5. Easy to remove: delete
+          this line and the ./Bookcase import above. */}
+      <Bookcase position={[-0.5, -0.15, 6.075]} />
 
       {/* Spring-loaded baseboard doorstop on the LEFT wall near the
           front-left corner — close to the door so it could (in theory)

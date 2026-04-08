@@ -458,33 +458,241 @@ export default function TapeDeck({
         );
       })()}
 
-      {/* Head assembly — sits on the well floor */}
-      <group position={[tapeWellX, -wellDepth + 0.015, tapeWellZ + 0.25]}>
-        <mesh>
-          <boxGeometry args={[0.3, 0.04, 0.08]} />
-          <meshStandardMaterial color="#555" metalness={0.7} roughness={0.3} />
-        </mesh>
-        <mesh position={[0, 0.02, 0]}>
-          <boxGeometry args={[0.08, 0.02, 0.04]} />
-          <meshStandardMaterial color="#888" metalness={0.9} roughness={0.1} />
-        </mesh>
-        <mesh position={[0.2, 0.01, 0]}>
-          <cylinderGeometry args={[0.03, 0.03, 0.05, 16]} />
-          <meshStandardMaterial color="#222" roughness={0.9} />
-        </mesh>
-        <mesh position={[-0.2, 0.02, 0]}>
-          <cylinderGeometry args={[0.015, 0.015, 0.06, 8]} />
-          <meshStandardMaterial color="#999" metalness={0.8} roughness={0.2} />
-        </mesh>
-      </group>
+      {/* === Tape transport mechanism === Modeled after a real portable
+          cassette deck: stamped-steel chassis, erase head (left) + R/P
+          head (right) with a visible gap line, capstan + pinch roller,
+          two chrome tape guide posts flanking the head row, and a small
+          azimuth adjustment screw. All sized to stay inside the well
+          depth (0.11) and centered in the front half of the well. */}
+      {(() => {
+        // Top surface of the 0.003-thick well floor plate
+        const floorTop = -wellDepth + 0.0035;
+        // Chassis plate adds 0.006 of thickness — items sit on top of it
+        const baseY = floorTop + 0.006;
+        // Head row Z — in the front portion of the well where a real
+        // cassette's tape path runs, forward of the reels.
+        const headZ = tapeWellZ + 0.22;
 
-      {/* Reel spindles — rise up from the well floor */}
-      {[-0.32, 0.32].map((x, i) => (
-        <mesh key={i} position={[tapeWellX + x, -wellDepth + 0.04, tapeWellZ]}>
-          <cylinderGeometry args={[0.04, 0.04, 0.08, 6]} />
-          <meshStandardMaterial color="#666" metalness={0.7} roughness={0.3} />
-        </mesh>
-      ))}
+        return (
+          <>
+            {/* Stamped-steel chassis plate under the mechanism */}
+            <mesh
+              position={[tapeWellX, floorTop + 0.003, headZ]}
+              receiveShadow
+            >
+              <boxGeometry args={[0.55, 0.006, 0.17]} />
+              <meshStandardMaterial
+                color="#3a3a3e"
+                metalness={0.6}
+                roughness={0.45}
+              />
+            </mesh>
+            {/* Phillips screws at the 4 chassis corners */}
+            {[
+              [-0.25, 0.07],
+              [0.25, 0.07],
+              [-0.25, -0.07],
+              [0.25, -0.07],
+            ].map(([dx, dz], i) => (
+              <mesh
+                key={`screw${i}`}
+                position={[tapeWellX + dx, baseY + 0.0015, headZ + dz]}
+              >
+                <cylinderGeometry args={[0.0085, 0.0085, 0.003, 10]} />
+                <meshStandardMaterial
+                  color="#8a8a8e"
+                  metalness={0.8}
+                  roughness={0.3}
+                />
+              </mesh>
+            ))}
+
+            {/* Left tape guide post — chrome pin with a small flared cap */}
+            <mesh position={[tapeWellX - 0.2, baseY + 0.04, headZ]}>
+              <cylinderGeometry args={[0.005, 0.005, 0.08, 12]} />
+              <meshStandardMaterial
+                color="#d8dce0"
+                metalness={0.95}
+                roughness={0.12}
+              />
+            </mesh>
+            <mesh position={[tapeWellX - 0.2, baseY + 0.082, headZ]}>
+              <cylinderGeometry args={[0.007, 0.005, 0.004, 12]} />
+              <meshStandardMaterial
+                color="#d8dce0"
+                metalness={0.95}
+                roughness={0.12}
+              />
+            </mesh>
+
+            {/* Erase head — smaller, no gap line (erase heads don't
+                have a visible record gap) */}
+            <mesh position={[tapeWellX - 0.11, baseY + 0.012, headZ]}>
+              <boxGeometry args={[0.05, 0.024, 0.05]} />
+              <meshStandardMaterial
+                color="#1a1a1c"
+                roughness={0.65}
+                metalness={0.1}
+              />
+            </mesh>
+            <mesh position={[tapeWellX - 0.11, baseY + 0.049, headZ + 0.012]}>
+              <boxGeometry args={[0.038, 0.05, 0.02]} />
+              <meshStandardMaterial
+                color="#c8ccd0"
+                metalness={0.92}
+                roughness={0.2}
+              />
+            </mesh>
+
+            {/* Record/Playback head — larger, with horizontal gap line */}
+            <mesh position={[tapeWellX + 0.03, baseY + 0.012, headZ]}>
+              <boxGeometry args={[0.08, 0.024, 0.06]} />
+              <meshStandardMaterial
+                color="#1a1a1c"
+                roughness={0.65}
+                metalness={0.1}
+              />
+            </mesh>
+            <mesh position={[tapeWellX + 0.03, baseY + 0.053, headZ + 0.014]}>
+              <boxGeometry args={[0.062, 0.058, 0.022]} />
+              <meshStandardMaterial
+                color="#d0d4d8"
+                metalness={0.94}
+                roughness={0.16}
+              />
+            </mesh>
+            {/* Gap line — thin dark stripe across the chrome head face */}
+            <mesh
+              position={[tapeWellX + 0.03, baseY + 0.058, headZ + 0.0255]}
+            >
+              <boxGeometry args={[0.052, 0.0035, 0.001]} />
+              <meshStandardMaterial color="#060606" roughness={0.7} />
+            </mesh>
+            {/* Azimuth adjustment screw just left of the R/P head */}
+            <mesh position={[tapeWellX - 0.018, baseY + 0.07, headZ + 0.014]}>
+              <cylinderGeometry args={[0.004, 0.004, 0.006, 10]} />
+              <meshStandardMaterial
+                color="#d8dce0"
+                metalness={0.95}
+                roughness={0.12}
+              />
+            </mesh>
+
+            {/* Capstan — thin chrome shaft, taller than the heads */}
+            <mesh position={[tapeWellX + 0.13, baseY + 0.045, headZ]}>
+              <cylinderGeometry args={[0.0045, 0.0045, 0.09, 16]} />
+              <meshStandardMaterial
+                color="#d8dce0"
+                metalness={0.95}
+                roughness={0.1}
+              />
+            </mesh>
+            {/* Capstan flywheel collar at the base */}
+            <mesh position={[tapeWellX + 0.13, baseY + 0.004, headZ]}>
+              <cylinderGeometry args={[0.013, 0.015, 0.008, 16]} />
+              <meshStandardMaterial
+                color="#3a3a3e"
+                metalness={0.65}
+                roughness={0.4}
+              />
+            </mesh>
+
+            {/* Pinch roller — black rubber wheel pressing against the
+                capstan shaft */}
+            <mesh position={[tapeWellX + 0.156, baseY + 0.034, headZ]}>
+              <cylinderGeometry args={[0.017, 0.017, 0.068, 20]} />
+              <meshStandardMaterial
+                color="#0b0b0b"
+                roughness={0.95}
+                metalness={0.0}
+              />
+            </mesh>
+            {/* Roller axle pin visible at the top */}
+            <mesh position={[tapeWellX + 0.156, baseY + 0.074, headZ]}>
+              <cylinderGeometry args={[0.004, 0.004, 0.012, 10]} />
+              <meshStandardMaterial
+                color="#d8dce0"
+                metalness={0.95}
+                roughness={0.12}
+              />
+            </mesh>
+
+            {/* Right tape guide post */}
+            <mesh position={[tapeWellX + 0.21, baseY + 0.04, headZ]}>
+              <cylinderGeometry args={[0.005, 0.005, 0.08, 12]} />
+              <meshStandardMaterial
+                color="#d8dce0"
+                metalness={0.95}
+                roughness={0.12}
+              />
+            </mesh>
+            <mesh position={[tapeWellX + 0.21, baseY + 0.082, headZ]}>
+              <cylinderGeometry args={[0.007, 0.005, 0.004, 12]} />
+              <meshStandardMaterial
+                color="#d8dce0"
+                metalness={0.95}
+                roughness={0.12}
+              />
+            </mesh>
+          </>
+        );
+      })()}
+
+      {/* === Gear-toothed reel spindles === 6-toothed hub + central
+          shaft + tapered cap — reads as a cassette drive spindle that
+          engages the cassette's hub gears, instead of the old smooth
+          cylinders. */}
+      {[-0.32, 0.32].map((x, i) => {
+        const sx = tapeWellX + x;
+        const sy = -wellDepth + 0.004;
+        const sz = tapeWellZ;
+        const toothCount = 6;
+        const toothR = 0.023;
+        return (
+          <group key={`spindle${i}`} position={[sx, sy, sz]}>
+            {/* Central hub shaft */}
+            <mesh position={[0, 0.04, 0]}>
+              <cylinderGeometry args={[0.018, 0.018, 0.08, 16]} />
+              <meshStandardMaterial
+                color="#7a7a7e"
+                metalness={0.7}
+                roughness={0.3}
+              />
+            </mesh>
+            {/* 6 teeth arrayed around the hub */}
+            {Array.from({ length: toothCount }).map((_, t) => {
+              const angle = (t / toothCount) * Math.PI * 2;
+              return (
+                <mesh
+                  key={t}
+                  position={[
+                    Math.cos(angle) * toothR,
+                    0.04,
+                    Math.sin(angle) * toothR,
+                  ]}
+                  rotation={[0, -angle, 0]}
+                >
+                  <boxGeometry args={[0.007, 0.072, 0.01]} />
+                  <meshStandardMaterial
+                    color="#7a7a7e"
+                    metalness={0.7}
+                    roughness={0.3}
+                  />
+                </mesh>
+              );
+            })}
+            {/* Tapered top cap */}
+            <mesh position={[0, 0.084, 0]}>
+              <cylinderGeometry args={[0.009, 0.015, 0.008, 12]} />
+              <meshStandardMaterial
+                color="#5a5a5e"
+                metalness={0.78}
+                roughness={0.28}
+              />
+            </mesh>
+          </group>
+        );
+      })}
 
       {/* Label — top-left corner of deck */}
       <group position={[speakerX, 0.005, -deckD / 2 + 0.15]}>
