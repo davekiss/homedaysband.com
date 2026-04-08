@@ -14,6 +14,7 @@ import VUMeter from "./VUMeter";
 import StringLights from "./StringLights";
 import GuitarAmp from "./GuitarAmp";
 import GuitarCable from "./GuitarCable";
+import Microphone from "./Microphone";
 import Polaroid from "./Polaroid";
 import NotebookPaper from "./NotebookPaper";
 import PostItNote from "./PostItNote";
@@ -526,6 +527,15 @@ export default function Scene({
 
       {/* Coiled tweed guitar cable resting on the floor near the amp */}
       <GuitarCable position={[4.2, -1.49, -4.9]} rotation={[0, 0.4, 0]} />
+
+      {/* SM58-style stage microphone laying on the floor between the
+          amp and the coiled cable. Y = floor (-1.5) + handle radius
+          (0.032) so the side of the cylindrical body just touches
+          the floor. */}
+      <Microphone
+        position={[5.1, -1.452, -4.2]}
+        rotation={[0, 1.15, 0]}
+      />
 
       {/* Aged Polaroid of the band sitting on the table */}
       <Polaroid
