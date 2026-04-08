@@ -23,11 +23,14 @@ export type PlayerState = "idle" | "playing" | "paused" | "rewinding" | "fast-fo
 // ---------------------------------------------------------------------------
 const TAPE_EFFECT_ENABLED = true;
 
-// Wow = slow pitch drift; flutter = faster subtle warble
+// Wow = slow pitch drift; flutter = faster subtle warble. Depths
+// kept modest so sustained notes don't read as intentional vibrato —
+// the ~6 Hz flutter sits right in vibrato range and gets audible
+// fast as depth increases.
 const WOW_RATE_HZ = 0.55;
-const WOW_DEPTH_SEC = 0.0022;
+const WOW_DEPTH_SEC = 0.0012;
 const FLUTTER_RATE_HZ = 6.2;
-const FLUTTER_DEPTH_SEC = 0.00035;
+const FLUTTER_DEPTH_SEC = 0.00012;
 
 // Tone shaping
 const TAPE_LOWPASS_HZ = 7500;
@@ -150,7 +153,7 @@ export function useAudioPlayer(tracks: Track[]) {
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolumeState] = useState(7); // 0-12 scale
+  const [volume, setVolumeState] = useState(3); // 0-12 scale
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
