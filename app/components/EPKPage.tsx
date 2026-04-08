@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { muxStatic } from './CassettePlayer/mux';
 
 type PressQuote = {
   quote: string;
@@ -62,7 +63,8 @@ export default function EPKPage() {
         muted
         playsInline
         className="fixed inset-0 w-full h-full object-cover pointer-events-none z-[1] opacity-30 mix-blend-overlay"
-        src="/videos/grain.mp4"
+        src={muxStatic('02Sxge8AxIUTz5tvGKL2WikSdU4IVNsaNhUcC448h5lg', 'highest.mp4')}
+        crossOrigin="anonymous"
       />
 
       {/* Ambient blobs */}

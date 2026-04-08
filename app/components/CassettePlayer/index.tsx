@@ -7,6 +7,7 @@ import Scene from "./Scene";
 import NowPlaying from "./NowPlaying";
 import { useAudioPlayer, type Track } from "./useAudioPlayer";
 import { useIsMobile } from "./useIsMobile";
+import { muxStatic } from "./mux";
 
 // Lives inside the Canvas's Suspense boundary so it only mounts AFTER
 // every Suspense-loaded asset (useTexture/useVideoTexture) has resolved.
@@ -79,25 +80,55 @@ function LoadingOverlay({ sceneReady }: { sceneReady: boolean }) {
 }
 
 const TRACKS: Track[] = [
-  { title: "Awry", src: "/music/Awry (RB1).mp3" },
-  { title: "Fracture", src: "/music/Fracture (RB1).mp3" },
-  { title: "Calico", src: "/music/calico-v1.mp3" },
-  { title: "Cinematheque", src: "/music/cinematheque.mp3" },
-  { title: "High Fly Ball", src: "/music/hi-fly-ball-3.mp3" },
-  { title: "I Love a Rainbow", src: "/music/i-love-a-rainbow.mp3" },
-  { title: "Imposter", src: "/music/imposter-v5.mp3" },
+  {
+    title: "Awry",
+    src: muxStatic("XiZ6YMTp400XdlSH8T2qgJPxs6L4Ak00MBvh6901qThcW00", "audio.m4a"),
+  },
+  {
+    title: "Fracture",
+    src: muxStatic("o1GXRne9hRVW4elA00j01dGB01OlUROHB01LT7ibilZGFSA", "audio.m4a"),
+  },
+  {
+    title: "Calico",
+    src: muxStatic("NgXZZbxvWQtJQIhUiF702RZ1u02WqOlJSekmBnb01bl02mE", "audio.m4a"),
+  },
+  {
+    title: "Cinematheque",
+    src: muxStatic("Z7pH36DEdHsXgqWeQZPDif00c4JfK51db4WL02Gr1kjms", "audio.m4a"),
+  },
+  {
+    title: "High Fly Ball",
+    src: muxStatic("cQqnLBsz8qPa74TkM00m7V8pHojL3tL9YIey00OkkB00cA", "audio.m4a"),
+  },
+  {
+    title: "I Love a Rainbow",
+    src: muxStatic("kshuRlfVYiG8JXyHJaDdOMN00hxdmWxXg6hIJED2y02UI", "audio.m4a"),
+  },
+  {
+    title: "Imposter",
+    src: muxStatic("CvYHNMUpz202GMjs4zMPzB5NwAhVY9WmbkeSWREQG6UA", "audio.m4a"),
+  },
   {
     title: "Movement",
-    src: "/music/movement.mp3",
-    // Mux static MP4 rendition — drives the dreamy video that plays over
-    // the Movement tape's label while it's inserted in the deck.
-    labelVideoUrl:
-      "https://stream.mux.com/BV3YZtogl89mg9VcNBhhnHm02Y34zI1nlMuMQfAbl3dM/medium.mp4",
+    // Audio served from Mux as a static m4a rendition.
+    src: muxStatic("mbeJnNzlVoRSXDKfXTM6IQOaQSm00MZ8aKr99uGdREHE", "audio.m4a"),
   },
-  { title: "Overflow", src: "/music/overflow-v4.mp3" },
-  { title: "Reckless", src: "/music/reckless-v3.mp3" },
-  { title: "Spiral", src: "/music/spiral-v1.mp3" },
-  { title: "Sway", src: "/music/sway-demo-2.mp3" },
+  {
+    title: "Overflow",
+    src: muxStatic("tPW4myd29xnz0111n2VG733DDholL501gq5YK2uqDDCBc", "audio.m4a"),
+  },
+  {
+    title: "Reckless",
+    src: muxStatic("AGV9nYRxIxPWCT4UbLbSt8Evki9nnOS5L01r01it3pqqA", "audio.m4a"),
+  },
+  {
+    title: "Spiral",
+    src: muxStatic("EHC9njwLuD1BrdvgbC02X5pjUYIbG3KJDs24gkOXYnks", "audio.m4a"),
+  },
+  {
+    title: "Pastures",
+    src: muxStatic("b7hzgHMQTJE8mbSyyKmbXp3vo3vkrSY01UT4GPfEY7mU", "audio.m4a"),
+  },
 ];
 
 export default function CassettePlayer() {
@@ -171,7 +202,8 @@ export default function CassettePlayer() {
           fullscreen video doing mix-blend-overlay which isn't cheap. */}
       {!isMobile && (
         <video
-          src="/videos/grain.mp4"
+          src={muxStatic("02Sxge8AxIUTz5tvGKL2WikSdU4IVNsaNhUcC448h5lg", "highest.mp4")}
+          crossOrigin="anonymous"
           autoPlay
           loop
           muted

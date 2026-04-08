@@ -28,6 +28,12 @@ import DoorStopper from "./DoorStopper";
 import FloatingShelf from "./FloatingShelf";
 import Bookcase from "./Bookcase";
 import Rug from "./Rug";
+import { muxStatic } from "./mux";
+
+const CLOUDS_VIDEO_URL = muxStatic(
+  "LTyk5dOSo9Gr2iIkbnPdbPkof4ZBcaGpFw3LdWb2m5o",
+  "highest.mp4"
+);
 import type { Track, PlayerState } from "./useAudioPlayer";
 
 type SceneProps = {
@@ -215,7 +221,7 @@ function Walls() {
 
 // Separate component so useVideoTexture can suspend independently
 function WindowSky({ width, height, z }: { width: number; height: number; z: number }) {
-  const cloudsTexture = useVideoTexture("/videos/clouds.mp4", { muted: true, loop: true, playsInline: true });
+  const cloudsTexture = useVideoTexture(CLOUDS_VIDEO_URL, { muted: true, loop: true, playsInline: true, crossOrigin: "anonymous" });
   return (
     <mesh position={[0, 0, z]}>
       <planeGeometry args={[width, height]} />

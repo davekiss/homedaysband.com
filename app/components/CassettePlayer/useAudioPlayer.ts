@@ -8,8 +8,9 @@ export type Track = {
   src: string;
   // Optional override for the dreamy video that plays over this tape's
   // label while it's inserted and playing. When omitted, the tape falls
-  // back to the shared `/videos/clouds.mp4` loop. Use a direct video URL
-  // (MP4 works everywhere; Mux static MP4 renditions are one easy source).
+  // back to the shared default Mux loop set in CassetteTape.tsx. Use a
+  // direct video URL (MP4 works everywhere; Mux static MP4 renditions
+  // are one easy source — see `muxStatic` in ./mux.ts).
   labelVideoUrl?: string;
 };
 

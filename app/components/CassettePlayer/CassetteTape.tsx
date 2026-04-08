@@ -5,6 +5,14 @@ import { useFrame } from "@react-three/fiber";
 import { MeshTransmissionMaterial, RoundedBox, useVideoTexture } from "@react-three/drei";
 import * as THREE from "three";
 import type { PlayerState } from "./useAudioPlayer";
+import { muxStatic } from "./mux";
+
+// Shared fallback for the dreamy label overlay — any tape without its
+// own labelVideoUrl uses this Mux-hosted loop.
+const DEFAULT_LABEL_VIDEO_URL = muxStatic(
+  "BXEiKl79hqqPG00MrvWPyKzHtHnpUbEE5nYvB5RACeE00",
+  "270p.mp4"
+);
 
 type CassetteTapeProps = {
   isInserted: boolean;
@@ -303,7 +311,7 @@ function DreamyLabelOverlay({
   isPlaying: boolean;
   videoUrl?: string;
 }) {
-  const url = videoUrl ?? "/videos/clouds.mp4";
+  const url = videoUrl ?? DEFAULT_LABEL_VIDEO_URL;
   return (
     <Suspense fallback={null}>
       {/* key forces a fresh Suspense boundary + hook mount per URL so a
