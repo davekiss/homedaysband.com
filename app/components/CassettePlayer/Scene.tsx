@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useCallback, Suspense, useEffect } from "react";
+import { useRef, useCallback, Suspense, useEffect, useMemo } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Sparkles, useTexture, useVideoTexture, OrbitControls, useFBO, Image } from "@react-three/drei";
+import { useTexture, useVideoTexture, OrbitControls, useFBO, Image } from "@react-three/drei";
 import { RectAreaLightUniformsLib } from "three/examples/jsm/lights/RectAreaLightUniformsLib.js";
 import { EffectComposer, Noise, Bloom, Vignette, DepthOfField } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
@@ -28,6 +28,7 @@ import DoorStopper from "./DoorStopper";
 import FloatingShelf from "./FloatingShelf";
 import Bookcase from "./Bookcase";
 import Rug from "./Rug";
+import Fireflies from "./Fireflies";
 import { muxStatic } from "./mux";
 
 const CLOUDS_VIDEO_URL = muxStatic(
@@ -230,6 +231,53 @@ function WindowSky({ width, height, z }: { width: number; height: number; z: num
   );
 }
 
+// Dusk/night backdrop painted into a CanvasTexture — indigo-to-ember
+// gradient with a scatter of stars in the upper half. Gets drawn once
+// per mount; the <Sparkles> fireflies handle everything that moves.
+function NightSky({ width, height, z }: { width: number; height: number; z: number }) {
+  const texture = useMemo(() => {
+    const w = 512;
+    const h = 512;
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d")!;
+
+    // Deep indigo overhead → plum → dying sunset ember at the horizon.
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    grad.addColorStop(0, "#040312");
+    grad.addColorStop(0.45, "#120d2a");
+    grad.addColorStop(0.75, "#2a1330");
+    grad.addColorStop(0.92, "#512026");
+    grad.addColorStop(1, "#6e2c12");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // Stars — concentrated in the top ~65% where the sky is darkest.
+    for (let i = 0; i < 90; i++) {
+      const x = Math.random() * w;
+      const y = Math.random() * h * 0.65;
+      const r = Math.random() * 1.1 + 0.25;
+      const a = 0.35 + Math.random() * 0.55;
+      ctx.fillStyle = `rgba(255,250,220,${a})`;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.needsUpdate = true;
+    return tex;
+  }, []);
+
+  return (
+    <mesh position={[0, 0, z]}>
+      <planeGeometry args={[width, height]} />
+      <meshBasicMaterial map={texture} side={THREE.DoubleSide} toneMapped={false} />
+    </mesh>
+  );
+}
+
 function WindowLight() {
   const { gl } = useThree();
   useEffect(() => {
@@ -256,6 +304,10 @@ function Window() {
 
   const skyW = windowW - frameThickness * 2;
   const skyH = windowH - frameThickness * 2;
+
+  // Pick day or night once per page load. 50/50 — refreshes re-roll
+  // so repeat visitors can stumble on the other mood.
+  const isNight = useMemo(() => Math.random() < 0.5, []);
 
   return (
     <group position={[wallX, centerY, centerZ]} rotation={[0, -Math.PI / 2, 0]}>
@@ -294,15 +346,35 @@ function Window() {
         </mesh>
       ))}
 
-      {/* Clouds video behind the window — wrapped in Suspense */}
-      <Suspense fallback={
-        <mesh position={[0, 0, 0]}>
-          <planeGeometry args={[skyW, skyH]} />
-          <meshBasicMaterial color="#8aaccf" side={THREE.DoubleSide} />
-        </mesh>
-      }>
-        <WindowSky width={skyW} height={skyH} z={0} />
-      </Suspense>
+      {/* Sky behind the window — either the clouds video (day) or a
+          dusk/night canvas with drifting firefly sparkles. Picked once
+          per mount. */}
+      {isNight ? (
+        <>
+          <NightSky width={skyW} height={skyH} z={0} />
+          {/* Custom-shader fireflies drifting in the narrow slab
+              between the sky backdrop (local z = 0) and the glass
+              pane (local z ≈ 0.085), so they always read as being
+              *outside* the window. Each particle has independent
+              drift / blink cycles (see Fireflies.tsx) so they flash
+              several times per drift wobble without syncing. */}
+          <Fireflies
+            count={16}
+            scale={[skyW * 0.8, skyH * 0.8, 0.03]}
+            position={[0, 0, 0.025]}
+            color="#d4ff88"
+          />
+        </>
+      ) : (
+        <Suspense fallback={
+          <mesh position={[0, 0, 0]}>
+            <planeGeometry args={[skyW, skyH]} />
+            <meshBasicMaterial color="#8aaccf" side={THREE.DoubleSide} />
+          </mesh>
+        }>
+          <WindowSky width={skyW} height={skyH} z={0} />
+        </Suspense>
+      )}
 
       {/* Venetian blinds */}
       {(() => {
@@ -335,14 +407,15 @@ function Window() {
         <meshBasicMaterial color="#c8dce8" transparent opacity={0.08} side={THREE.DoubleSide} />
       </mesh>
 
-      {/* Daylight pouring in from the window */}
+      {/* Light pouring in from the window — bright daylight when it's
+          day, a dim cool moonlight wash when it's night. */}
       <rectAreaLight
         position={[0, 0, frameDepth / 2 + 0.15]}
         rotation={[0, Math.PI, 0]}
         width={skyW}
         height={skyH}
-        intensity={4}
-        color="#b8d4e8"
+        intensity={isNight ? 0.7 : 4}
+        color={isNight ? "#7a88a8" : "#b8d4e8"}
       />
     </group>
   );
