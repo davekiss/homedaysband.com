@@ -534,6 +534,15 @@ export default function Scene({
         rotation={[0, 0.25, 0]}
       />
 
+      {/* Second Polaroid — IMG_9685, slightly overlapping the first so
+          they read as a casual pair tossed onto the table. Bumped up
+          0.005 in y so it rests on top of the first one where they cross. */}
+      <Polaroid
+        photoUrl="/images/IMG_9685.jpeg"
+        position={[2.75, -0.432, 2.25]}
+        rotation={[0, -0.45, 0]}
+      />
+
       {/* Diner-style coffee mug in the back-left corner of the table with
           a coffee ring stain next to it. y=-0.44 is exactly the top surface
           of the tabletop, so the mug's flat cylindrical bottom sits flush. */}
