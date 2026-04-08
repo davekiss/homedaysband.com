@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     description: "Coming soon to a CD-RW near you",
     images: [
       {
-        url: "/images/og.png",
-        width: 3442,
-        height: 1824,
+        url: "/images/og.jpg",
+        width: 1200,
+        height: 630,
         alt: "Homedays band",
       },
     ],
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Homedays band | Cleveland, OH",
     description: "Coming soon to a CD-RW near you",
-    images: ["/images/og.png"],
+    images: ["/images/og.jpg"],
   },
 };
 
