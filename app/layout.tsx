@@ -21,6 +21,25 @@ const bitcount = Inter({
 export const metadata: Metadata = {
   title: "Homedays band | Cleveland, OH",
   description: "Coming soon to a CD-RW near you",
+  openGraph: {
+    title: "Homedays band | Cleveland, OH",
+    description: "Coming soon to a CD-RW near you",
+    images: [
+      {
+        url: "/images/og.png",
+        width: 3442,
+        height: 1824,
+        alt: "Homedays band",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Homedays band | Cleveland, OH",
+    description: "Coming soon to a CD-RW near you",
+    images: ["/images/og.png"],
+  },
 };
 
 export default function RootLayout({
