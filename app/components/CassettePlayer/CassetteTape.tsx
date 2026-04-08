@@ -21,6 +21,9 @@ type CassetteTapeProps = {
   // Per-tape override for the dreamy video that plays over the label
   // while the tape is inserted and playing. Falls back to clouds.mp4.
   labelVideoUrl?: string;
+  // On mobile we swap MeshTransmissionMaterial out for a vanilla
+  // MeshPhysicalMaterial to avoid the per-frame backdrop FBO render.
+  isMobile?: boolean;
 };
 
 // Cassette body palettes — index 0 is the original dark smoke plastic,
@@ -255,6 +258,20 @@ function DreamyVideoLayer({
     crossOrigin: "anonymous",
   });
 
+  // Pause the underlying <video> element when this tape isn't
+  // currently playing. Idle tapes otherwise keep decoding frames every
+  // second forever, which is pure wasted CPU/GPU — matters most on
+  // mobile but it's a strict win everywhere.
+  useEffect(() => {
+    const el = videoTexture.image as HTMLVideoElement | undefined;
+    if (!el) return;
+    if (isPlaying) {
+      el.play().catch(() => {});
+    } else {
+      el.pause();
+    }
+  }, [isPlaying, videoTexture]);
+
   useFrame((_, delta) => {
     if (!matRef.current) return;
     const target = isPlaying ? 0.35 : 0;
@@ -310,6 +327,7 @@ export default function CassetteTape({
   transmissionBuffer,
   bodyStyleIndex = 0,
   labelVideoUrl,
+  isMobile = false,
 }: CassetteTapeProps) {
   const groupRef = useRef<THREE.Group>(null);
   const reelProgress = duration > 0 ? progress / duration : 0;
@@ -531,27 +549,47 @@ export default function CassetteTape({
       ref={groupRef}
       onClick={onClick}
     >
-      {/* Main cassette body — translucent plastic shell with rounded corners */}
+      {/* Main cassette body — translucent plastic shell with rounded
+          corners. Desktop uses MeshTransmissionMaterial (refracts the
+          shared FBO backdrop); mobile falls back to vanilla
+          MeshPhysicalMaterial with transmission enabled, which skips
+          the per-frame scene re-render entirely. Visually close
+          enough, radically cheaper. */}
       <RoundedBox args={[1.1, 0.7, 0.12]} radius={0.02} smoothness={4} castShadow>
-        <MeshTransmissionMaterial
-          buffer={transmissionBuffer}
-          backside
-          samples={6}
-          resolution={512}
-          transmission={bodyStyle.transmission}
-          roughness={bodyStyle.roughness}
-          roughnessMap={scuffTexture}
-          thickness={0.8}
-          ior={1.1}
-          chromaticAberration={0.01}
-          anisotropy={0}
-          clearcoat={bodyStyle.clearcoat}
-          clearcoatRoughness={bodyStyle.clearcoatRoughness}
-          attenuationDistance={bodyStyle.attenuationDistance}
-          attenuationColor={bodyStyle.attenuationColor}
-          color={bodyStyle.color}
-          background={new THREE.Color(bodyStyle.background)}
-        />
+        {isMobile ? (
+          <meshPhysicalMaterial
+            transmission={bodyStyle.transmission}
+            roughness={bodyStyle.roughness}
+            roughnessMap={scuffTexture}
+            thickness={0.8}
+            ior={1.1}
+            clearcoat={bodyStyle.clearcoat}
+            clearcoatRoughness={bodyStyle.clearcoatRoughness}
+            attenuationDistance={bodyStyle.attenuationDistance}
+            attenuationColor={new THREE.Color(bodyStyle.attenuationColor)}
+            color={new THREE.Color(bodyStyle.color)}
+          />
+        ) : (
+          <MeshTransmissionMaterial
+            buffer={transmissionBuffer}
+            backside
+            samples={6}
+            resolution={512}
+            transmission={bodyStyle.transmission}
+            roughness={bodyStyle.roughness}
+            roughnessMap={scuffTexture}
+            thickness={0.8}
+            ior={1.1}
+            chromaticAberration={0.01}
+            anisotropy={0}
+            clearcoat={bodyStyle.clearcoat}
+            clearcoatRoughness={bodyStyle.clearcoatRoughness}
+            attenuationDistance={bodyStyle.attenuationDistance}
+            attenuationColor={bodyStyle.attenuationColor}
+            color={bodyStyle.color}
+            background={new THREE.Color(bodyStyle.background)}
+          />
+        )}
       </RoundedBox>
 
       {/* Label sticker on front face (+Z) */}

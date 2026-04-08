@@ -6,6 +6,7 @@ import { useProgress } from "@react-three/drei";
 import Scene from "./Scene";
 import NowPlaying from "./NowPlaying";
 import { useAudioPlayer, type Track } from "./useAudioPlayer";
+import { useIsMobile } from "./useIsMobile";
 
 // Lives inside the Canvas's Suspense boundary so it only mounts AFTER
 // every Suspense-loaded asset (useTexture/useVideoTexture) has resolved.
@@ -102,6 +103,10 @@ const TRACKS: Track[] = [
 export default function CassettePlayer() {
   const player = useAudioPlayer(TRACKS);
   const [sceneReady, setSceneReady] = useState(false);
+  // Null until matchMedia has resolved on the client; we hold off
+  // mounting the r3f Canvas until we know, because `shadows` and `dpr`
+  // are effectively initial-only props on the WebGL renderer.
+  const isMobile = useIsMobile();
 
   // Wait for the cassette tape's insert animation to finish (~833ms in
   // CassetteTape.tsx) before actually starting playback, so the song
@@ -112,55 +117,68 @@ export default function CassettePlayer() {
 
   return (
     <div className="fixed inset-0 w-screen h-screen">
-      <Canvas
-        shadows
-        camera={{
-          position: [0, 2.2, 2.4],
-          fov: 40,
-          near: 0.1,
-          far: 50,
-        }}
-        gl={{
-          antialias: true,
-          toneMapping: 1, // LinearToneMapping
-          toneMappingExposure: 1.6,
-        }}
-        style={{
-          cursor: "pointer",
-          background: "linear-gradient(180deg, #1a1614 0%, #0f0e0c 100%)",
-        }}
-      >
-        <Suspense fallback={null}>
-          <Scene
-            tracks={TRACKS}
-            playerState={player.state}
-            currentTrackIndex={player.currentTrackIndex}
-            progress={player.progress}
-            duration={player.duration}
-            onSelectTrack={handleSelectTrack}
-            onPlay={player.play}
-            onPause={player.pause}
-            onStop={player.stop}
-            onRewind={player.rewind}
-            onFastForward={player.fastForward}
-            onEject={player.eject}
-            onStopFastAction={player.stopFastAction}
-            getFrequencyData={player.getFrequencyData}
-            volume={player.volume}
-            onVolumeChange={player.setVolume}
-          />
-          <SceneReadySignal onReady={() => setSceneReady(true)} />
-        </Suspense>
-      </Canvas>
-      {/* Film grain overlay */}
-      <video
-        src="/videos/grain.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="fixed inset-0 w-full h-full object-cover pointer-events-none z-[1] mix-blend-overlay opacity-100"
-      />
+      {isMobile !== null && (
+        <Canvas
+          // Desktop: rely on the browser default DPR. Mobile: clamp to
+          // 1.5 max — phones ship at DPR 2–3 which quadruples the pixel
+          // count vs. DPR 1 and is the single biggest perf lever.
+          dpr={isMobile ? [1, 1.5] : undefined}
+          // Shadow maps are expensive on mobile GPUs. Every castShadow
+          // mesh renders into an extra depth target per shadow-casting
+          // light per frame — we turn the whole subsystem off on phones.
+          shadows={!isMobile}
+          camera={{
+            position: [0, 2.2, 2.4],
+            fov: 40,
+            near: 0.1,
+            far: 50,
+          }}
+          gl={{
+            antialias: true,
+            toneMapping: 1, // LinearToneMapping
+            toneMappingExposure: 1.6,
+          }}
+          style={{
+            cursor: "pointer",
+            background: "linear-gradient(180deg, #1a1614 0%, #0f0e0c 100%)",
+          }}
+        >
+          <Suspense fallback={null}>
+            <Scene
+              tracks={TRACKS}
+              playerState={player.state}
+              currentTrackIndex={player.currentTrackIndex}
+              progress={player.progress}
+              duration={player.duration}
+              onSelectTrack={handleSelectTrack}
+              onPlay={player.play}
+              onPause={player.pause}
+              onStop={player.stop}
+              onRewind={player.rewind}
+              onFastForward={player.fastForward}
+              onEject={player.eject}
+              onStopFastAction={player.stopFastAction}
+              getFrequencyData={player.getFrequencyData}
+              volume={player.volume}
+              onVolumeChange={player.setVolume}
+              isMobile={isMobile}
+            />
+            <SceneReadySignal onReady={() => setSceneReady(true)} />
+          </Suspense>
+        </Canvas>
+      )}
+      {/* Film grain overlay — skipped on mobile, it's an always-playing
+          fullscreen video doing mix-blend-overlay which isn't cheap. */}
+      {!isMobile && (
+        <video
+          src="/videos/grain.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="fixed inset-0 w-full h-full object-cover pointer-events-none z-[1] mix-blend-overlay opacity-100"
+        />
+      )}
       <div
         className="fixed bottom-8 left-0 right-0 z-10 transition-opacity duration-500"
         style={{ opacity: sceneReady ? 1 : 0 }}

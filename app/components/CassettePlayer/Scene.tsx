@@ -44,6 +44,11 @@ type SceneProps = {
   getFrequencyData: () => Uint8Array;
   volume: number;
   onVolumeChange: (vol: number) => void;
+  // When true, skip the expensive extras: no per-frame transmission
+  // FBO render, no post-processing, no auto-rotate or idle sway, no
+  // shadow-casting lights, and cassette bodies fall back to vanilla
+  // physical material instead of MeshTransmissionMaterial.
+  isMobile: boolean;
 };
 
 const TAPE_COLORS = ["#c4956a", "#7a8c6e", "#8a7a6a", "#6a7a8c", "#9c8a6a", "#7c6a5a", "#6a8a7a", "#8c7a7a", "#7a6a5a", "#6a7a6a"];
@@ -319,6 +324,7 @@ export default function Scene({
   getFrequencyData,
   volume,
   onVolumeChange,
+  isMobile,
 }: SceneProps) {
   const cameraGroupRef = useRef<THREE.Group>(null);
   const tapesGroupRef = useRef<THREE.Group>(null);
@@ -335,8 +341,12 @@ export default function Scene({
   useFrame((state) => {
     if (!cameraGroupRef.current) return;
 
-    // Render background into shared transmission buffer
-    if (tapesGroupRef.current) {
+    // Render background into shared transmission buffer. Skipped on
+    // mobile — the mobile path swaps MeshTransmissionMaterial out for a
+    // plain MeshPhysicalMaterial, so nothing reads this buffer and the
+    // full-scene render pass would be pure waste. The FBO itself is
+    // still allocated so the code path stays simple.
+    if (!isMobile && tapesGroupRef.current) {
       tapesGroupRef.current.visible = false;
       state.gl.setRenderTarget(transmissionFBO);
       state.gl.render(state.scene, state.camera);
@@ -344,10 +354,13 @@ export default function Scene({
       tapesGroupRef.current.visible = true;
     }
 
-    // Gentle idle camera sway
-    const t = state.clock.elapsedTime;
-    cameraGroupRef.current.rotation.y = Math.sin(t * 0.15) * 0.015;
-    cameraGroupRef.current.rotation.x = Math.sin(t * 0.1) * 0.005;
+    // Gentle idle camera sway — desktop only. On mobile we leave the
+    // camera frozen so the scene can idle cooler.
+    if (!isMobile) {
+      const t = state.clock.elapsedTime;
+      cameraGroupRef.current.rotation.y = Math.sin(t * 0.15) * 0.015;
+      cameraGroupRef.current.rotation.x = Math.sin(t * 0.1) * 0.005;
+    }
   });
 
   const handleTapeClick = useCallback(
@@ -366,14 +379,17 @@ export default function Scene({
       {/* Very low ambient — most light comes from lamps */}
       <ambientLight intensity={0.25} color="#e8d0b0" />
 
-      {/* Table lamp — left side, warm and close */}
+      {/* Table lamp — left side, warm and close. castShadow is dropped
+          on mobile; the whole shadowmap subsystem is disabled at the
+          Canvas level there anyway, but no sense rendering depth
+          targets for a light that can't cast. */}
       <pointLight
         position={[-2.5, 0.8, 0.5]}
         intensity={6}
         color="#f5d0a0"
         distance={8}
         decay={2}
-        castShadow
+        castShadow={!isMobile}
         shadow-mapSize={[1024, 1024]}
       />
 
@@ -454,6 +470,7 @@ export default function Scene({
               tableRotation={TABLE_POSITIONS[i % TABLE_POSITIONS.length][3]}
               bodyStyleIndex={TAPE_BODY_STYLES[i % TAPE_BODY_STYLES.length]}
               labelVideoUrl={track.labelVideoUrl}
+              isMobile={isMobile}
             />
           ))}
         </group>
@@ -575,33 +592,38 @@ export default function Scene({
         maxDistance={6}
         minPolarAngle={0.2}
         maxPolarAngle={Math.PI / 2.2}
-        autoRotate
+        autoRotate={!isMobile}
         autoRotateSpeed={0.3}
       />
 
-      {/* Post-processing */}
-      <EffectComposer>
-        <Bloom
-          mipmapBlur
-          luminanceThreshold={1}
-          intensity={0.8}
-          luminanceSmoothing={0.025}
-        />
-        <Noise
-          premultiply
-          blendFunction={BlendFunction.ADD}
-        />
-        <Vignette
-          offset={0.4}
-          darkness={0.6}
-          blendFunction={BlendFunction.NORMAL}
-        />
-        <DepthOfField
-          focusDistance={0}
-          focalLength={0.01}
-          bokehScale={0.8}
-        />
-      </EffectComposer>
+      {/* Post-processing — desktop only. EffectComposer adds several
+          full-screen passes (bloom mipmap blur, noise, vignette, DoF
+          with bokeh); on mobile that's easily the hottest thing on the
+          GPU, and dropping it is the single biggest perf win for phones. */}
+      {!isMobile && (
+        <EffectComposer>
+          <Bloom
+            mipmapBlur
+            luminanceThreshold={1}
+            intensity={0.8}
+            luminanceSmoothing={0.025}
+          />
+          <Noise
+            premultiply
+            blendFunction={BlendFunction.ADD}
+          />
+          <Vignette
+            offset={0.4}
+            darkness={0.6}
+            blendFunction={BlendFunction.NORMAL}
+          />
+          <DepthOfField
+            focusDistance={0}
+            focalLength={0.01}
+            bokehScale={0.8}
+          />
+        </EffectComposer>
+      )}
     </>
   );
 }
