@@ -157,7 +157,10 @@ export default function CassettePlayer() {
           // Shadow maps are expensive on mobile GPUs. Every castShadow
           // mesh renders into an extra depth target per shadow-casting
           // light per frame — we turn the whole subsystem off on phones.
-          shadows={!isMobile}
+          // On desktop, use "percentage" (PCFShadowMap) — r3f's default
+          // `shadows` type is PCFSoftShadowMap, which three.js has
+          // deprecated and spams a console warning every frame.
+          shadows={isMobile ? false : "percentage"}
           camera={{
             position: [0, 2.2, 2.4],
             fov: 40,

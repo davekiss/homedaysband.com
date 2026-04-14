@@ -28,6 +28,9 @@ import DoorStopper from "./DoorStopper";
 import FloatingShelf from "./FloatingShelf";
 import Bookcase from "./Bookcase";
 import Rug from "./Rug";
+import IbanezGuitar from "./IbanezGuitar";
+import GuitarStand from "./GuitarStand";
+import BusinessCard from "./BusinessCard";
 import Fireflies from "./Fireflies";
 import { muxStatic } from "./mux";
 
@@ -599,6 +602,18 @@ export default function Scene({
       {/* Guitar amp in the corner near the window */}
       <GuitarAmp position={[6.2, -0.8, -4.3]} rotation={[0, -Math.PI / 3.5, 0]} />
 
+      {/* Guitar stand + Ibanez semi-hollow in the corner near the shelf */}
+      <GuitarStand
+        position={[-7.5, -1.5, -5.2]}
+        rotation={[0, (70 * Math.PI) / 180, 0]}
+        scale={0.55}
+      />
+      <IbanezGuitar
+        position={[-7.5, -1.5, -5.2]}
+        rotation={[0, (70 * Math.PI) / 180, 0]}
+        scale={0.24}
+      />
+
       {/* Scandinavian tripod floor lamp in the front-right corner — diagonally
           opposite where it used to live. Easy to remove — just delete this
           line and the ./FloorLamp import above. */}
@@ -650,6 +665,16 @@ export default function Scene({
           surface (y=-0.44); easy to remove by deleting this line and the
           ./GuitarPicks import above. */}
       <GuitarPicks position={[-0.7, -0.44, 2.55]} rotation={[0, 0.3, 0]} />
+
+      {/* Luthier's business card — attribution for the Ibanez GLB model.
+          Click once to pick up, click again to open the creator's page. */}
+      <BusinessCard
+        name="KgDaniel"
+        title="3D Artist"
+        url="https://sketchfab.com/models/8cf60ce5bdbc43e4842abb86983cef5d"
+        position={[3.2, -0.437, -2.0]}
+        rotation={[0, 0.25, 0]}
+      />
 
       {/* Die-cut "Homedays" vinyl sticker on the table — wordmark in the
           band's Theseasons font, like a printed test sticker the band
