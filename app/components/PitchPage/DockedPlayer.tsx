@@ -118,10 +118,8 @@ export default function DockedPlayer({ tracks, bandSlug }: Props) {
                     <button {...props}>
                       {state.muted ? (
                         <VolumeOffIcon className="w-4 h-4" />
-                      ) : state.volume > 0.5 ? (
-                        <VolumeHighIcon className="w-4 h-4" />
                       ) : (
-                        <VolumeLowIcon className="w-4 h-4" />
+                        <VolumeHighIcon className="w-4 h-4" />
                       )}
                     </button>
                   )}
