@@ -26,6 +26,12 @@ const venues: Record<string, Venue> = {
     address: "15711 Waterloo Rd, Cleveland, OH 44110",
     neighborhood: "North Collinwood",
   },
+  "beachland-tavern": {
+    key: "beachland-tavern",
+    name: "Beachland Tavern",
+    address: "15711 Waterloo Rd, Cleveland, OH 44110",
+    neighborhood: "North Collinwood",
+  },
   "now-thats-class": {
     key: "now-thats-class",
     name: "Now That\u2019s Class",
