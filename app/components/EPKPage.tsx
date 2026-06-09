@@ -229,7 +229,23 @@ export default function EPKPage() {
                 <ul className="space-y-2 text-[#a41b77]">
                   <li className="flex items-start gap-3">
                     <span className="text-[#a41b77] mt-1">•</span>
-                    <span>Brothers Lounge (Cleveland) — Co-headline with local favorites, September 2025</span>
+                    <span>The Grog Shop (Cleveland Heights) — w/ Molly O&apos;Malley, Plum Shed, Youth Pallet, January 2026</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#a41b77] mt-1">•</span>
+                    <span>Musica (Akron) — w/ Blind Boxing, Negative Mental Attitude, January 2026</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#a41b77] mt-1">•</span>
+                    <span>Dunlap&apos;s (Cleveland) — February 2026</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#a41b77] mt-1">•</span>
+                    <span>Brothers Lounge (Cleveland) — w/ Isles, Rusted Hearts, Archangel, November 2025</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#a41b77] mt-1">•</span>
+                    <span>Bent Mace (Cleveland) — w/ Aro Girl, Nervous Surface, Detatchi, October 2025</span>
                   </li>
                 </ul>
               </div>
