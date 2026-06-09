@@ -6,7 +6,18 @@ type Show = {
   ticketsUrl?: string;
 };
 
-const shows: Show[] = [];
+const shows: Show[] = [
+  {
+    date: "July 25, 2026",
+    venue: "West Side Bowl",
+    location: "Youngstown, OH",
+  },
+  {
+    date: "September 12, 2026",
+    venue: "Waterloo Arts Fest",
+    location: "Cleveland, OH",
+  },
+];
 
 export default function Shows() {
   const upcomingShows = shows.filter(
