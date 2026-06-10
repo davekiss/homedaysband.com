@@ -31,6 +31,9 @@ import Rug from "./Rug";
 import IbanezGuitar from "./IbanezGuitar";
 import GuitarStand from "./GuitarStand";
 import BusinessCard from "./BusinessCard";
+import CalendarPage from "./CalendarPage";
+import DeskCalendar from "./DeskCalendar";
+import { getUpcomingShows } from "@/data/shows";
 import Fireflies from "./Fireflies";
 import { muxStatic } from "./mux";
 
@@ -729,6 +732,29 @@ export default function Scene({
         toneMapped
         color="#888888"
       />
+
+      {/* Upcoming shows — torn page-a-day calendar pages taped to the back
+          wall between the posters, one per show, date circled in sharpie
+          with the venue scrawled underneath. Click to pick one up and read
+          it; clicking again opens the tickets link when the show has one.
+          Pages come straight from data/shows.ts, so past shows disappear
+          on their own. */}
+      {getUpcomingShows().map((show, i, arr) => (
+        <CalendarPage
+          key={`${show.date}-${show.venue}`}
+          show={show}
+          position={[
+            (i - (arr.length - 1) / 2) * 1.15,
+            i % 2 === 0 ? 1.84 : 1.7,
+            -5.93,
+          ]}
+          tilt={i % 2 === 0 ? 0.05 : -0.065}
+        />
+      ))}
+
+      {/* The tear-off block those pages were ripped from, sitting on the
+          desk open to today's date. */}
+      <DeskCalendar position={[-4.35, -0.44, 0.55]} rotation={[0, 0.4, 0]} />
 
       {/* Floating shelf on the left wall — holds a pothos, a globe lamp,
           and a couple of leaning vinyl records. Easy to remove: delete
