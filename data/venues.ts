@@ -4,6 +4,7 @@ export type Venue = {
   address: string;
   neighborhood: string;
   photo?: string;
+  sleepSubtitle?: string;
 };
 
 const venues: Record<string, Venue> = {
@@ -13,6 +14,7 @@ const venues: Record<string, Venue> = {
     address: "13200 Madison Ave, Lakewood, OH 44107",
     neighborhood: "Lakewood",
     photo: "/images/venues/mahalls.jpg",
+    sleepSubtitle: "Right off I-77/480, safe parking",
   },
   "grog-shop": {
     key: "grog-shop",
@@ -31,6 +33,7 @@ const venues: Record<string, Venue> = {
     name: "Beachland Tavern",
     address: "15711 Waterloo Rd, Cleveland, OH 44110",
     neighborhood: "North Collinwood",
+    sleepSubtitle: "Beachwood, off I-271, safe parking",
   },
   "now-thats-class": {
     key: "now-thats-class",

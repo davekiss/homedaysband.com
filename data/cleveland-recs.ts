@@ -29,7 +29,7 @@ const clevelandRecs: Rec[] = [
     name: "Courtyard by Marriott",
     address: "5101 West Creek Rd, Independence",
     description:
-      "~20 min south of the venue, right off I-77/480. Plenty of parking, safe area for a loaded van.",
+      "Plenty of parking, safe area for a loaded van.",
     category: "sleep",
     tags: ["touring-friendly", "free-parking"],
     venueNotes: {
@@ -56,6 +56,28 @@ const clevelandRecs: Rec[] = [
     tags: ["touring-friendly", "free-parking"],
     venueNotes: {
       mahalls: "~20 min south, off I-77/480",
+    },
+  },
+  {
+    name: "Hampton Inn & Suites Cleveland-Beachwood",
+    address: "3840 Orange Pl, Beachwood",
+    description:
+      "Well-lit business-hotel lot in a quiet suburb — the safe bet for a loaded trailer. Back it against the building and you're fine.",
+    category: "sleep",
+    tags: ["touring-friendly", "free-parking"],
+    venueNotes: {
+      "beachland-tavern": "~15 min south, right off I-271",
+    },
+  },
+  {
+    name: "Homewood Suites by Hilton Cleveland-Beachwood",
+    address: "25725 Central Pkwy, Beachwood",
+    description:
+      "Same area, more room. Suites with a separate living area, free breakfast, same safe-lot situation.",
+    category: "sleep",
+    tags: ["touring-friendly", "free-parking"],
+    venueNotes: {
+      "beachland-tavern": "~15 min south, off I-271",
     },
   },
 
@@ -95,11 +117,37 @@ const clevelandRecs: Rec[] = [
     name: "LBM",
     address: "12301 Madison",
     description:
-      "Kitchen \u2018til 11:30pm weekdays, 1:30pm weekends. Closest to the venue.",
+      "Kitchen \u2018til 11:30pm weekdays, 1:30am weekends.",
     category: "food-post-show",
     tags: ["late-night"],
     venueNotes: {
       mahalls: "Closest restaurant to the venue",
+    },
+  },
+  {
+    name: "Doinks Burger Joint",
+    address: "15519 Waterloo Rd",
+    description:
+      "Smash burgers and house-made hard seltzers from a garage operation gone legit. Closes at 10pm — hit it before doors or right after an early set.",
+    category: "food-post-show",
+    tags: ["burgers"],
+    hours: "Tue–Sat 4–10pm",
+    closedDays: [0, 1],
+    venueNotes: {
+      "beachland-tavern": "On Waterloo, a block from the venue",
+    },
+  },
+  {
+    name: "Citizen Pie",
+    address: "15710 Waterloo Rd",
+    description:
+      "Some of the best Neapolitan pizza in the city. Closes at 9pm, so it's a pre-show move. Fair warning: late-night options near Waterloo are thin — eat early, and the Beachland's own kitchen runs during shows.",
+    category: "food-post-show",
+    tags: ["pizza"],
+    hours: "Tue–Sat 12–9pm, Sun 12–7pm",
+    closedDays: [1],
+    venueNotes: {
+      "beachland-tavern": "Across the street from the venue",
     },
   },
 
@@ -115,6 +163,17 @@ const clevelandRecs: Rec[] = [
     venueNotes: {
       mahalls: "About 10 min east of Mahall\u2019s",
       "grog-shop": "About 20 min west",
+    },
+  },
+  {
+    name: "Inn on Coventry",
+    address: "2785 Euclid Heights Blvd, Cleveland Heights",
+    description:
+      "Coventry Village diner \u2014 a dozen kinds of eggs Benedict, lemon ricotta pancakes. Open from 7am weekdays.",
+    category: "breakfast",
+    tags: ["morning-after"],
+    venueNotes: {
+      "beachland-tavern": "~12 min south, in Coventry Village",
     },
   },
 
@@ -135,7 +194,7 @@ const clevelandRecs: Rec[] = [
     address: "13380 Madison Ave, Lakewood",
     category: "coffee",
     tags: ["coffee"],
-    description: "Right around the corner from the venue.",
+    description: "Cleveland roaster, reliably good espresso.",
     venueNotes: {
       mahalls: "Walking distance from Mahall\u2019s",
     },
@@ -148,6 +207,18 @@ const clevelandRecs: Rec[] = [
     description: "Roastery cafe in Gordon Square. Good espresso, good space.",
     venueNotes: {
       mahalls: "~10 min east of Mahall\u2019s",
+    },
+  },
+  {
+    name: "Six Shooter Coffee",
+    address: "15613 Waterloo Rd",
+    description:
+      "Roaster-caf\u00e9 and the neighborhood hub. Breakfast burritos and vegan pastries too.",
+    category: "coffee",
+    tags: ["coffee"],
+    hours: "7am\u20137pm daily",
+    venueNotes: {
+      "beachland-tavern": "On the venue's block \u2014 walk it",
     },
   },
 
@@ -173,6 +244,17 @@ const clevelandRecs: Rec[] = [
       mahalls: "In Lakewood, close to the venue",
     },
   },
+  {
+    name: "Tommy's",
+    address: "1824 Coventry Rd, Cleveland Heights",
+    description:
+      "Coventry institution since 1972 — massive vegan/vegetarian menu (milkshakes and spinach pies are the move), with a bookstore attached. Open 12–8 daily.",
+    category: "vegan",
+    tags: ["vegan", "vegetarian"],
+    venueNotes: {
+      "beachland-tavern": "~12 min south, in Coventry Village",
+    },
+  },
 
   // --- Explore ---
   {
@@ -185,6 +267,7 @@ const clevelandRecs: Rec[] = [
     venueNotes: {
       mahalls: "About 20 min east, in University Circle",
       "grog-shop": "5 min south, basically next door",
+      "beachland-tavern": "~15 min south, in University Circle",
     },
   },
   {
@@ -211,6 +294,27 @@ const clevelandRecs: Rec[] = [
       mahalls: "About 15 min east, in Ohio City",
     },
   },
+  {
+    name: "Euclid Beach Park",
+    address: "16301 Lakeshore Blvd",
+    description:
+      "Lakefront park on the site of the old amusement park \u2014 the original 1895 arch still stands. Free.",
+    category: "explore",
+    tags: ["free", "outdoors"],
+    venueNotes: {
+      "beachland-tavern": "5 min north of the venue",
+    },
+  },
+  {
+    name: "Waterloo Arts District",
+    description:
+      "The strip the venue sits on \u2014 galleries, murals, Waterloo Arts, Praxis Fiber Workshop. Worth a slow walk before soundcheck.",
+    category: "explore",
+    tags: ["free", "daytime"],
+    venueNotes: {
+      "beachland-tavern": "Out the front door",
+    },
+  },
 
   // --- Quiet Drinks ---
   {
@@ -224,13 +328,26 @@ const clevelandRecs: Rec[] = [
       mahalls: "About 15 min east, in Tremont",
     },
   },
+  {
+    name: "The Millard Fillmore Presidential Library",
+    address: "15617 Waterloo Rd",
+    description:
+      "Neighborhood bar named after the most forgettable president. More easygoing dive than wine bar, but it's open 'til 2:30am and it's where the night ends up.",
+    category: "quiet-drinks",
+    tags: ["post-show"],
+    hours: "4pm–2:30am daily",
+    phone: "(216) 481-9444",
+    venueNotes: {
+      "beachland-tavern": "Two doors from the venue",
+    },
+  },
 
   // --- Gear & Records ---
   {
     name: "Guitar Riot",
     address: "4517 Lorain Ave, Ste A",
     description:
-      "Best guitar shop by far. Closes at 6pm day-of-show, so call ahead Wed/Thu morning if anything\u2019s already fragile.",
+      "Best guitar shop by far. Closes at 6pm, so call ahead in the morning if anything\u2019s already fragile.",
     category: "gear",
     tags: ["guitars", "gear", "repair"],
     hours: "Tue\u2013Thu 11\u20136, Fri\u2013Sat 11\u20135, closed Sun/Mon",
@@ -238,6 +355,7 @@ const clevelandRecs: Rec[] = [
     phone: "(216) 291-7172",
     venueNotes: {
       mahalls: "~10 min east of Mahall\u2019s, on Lorain Ave",
+      "beachland-tavern": "~25 min west \u2014 far, but it\u2019s the one worth the drive",
     },
   },
 
@@ -260,6 +378,26 @@ const clevelandRecs: Rec[] = [
     tags: ["books", "shopping"],
     venueNotes: {
       mahalls: "~10 min east of Mahall\u2019s, on Lorain Ave",
+    },
+  },
+  {
+    name: "Blue Arrow Records",
+    address: "16001 Waterloo Rd",
+    description: "Vintage vinyl and tapes \u2014 the anchor of the Waterloo strip.",
+    category: "entertainment",
+    tags: ["vinyl", "records"],
+    venueNotes: {
+      "beachland-tavern": "A block east of the venue",
+    },
+  },
+  {
+    name: "This Way Out Vintage Shoppe",
+    description:
+      "Vintage clothing in the Beachland's basement. Open during shows, dangerous during load-out.",
+    category: "entertainment",
+    tags: ["vintage", "shopping"],
+    venueNotes: {
+      "beachland-tavern": "Inside the venue, downstairs",
     },
   },
 ];

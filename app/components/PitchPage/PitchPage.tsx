@@ -39,11 +39,12 @@ function useRecsByCategory(venueKey: string) {
   return useMemo(() => {
     const map = new Map<RecCategory, Rec[]>();
     for (const rec of clevelandRecs) {
+      if (!rec.venueNotes[venueKey]) continue;
       if (!map.has(rec.category)) map.set(rec.category, []);
       map.get(rec.category)!.push(rec);
     }
     return map;
-  }, []);
+  }, [venueKey]);
 }
 
 export default function PitchPage({ pitch, venue }: Props) {
@@ -146,7 +147,7 @@ export default function PitchPage({ pitch, venue }: Props) {
         <div id="food" className="grid grid-cols-1 md:grid-cols-3 border-b md:border-x border-[#2B44FF]/15">
           {/* Sleep */}
           <div className="py-10 md:px-10 md:border-r border-[#2B44FF]/15">
-            <SectionHeader title="Sleep" subtitle="Right off I-77/480, safe parking" />
+            <SectionHeader title="Sleep" subtitle={venue.sleepSubtitle ?? "Safe overnight parking"} />
             <RecList recs={recs.get("sleep") ?? []} venueKey={pitch.venueKey} showDay={showDay} />
           </div>
 
@@ -365,6 +366,11 @@ function RecList({
             {rec.address && (
               <p className="text-[14px] text-[#2B44FF]/85 mb-1">
                 {rec.address}
+              </p>
+            )}
+            {rec.venueNotes[venueKey] && (
+              <p className="text-[13px] text-[#2B44FF]/70 italic mb-1">
+                {rec.venueNotes[venueKey]}
               </p>
             )}
             <p className="text-[15px] text-[#2B44FF]/85 leading-relaxed">
