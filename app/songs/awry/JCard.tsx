@@ -242,6 +242,10 @@ export default function JCard({ song }: { song: Song }) {
         .jc-cover-foot-also {
           white-space: nowrap;
         }
+        .jc-cover-foot-name {
+          display: inline-flex;
+          gap: 14px;
+        }
         .jc-cover-foot > span:first-child,
         .jc-cover-foot-links a {
           white-space: nowrap;
@@ -367,6 +371,8 @@ export default function JCard({ song }: { song: Song }) {
           text-wrap: balance;
         }
         .jc-back-meta {
+          display: grid;
+          gap: 2px;
           font-size: 12px;
           letter-spacing: 0;
           color: var(--ink-2);
@@ -868,8 +874,9 @@ function CoverPanel({ song }: { song: Song }) {
         />
       </div>
       <div className="jc-cover-foot">
-        <span>
-          {song.artist} · {song.releaseDateISO.slice(0, 4)}
+        <span className="jc-cover-foot-name">
+          <span>{song.artist}</span>
+          <span>{song.releaseDateISO.slice(0, 4)}</span>
         </span>
         <span className="jc-cover-foot-links">
           <span className="jc-cover-foot-also">Also on</span>
@@ -932,7 +939,9 @@ function BackPanel({ song }: { song: Song }) {
     <div className="jc-panel jc-back" style={{ "--i": i } as React.CSSProperties}>
       <h1>{song.title}</h1>
       <p className="jc-back-meta">
-        Single · {song.releaseDate} · {song.origin}
+        <span>Single</span>
+        <span>Released {song.releaseDate}</span>
+        <span>{song.origin}</span>
       </p>
 
       <div className="jc-credits">
