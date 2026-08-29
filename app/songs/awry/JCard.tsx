@@ -59,6 +59,7 @@ export default function JCard({ song }: { song: Song }) {
           --deck: #171310;
           --deck-2: #241e18;
           --cream: #f5efdd;
+          --mono: "Andale Mono", var(--font-cousine), ui-monospace, Menlo, monospace;
           --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
           position: relative;
           min-height: 100dvh;
@@ -111,11 +112,11 @@ export default function JCard({ song }: { song: Song }) {
           gap: 8px;
           padding: 8px 16px 18px;
           font-size: 12px;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
+          letter-spacing: 0;
           color: rgba(245, 239, 221, 0.62);
           text-decoration: none;
           transition: color 200ms ease;
+          font-family: var(--mono);
         }
         .jc-home:hover {
           color: var(--cream);
@@ -228,10 +229,10 @@ export default function JCard({ song }: { song: Song }) {
           gap: 0 12px;
           padding: 2px 16px;
           min-height: 48px;
-          font-size: 10px;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
+          font-size: 11px;
+          letter-spacing: 0;
           color: var(--ink-2);
+          font-family: var(--mono);
         }
         .jc-cover-foot-links {
           display: flex;
@@ -271,9 +272,9 @@ export default function JCard({ song }: { song: Song }) {
           padding: 12px 18px;
           background: var(--stock-2);
           font-family: "Theseasons", serif;
-          font-size: 15px;
-          letter-spacing: 0.26em;
-          text-transform: uppercase;
+          font-weight: 400;
+          font-size: 17px;
+          letter-spacing: 0.05em;
           color: var(--ink);
         }
         .jc-spine em {
@@ -286,7 +287,7 @@ export default function JCard({ song }: { song: Song }) {
         .jc-spine small {
           font-family: var(--font-geist-sans), system-ui, sans-serif;
           font-size: 11px;
-          letter-spacing: 0.22em;
+          letter-spacing: 0;
           color: var(--ink-2);
         }
 
@@ -316,15 +317,18 @@ export default function JCard({ song }: { song: Song }) {
         }
         .jc-lyric-time {
           font-size: 11px;
-          letter-spacing: 0.08em;
+          letter-spacing: 0;
           color: var(--ink-2);
           font-variant-numeric: tabular-nums;
           padding-top: 3px;
+          font-family: var(--mono);
         }
         .jc-lyric-lines {
-          font-size: 15px;
+          font-size: 14px;
           line-height: 1.55;
-          max-width: 34ch;
+          max-width: 36ch;
+          font-family: var(--mono);
+          line-height: 1.65;
         }
         .jc-lyric-section[data-on-card="true"] .jc-lyric-lines {
           background: linear-gradient(transparent 12%, rgba(233, 210, 122, 0.55) 12%, rgba(233, 210, 122, 0.55) 88%, transparent 88%);
@@ -339,13 +343,13 @@ export default function JCard({ song }: { song: Song }) {
           gap: 8px;
           margin: 26px 0 0;
           font-size: 11px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
+          letter-spacing: 0;
           color: var(--ink-2);
+          font-family: var(--mono);
         }
         .jc-lyric-card-swatch {
           width: 14px;
-          height: 8px;
+          height: 9px;
           background: rgba(233, 210, 122, 0.55);
         }
 
@@ -364,19 +368,20 @@ export default function JCard({ song }: { song: Song }) {
         }
         .jc-back-meta {
           font-size: 12px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
+          letter-spacing: 0;
           color: var(--ink-2);
           margin: 0 0 22px;
           text-wrap: balance;
+          font-family: var(--mono);
         }
         .jc-credits {
           border-top: 1px solid rgba(42, 36, 22, 0.35);
           border-bottom: 1px solid rgba(42, 36, 22, 0.35);
           padding: 12px 0;
           margin: 0 0 22px;
-          font-size: 12.5px;
+          font-size: 12px;
           line-height: 1.5;
+          font-family: var(--mono);
         }
         .jc-credits dl {
           display: grid;
@@ -392,24 +397,25 @@ export default function JCard({ song }: { song: Song }) {
           color: var(--ink);
         }
         .jc-lyrics-note {
-          font-size: 13px;
+          font-size: 12px;
           line-height: 1.5;
           color: var(--ink-2);
           margin: 0 0 22px;
           max-width: 36ch;
+          font-family: var(--mono);
         }
         .jc-tracklist {
           display: grid;
           grid-template-columns: 1.5rem 1fr auto;
           gap: 12px;
           font-size: 12px;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
+          letter-spacing: 0;
           color: var(--ink);
           border-top: 1px solid rgba(42, 36, 22, 0.35);
           padding: 10px 0;
           margin: 0 0 22px;
           font-variant-numeric: tabular-nums;
+          font-family: var(--mono);
         }
         .jc-tracklist span:first-child {
           color: var(--ink-2);
@@ -445,9 +451,9 @@ export default function JCard({ song }: { song: Song }) {
           margin-top: auto;
           padding-top: 28px;
           font-size: 11px;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
+          letter-spacing: 0;
           color: var(--ink-2);
+          font-family: var(--mono);
         }
         .jc-back-foot a {
           color: var(--ink);
@@ -511,8 +517,9 @@ export default function JCard({ song }: { song: Song }) {
           transform: translate(-50%, -42%);
           font-size: 8px;
           font-weight: 700;
-          letter-spacing: 0.02em;
+          letter-spacing: 0;
           font-variant-numeric: tabular-nums;
+          font-family: var(--mono);
         }
         .jc-play {
           width: 52px;
@@ -541,11 +548,12 @@ export default function JCard({ song }: { song: Song }) {
           min-width: 0;
         }
         .jc-time {
-          font-size: 12px;
+          font-size: 11px;
           font-variant-numeric: tabular-nums;
           color: rgba(245, 239, 221, 0.7);
           flex-shrink: 0;
           width: 36px;
+          font-family: var(--mono);
         }
         .jc-time[data-type="current"] {
           text-align: right;
@@ -584,11 +592,11 @@ export default function JCard({ song }: { song: Song }) {
         }
         .jc-counter-reset {
           font-size: 10px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
+          letter-spacing: 0;
           color: rgba(245, 239, 221, 0.5);
           transition: color 200ms ease;
           cursor: pointer;
+          font-family: var(--mono);
         }
         .jc-counter-reset:hover {
           color: var(--cream);
@@ -620,6 +628,7 @@ export default function JCard({ song }: { song: Song }) {
           font-size: 13px;
           color: var(--cream);
           padding: 8px 0;
+          font-family: var(--mono);
         }
         .jc-jammed a {
           color: var(--lamp);
@@ -770,7 +779,7 @@ export default function JCard({ song }: { song: Song }) {
           .jc-cover-foot {
             padding: 4px 22px;
             font-size: 11px;
-            letter-spacing: 0.2em;
+            letter-spacing: 0;
           }
           .jc-spine {
             writing-mode: vertical-rl;

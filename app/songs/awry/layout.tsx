@@ -1,3 +1,14 @@
+import { Cousine } from "next/font/google";
+
+// The printed text on the physical song card is Andale Mono. It ships on
+// Macs but not phones, so Cousine (same proportions) rides as the fallback.
+const cousine = Cousine({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-cousine",
+  display: "swap",
+});
+
 const DIRECTION_CONTRACT = `
 THESIS: /songs/awry is the unfolded J-card insert of the single, not a smart-link
 page of stacked buttons. The insert lies open on the night-lit table of the
@@ -28,7 +39,9 @@ export default function AwryLayout({ children }: { children: React.ReactNode }) 
         aria-hidden
         dangerouslySetInnerHTML={{ __html: `<!-- impeccable:direction 9a1c93e4\n${DIRECTION_CONTRACT}-->` }}
       />
-      {children}
+      <div className={cousine.variable} style={{ display: "contents" }}>
+        {children}
+      </div>
     </>
   );
 }

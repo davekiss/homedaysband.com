@@ -35,10 +35,10 @@ typography:
     letterSpacing: "0.02em"
   spine:
     fontFamily: "Theseasons, Georgia, serif"
-    fontSize: "15px"
-    fontWeight: 700
+    fontSize: "17px"
+    fontWeight: 400
     lineHeight: 1
-    letterSpacing: "0.26em"
+    letterSpacing: "0.05em"
   body:
     fontFamily: "Geist, system-ui, sans-serif"
     fontSize: "15px"
@@ -46,14 +46,20 @@ typography:
     lineHeight: 1.55
     letterSpacing: "normal"
   label:
-    fontFamily: "Geist, system-ui, sans-serif"
+    fontFamily: "Andale Mono, Cousine, ui-monospace, Menlo, monospace"
     fontSize: "11px"
     fontWeight: 400
     lineHeight: 1.4
-    letterSpacing: "0.18em"
+    letterSpacing: "0"
+  lyric:
+    fontFamily: "Andale Mono, Cousine, ui-monospace, Menlo, monospace"
+    fontSize: "14px"
+    fontWeight: 400
+    lineHeight: 1.65
+    letterSpacing: "0"
   numeral:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "12px"
+    fontFamily: "Andale Mono, Cousine, ui-monospace, Menlo, monospace"
+    fontSize: "11px"
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "normal"
@@ -185,20 +191,21 @@ A warm near-monochrome: two dark browns for the ground and the hardware, two cre
 **Body Font:** Geist (via `--font-geist-sans`, with system-ui fallback)
 **Label/Mono Font:** Geist with `tabular-nums` for anything that counts; Geist Mono is registered (`--font-geist-mono`) but no built surface uses it yet
 
-**Character:** A hand-cut display face against a plain, even sans. Theseasons carries the band's name and song titles the way hand-lettered stickers do; Geist is the small print on the card, so it stays quiet, tracked open in caps for captions and set tight in tabular figures for times and counters. The root stylesheet applies Theseasons bold to every `h1`–`h3` site-wide (`.bitcount-homedays, h1, h2, h3`), so headings need no per-surface font declaration.
+**Character:** A hand-cut display face against typewriter print. Theseasons carries the band's name and song titles the way hand-lettered stickers do; the small print is Andale Mono — the face printed on the physical song cards — loaded with `local()` and Cousine (Google Fonts, same proportions) as the fallback for phones. Print is set in normal case at zero tracking, never uppercase-and-tracked; Geist remains for UI controls (the save buttons) and any longer body prose. The root stylesheet applies Theseasons bold to every `h1`–`h3` site-wide (`.bitcount-homedays, h1, h2, h3`), so headings need no per-surface font declaration.
 
 ### Hierarchy
 - **Display** (700, 44px stepping to 56px at ≥900px and 64px at ≥1180px, line-height 0.95, -0.01em, `text-wrap: balance`): the song title on the back panel. One per surface.
 - **Headline** (700, 22px, 0.02em): section titles on paper, e.g. "Lyrics" at the top of the fold.
 - **Spine** (700, 15px, uppercase, 0.26em): the artist name along the spine; the song title inside it is Theseasons regular (400) at 20px, lowercase, 0.08em, and the year is Geist 11px at 0.22em in Faded Ink. On desktop the spine runs `vertical-rl` rotated 180° so it reads bottom-to-top like a shelved tape.
 - **Body** (400, 15px, line-height 1.55, max 34ch): lyric lines. Notes and liner copy sit at 13px / 1.5 / max 36ch; the credits list at 12.5px / 1.5 in an `auto 1fr` definition grid.
-- **Label** (400, 10–12px, uppercase, 0.14–0.22em, Faded Ink on paper or Cream-alpha on night): every printed caption: the cover foot, the meta line under the title, the tracklist, the foot line, the home link, the counter's reset. The 11px / 0.18em pair is the centre of the range.
+- **Label** (Andale Mono/Cousine 400, 10–12px, normal case, 0 tracking, Faded Ink on paper or Cream-alpha on night): every printed caption: the cover foot, the meta line under the title, the credits, the tracklist, the foot line, the home link, the counter's reset, times.
+- **Lyric** (Andale Mono/Cousine 400, 14px/1.65, 36ch): the lyric fold, set exactly as the card prints it.
 - **Numeral** (400, 12px, `tabular-nums`): time readouts and lyric time marks. Counter digits are 700 at 14px in the same feature set.
 
 ### Named Rules
 **The Tabular Rule.** Any number that changes while you watch it (time, counter, duration, a track index) is set in tabular numerals so the digits do not jitter.
 
-**The Printed Caption Rule.** Small uppercase tracked text is a caption printed at the foot or margin of an object, or a subtitle under a title. It is never a kicker or eyebrow placed above a heading.
+**The Printed Caption Rule.** Small mono text is a caption printed at the foot or margin of an object, or a subtitle under a title, in normal case. It is never a kicker or eyebrow placed above a heading, and never uppercase with wide tracking.
 
 ## Layout
 
@@ -271,7 +278,7 @@ The insert unfolds on load: each panel rotates from `-62deg` (X on phones, Y on 
 ### Do:
 - **Do** start every house surface from the Night Lift → Night Ground gradient with the 16% Lamp Yellow pool at top centre and 7% screen grain (The Same Room Rule).
 - **Do** place content as objects on that ground with the insert-on-table shadow, square corners, and multiply grain on paper.
-- **Do** set titles in Theseasons 700 and let the root `h1`–`h3` rule do it; set all print in Geist, captions in 10–12px uppercase at 0.14–0.22em in Faded Ink.
+- **Do** set titles in Theseasons 700 and let the root `h1`–`h3` rule do it; set all small print and lyrics in Andale Mono (Cousine fallback), normal case, zero tracking, in Faded Ink.
 - **Do** use `tabular-nums` for anything that ticks (The Tabular Rule).
 - **Do** make the primary action on paper an Ink block with Cream text, and hover it to Ink Raised with a 1px lift.
 - **Do** author icons as inline SVG at 1.8 stroke with round caps, sized 13–30px to their context.
@@ -282,7 +289,7 @@ The insert unfolds on load: each panel rotates from `-62deg` (X on phones, Y on 
 - **Don't** fill a button, panel, or heading with Lamp Yellow; it is light, not paint (The One Lamp Rule).
 - **Don't** use coloured glows, hard offset shadows, or drop shadows on text; every shadow is black, blurred, and negatively spread (The Lamp Shadow Rule).
 - **Don't** round the paper; 4px and larger radii belong only to the scoped pitch surface.
-- **Don't** put a kicker or eyebrow above a heading; small caps are captions at the foot or a subtitle beneath (The Printed Caption Rule).
+- **Don't** put a kicker or eyebrow above a heading, and don't set captions in tracked uppercase; small mono print is a caption at the foot or a subtitle beneath (The Printed Caption Rule).
 - **Don't** use icon fonts, Unicode glyphs, or system display faces; Theseasons is the only display face and icons are authored SVG.
 - **Don't** bring Pitch Blue onto the house surfaces, or the house palette onto the pitch pages; they are separate rooms.
 - **Don't** render secondary text as Ink at reduced opacity on paper; use Faded Ink (The Faded Ink Rule).
