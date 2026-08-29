@@ -22,7 +22,7 @@ Homedays is "just a band from Cleveland, Ohio" — the site is deliberately pers
 ## Operating Context
 
 - Live shows around Cleveland / Northeast Ohio (Grog Shop, Musica, West Side Bowl, Waterloo Arts Fest). Merch table sells NFC cards for "Awry".
-- Catalog audio is hosted on Mux as static m4a renditions (`muxStatic()` in `app/components/CassettePlayer/mux.ts`). The Awry song page serves the master WAV from `public/music/awry.wav` by request.
+- Catalog audio is hosted on Mux as static m4a renditions (`muxStatic()` in `app/components/CassettePlayer/mux.ts`). The Awry song page streams a 320k MP3 (`public/music/awry.mp3`) encoded from the master WAV.
 - Pitch pages email the band (Resend) when a booker listens ≥15s.
 
 ## Capabilities and Constraints
@@ -42,12 +42,12 @@ Homedays is "just a band from Cleveland, Ohio" — the site is deliberately pers
 
 ## Evidence on Hand
 
-- Awry single released **July 31, 2026**. Master WAV: `public/music/awry.wav` (24-bit/48k, 3:05). Art: `public/images/awry-single.jpg` and `-1600.jpg`.
+- Awry single released **July 31, 2026**. Master WAV lives at `~/Downloads/Awry.wav` (24-bit/48k, 3:05); the site ships `public/music/awry.mp3` (320k). Art: `public/images/awry-single.jpg` and `-1600.jpg`.
 - Catalog of 12 tracks on Mux (see `app/components/CassettePlayer/index.tsx`).
 - Shows in `data/shows.ts`; venue notes in `data/venues.ts`.
 - EPK press quotes and highlights in `app/components/EPKPage.tsx` — treat as unverified copy, do not propagate.
 - Awry credits (confirmed): recorded at Plastic Dino Recordings; produced by Tuck Mindrum; Dave Kiss — guitar, vocals, lyrics; Mark Shannon — bass; Alex Christian — drums.
-- Lyrics for Awry: in `data/songs/awry.ts` (supplied by the band Aug 28 2026). The card back prints several lines from the song; which lines is not yet recorded.
+- Lyrics for Awry: in `data/songs/awry.ts` (supplied by the band Aug 28 2026). "Homedays Song Card 01" prints the "I was so fed up" and "went a little too far" verses, one chorus line, and the bedtime outro; those sections are marked `onCard`.
 
 ## Product Principles
 

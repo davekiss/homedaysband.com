@@ -18,6 +18,8 @@ export type Song = {
   origin: string;
   // Printed on the back panel's track line. From the master WAV (3:05).
   duration: string;
+  // The physical NFC card this page is printed for.
+  cardLabel: string;
   src: string;
   artwork: string;
   artworkFull: string;
@@ -34,7 +36,9 @@ export const awry: Song = {
   releaseDateISO: "2026-07-31",
   origin: "Cleveland, Ohio",
   duration: "3:05",
-  src: "/music/awry.wav",
+  cardLabel: "Homedays Song Card 01",
+  // 320k MP3 encoded from the 24-bit/48k master WAV (~/Downloads/Awry.wav, Jul 22 2026).
+  src: "/music/awry.mp3",
   artwork: "/images/awry-single-1600.jpg",
   artworkFull: "/images/awry-single.jpg",
   spotifyUrl: "https://open.spotify.com/track/2zcZjk3mxHtH2P4eiOiLis",
@@ -96,6 +100,7 @@ export const awry: Song = {
       ],
     },
     {
+      onCard: true,
       lines: [
         "I was so fed up",
         "With your coercion",
@@ -104,6 +109,7 @@ export const awry: Song = {
       ],
     },
     {
+      onCard: true,
       lines: [
         "Went a little too far",
         "I snapped",
@@ -129,6 +135,7 @@ export const awry: Song = {
       ],
     },
     {
+      onCard: true,
       lines: ["let’s stay up past our bedtime and talk"],
     },
   ],

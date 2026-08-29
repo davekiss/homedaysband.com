@@ -36,7 +36,7 @@ export default function JCard({ song }: { song: Song }) {
             <section className="jc-insert" aria-label={`${song.title} — cassette insert`}>
               <CoverPanel song={song} />
               <Spine song={song} />
-              {hasLyrics && <LyricFold sections={song.lyrics!} />}
+              {hasLyrics && <LyricFold sections={song.lyrics!} cardLabel={song.cardLabel} />}
               <BackPanel song={song} />
             </section>
           </div>
@@ -334,12 +334,19 @@ export default function JCard({ song }: { song: Song }) {
           padding: 0 4px;
         }
         .jc-lyric-card-note {
-          grid-column: -1 / -2;
-          margin-top: 6px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 26px 0 0;
           font-size: 11px;
           letter-spacing: 0.16em;
           text-transform: uppercase;
           color: var(--ink-2);
+        }
+        .jc-lyric-card-swatch {
+          width: 14px;
+          height: 8px;
+          background: rgba(233, 210, 122, 0.55);
         }
 
         /* back panel */
@@ -879,8 +886,9 @@ function Spine({ song }: { song: Song }) {
   );
 }
 
-function LyricFold({ sections }: { sections: LyricSection[] }) {
+function LyricFold({ sections, cardLabel }: { sections: LyricSection[]; cardLabel: string }) {
   const hasTimes = sections.some((s) => s.time);
+  const hasCardLines = sections.some((s) => s.onCard);
   return (
     <div className="jc-panel jc-lyrics" style={{ "--i": 2 } as React.CSSProperties} data-times={hasTimes}>
       <div className="jc-lyrics-scroll">
@@ -896,9 +904,13 @@ function LyricFold({ sections }: { sections: LyricSection[] }) {
               </span>
             ))}
           </p>
-          {section.onCard && <span className="jc-lyric-card-note">Printed on the card</span>}
         </div>
       ))}
+      {hasCardLines && (
+        <p className="jc-lyric-card-note">
+          <span className="jc-lyric-card-swatch" aria-hidden /> Printed on {cardLabel}
+        </p>
+      )}
       </div>
       <div className="jc-lyrics-fade" aria-hidden />
     </div>
