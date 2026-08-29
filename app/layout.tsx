@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,12 +12,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const bitcount = Inter({
-  variable: "--font-bitcount",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
+  metadataBase: new URL("https://homedaysband.com"),
   title: "Homedays | Just a band from Cleveland, Ohio",
   description: "Coming soon to a CD-RW near you",
   openGraph: {
@@ -49,13 +44,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap" rel="stylesheet" />
-      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${bitcount.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

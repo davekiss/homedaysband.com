@@ -1,0 +1,556 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-29T00:48:50.161Z",
+  "title": "Design System: Homedays",
+  "extensions": {
+    "colorMeta": {
+      "lamp-yellow": {
+        "role": "primary",
+        "displayName": "Lamp Yellow",
+        "canonical": "oklch(86.4% 0.111 95.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.111 95.1)",
+          "oklch(26.0% 0.111 95.1)",
+          "oklch(38.0% 0.111 95.1)",
+          "oklch(49.0% 0.111 95.1)",
+          "oklch(60.0% 0.111 95.1)",
+          "oklch(72.0% 0.111 95.1)",
+          "oklch(83.0% 0.111 95.1)",
+          "oklch(95.0% 0.111 95.1)"
+        ]
+      },
+      "night-ground": {
+        "role": "neutral",
+        "displayName": "Night Ground",
+        "canonical": "oklch(16.5% 0.007 78.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.007 78.1)",
+          "oklch(26.0% 0.007 78.1)",
+          "oklch(38.0% 0.007 78.1)",
+          "oklch(49.0% 0.007 78.1)",
+          "oklch(60.0% 0.007 78.1)",
+          "oklch(72.0% 0.007 78.1)",
+          "oklch(83.0% 0.007 78.1)",
+          "oklch(95.0% 0.007 78.1)"
+        ]
+      },
+      "night-lift": {
+        "role": "neutral",
+        "displayName": "Night Lift",
+        "canonical": "oklch(20.4% 0.008 48.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 48.3)",
+          "oklch(26.0% 0.008 48.3)",
+          "oklch(38.0% 0.008 48.3)",
+          "oklch(49.0% 0.008 48.3)",
+          "oklch(60.0% 0.008 48.3)",
+          "oklch(72.0% 0.008 48.3)",
+          "oklch(83.0% 0.008 48.3)",
+          "oklch(95.0% 0.008 48.3)"
+        ]
+      },
+      "card-stock": {
+        "role": "neutral",
+        "displayName": "Card Stock",
+        "canonical": "oklch(92.6% 0.032 89.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.032 89.1)",
+          "oklch(26.0% 0.032 89.1)",
+          "oklch(38.0% 0.032 89.1)",
+          "oklch(49.0% 0.032 89.1)",
+          "oklch(60.0% 0.032 89.1)",
+          "oklch(72.0% 0.032 89.1)",
+          "oklch(83.0% 0.032 89.1)",
+          "oklch(95.0% 0.032 89.1)"
+        ]
+      },
+      "spine-stock": {
+        "role": "neutral",
+        "displayName": "Spine Stock",
+        "canonical": "oklch(89.3% 0.039 89.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.039 89.1)",
+          "oklch(26.0% 0.039 89.1)",
+          "oklch(38.0% 0.039 89.1)",
+          "oklch(49.0% 0.039 89.1)",
+          "oklch(60.0% 0.039 89.1)",
+          "oklch(72.0% 0.039 89.1)",
+          "oklch(83.0% 0.039 89.1)",
+          "oklch(95.0% 0.039 89.1)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(26.3% 0.026 87.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.026 87.4)",
+          "oklch(26.0% 0.026 87.4)",
+          "oklch(38.0% 0.026 87.4)",
+          "oklch(49.0% 0.026 87.4)",
+          "oklch(60.0% 0.026 87.4)",
+          "oklch(72.0% 0.026 87.4)",
+          "oklch(83.0% 0.026 87.4)",
+          "oklch(95.0% 0.026 87.4)"
+        ]
+      },
+      "faded-ink": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "oklch(49.1% 0.038 83.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.038 83.5)",
+          "oklch(26.0% 0.038 83.5)",
+          "oklch(38.0% 0.038 83.5)",
+          "oklch(49.0% 0.038 83.5)",
+          "oklch(60.0% 0.038 83.5)",
+          "oklch(72.0% 0.038 83.5)",
+          "oklch(83.0% 0.038 83.5)",
+          "oklch(95.0% 0.038 83.5)"
+        ]
+      },
+      "ink-raised": {
+        "role": "neutral",
+        "displayName": "Ink Raised",
+        "canonical": "oklch(32.0% 0.032 86.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.032 86.6)",
+          "oklch(26.0% 0.032 86.6)",
+          "oklch(38.0% 0.032 86.6)",
+          "oklch(49.0% 0.032 86.6)",
+          "oklch(60.0% 0.032 86.6)",
+          "oklch(72.0% 0.032 86.6)",
+          "oklch(83.0% 0.032 86.6)",
+          "oklch(95.0% 0.032 86.6)"
+        ]
+      },
+      "lake-fog": {
+        "role": "neutral",
+        "displayName": "Lake Fog",
+        "canonical": "oklch(74.9% 0.047 90.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.047 90.4)",
+          "oklch(26.0% 0.047 90.4)",
+          "oklch(38.0% 0.047 90.4)",
+          "oklch(49.0% 0.047 90.4)",
+          "oklch(60.0% 0.047 90.4)",
+          "oklch(72.0% 0.047 90.4)",
+          "oklch(83.0% 0.047 90.4)",
+          "oklch(95.0% 0.047 90.4)"
+        ]
+      },
+      "walnut-black": {
+        "role": "neutral",
+        "displayName": "Walnut Black",
+        "canonical": "oklch(19.0% 0.009 59.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.009 59.1)",
+          "oklch(26.0% 0.009 59.1)",
+          "oklch(38.0% 0.009 59.1)",
+          "oklch(49.0% 0.009 59.1)",
+          "oklch(60.0% 0.009 59.1)",
+          "oklch(72.0% 0.009 59.1)",
+          "oklch(83.0% 0.009 59.1)",
+          "oklch(95.0% 0.009 59.1)"
+        ]
+      },
+      "walnut-lift": {
+        "role": "neutral",
+        "displayName": "Walnut Lift",
+        "canonical": "oklch(24.0% 0.014 67.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.014 67.0)",
+          "oklch(26.0% 0.014 67.0)",
+          "oklch(38.0% 0.014 67.0)",
+          "oklch(49.0% 0.014 67.0)",
+          "oklch(60.0% 0.014 67.0)",
+          "oklch(72.0% 0.014 67.0)",
+          "oklch(83.0% 0.014 67.0)",
+          "oklch(95.0% 0.014 67.0)"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "canonical": "oklch(95.2% 0.025 91.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.025 91.6)",
+          "oklch(26.0% 0.025 91.6)",
+          "oklch(38.0% 0.025 91.6)",
+          "oklch(49.0% 0.025 91.6)",
+          "oklch(60.0% 0.025 91.6)",
+          "oklch(72.0% 0.025 91.6)",
+          "oklch(83.0% 0.025 91.6)",
+          "oklch(95.0% 0.025 91.6)"
+        ]
+      },
+      "root-parchment": {
+        "role": "neutral",
+        "displayName": "Root Parchment",
+        "canonical": "oklch(90.4% 0.027 99.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.027 99.9)",
+          "oklch(26.0% 0.027 99.9)",
+          "oklch(38.0% 0.027 99.9)",
+          "oklch(49.0% 0.027 99.9)",
+          "oklch(60.0% 0.027 99.9)",
+          "oklch(72.0% 0.027 99.9)",
+          "oklch(83.0% 0.027 99.9)",
+          "oklch(95.0% 0.027 99.9)"
+        ]
+      },
+      "root-magenta": {
+        "role": "neutral",
+        "displayName": "Root Magenta",
+        "canonical": "oklch(49.0% 0.190 345.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.190 345.7)",
+          "oklch(26.0% 0.190 345.7)",
+          "oklch(38.0% 0.190 345.7)",
+          "oklch(49.0% 0.190 345.7)",
+          "oklch(60.0% 0.190 345.7)",
+          "oklch(72.0% 0.190 345.7)",
+          "oklch(83.0% 0.190 345.7)",
+          "oklch(95.0% 0.190 345.7)"
+        ]
+      },
+      "root-night": {
+        "role": "neutral",
+        "displayName": "Root Night",
+        "canonical": "oklch(14.5% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(26.0% 0.000 89.9)",
+          "oklch(38.0% 0.000 89.9)",
+          "oklch(49.0% 0.000 89.9)",
+          "oklch(60.0% 0.000 89.9)",
+          "oklch(72.0% 0.000 89.9)",
+          "oklch(83.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "root-paper": {
+        "role": "neutral",
+        "displayName": "Root Paper",
+        "canonical": "oklch(94.6% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(26.0% 0.000 89.9)",
+          "oklch(38.0% 0.000 89.9)",
+          "oklch(49.0% 0.000 89.9)",
+          "oklch(60.0% 0.000 89.9)",
+          "oklch(72.0% 0.000 89.9)",
+          "oklch(83.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "pitch-blue": {
+        "role": "secondary",
+        "displayName": "Pitch Blue",
+        "canonical": "oklch(51.5% 0.271 267.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.271 267.6)",
+          "oklch(26.0% 0.271 267.6)",
+          "oklch(38.0% 0.271 267.6)",
+          "oklch(49.0% 0.271 267.6)",
+          "oklch(60.0% 0.271 267.6)",
+          "oklch(72.0% 0.271 267.6)",
+          "oklch(83.0% 0.271 267.6)",
+          "oklch(95.0% 0.271 267.6)"
+        ]
+      },
+      "pitch-white": {
+        "role": "secondary",
+        "displayName": "Pitch White",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(26.0% 0.000 89.9)",
+          "oklch(38.0% 0.000 89.9)",
+          "oklch(49.0% 0.000 89.9)",
+          "oklch(60.0% 0.000 89.9)",
+          "oklch(72.0% 0.000 89.9)",
+          "oklch(83.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The song title on the back panel; one per surface. Steps 44 → 56 → 64px at 900 / 1180px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles printed on paper, e.g. \"Lyrics\"."
+      },
+      "spine": {
+        "displayName": "Spine",
+        "purpose": "Artist name along the spine, uppercase and tracked; the title inside it is Theseasons 400 at 20px lowercase."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Lyric lines (max 34ch); notes at 13px / 1.5; credits at 12.5px."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Printed captions at the foot or margin of an object; 10–12px, 0.14–0.22em, uppercase. Never a kicker above a heading."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Time readouts and lyric time marks in tabular figures; counter digits are 700 at 14px."
+      }
+    },
+    "shadows": [
+      {
+        "name": "insert-on-table",
+        "value": "0 30px 60px -20px rgba(0,0,0,0.7), 0 8px 18px -6px rgba(0,0,0,0.5)",
+        "purpose": "The whole J-card resting on night."
+      },
+      {
+        "name": "disc-rest",
+        "value": "0 14px 36px -8px rgba(0,0,0,0.55)",
+        "purpose": "The 84px cover play disc at rest."
+      },
+      {
+        "name": "disc-playing",
+        "value": "0 6px 18px -6px rgba(0,0,0,0.5)",
+        "purpose": "The cover play disc settles while playing."
+      },
+      {
+        "name": "deck-disc",
+        "value": "0 8px 20px -6px rgba(0,0,0,0.6)",
+        "purpose": "The 52px play disc on the transport."
+      },
+      {
+        "name": "deck-lip",
+        "value": "0 -18px 40px -16px rgba(0,0,0,0.8)",
+        "purpose": "The fixed deck throws its shadow up onto the table."
+      },
+      {
+        "name": "counter-well",
+        "value": "inset 0 2px 6px rgba(0,0,0,0.9)",
+        "purpose": "The digit window sunk into the deck face."
+      },
+      {
+        "name": "slider-thumb",
+        "value": "0 2px 8px rgba(0,0,0,0.5)",
+        "purpose": "The cream thumb when visible."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-spring",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Unfold, press, lift, and scale transitions."
+      },
+      {
+        "name": "ease-standard",
+        "value": "ease",
+        "purpose": "Colour and border transitions at 200ms."
+      },
+      {
+        "name": "duration-hover",
+        "value": "200ms",
+        "purpose": "Hover colour / border changes (220ms for disc scale)."
+      },
+      {
+        "name": "duration-unfold",
+        "value": "1100ms",
+        "purpose": "Panel unfold on load; staggered 160ms per panel via --i."
+      },
+      {
+        "name": "duration-breathe",
+        "value": "1200ms",
+        "purpose": "Cover art scales to 1.02 while playing."
+      },
+      {
+        "name": "duration-blink",
+        "value": "900ms steps(2, jump-none)",
+        "purpose": "Counter digits blink while the tape loads."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop",
+        "value": "900px"
+      },
+      {
+        "name": "wide",
+        "value": "1180px"
+      }
+    ],
+    "materials": [
+      {
+        "name": "grain",
+        "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        "purpose": "One fractal-noise tile: 7% screen over night, 26% multiply over paper."
+      },
+      {
+        "name": "lamp-pool",
+        "value": "radial-gradient(60% 40% at 50% 0%, rgba(233, 210, 122, 0.16), transparent 70%)",
+        "purpose": "The lamp's light pooling at the top of the night ground."
+      },
+      {
+        "name": "crease-into",
+        "value": "linear-gradient(180deg, rgba(42,36,22,0.26), rgba(42,36,22,0.06) 55%, transparent)",
+        "purpose": "34px (40px wide on desktop, rotated 90deg) darkening into a fold; paired with a 1px Ink hairline at 38% (28% desktop)."
+      },
+      {
+        "name": "crease-out",
+        "value": "linear-gradient(0deg, rgba(42,36,22,0.2), rgba(42,36,22,0.04) 55%, transparent)",
+        "purpose": "The matching darkening on the far side of a fold."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Play Disc",
+      "kind": "button",
+      "refersTo": "button-play-disc",
+      "description": "Cream circle with an Ink glyph, centred on the cover art; 84px on the cover, 52px on the deck.",
+      "html": "<button class=\"ds-play-disc\" aria-label=\"Play\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\" aria-hidden=\"true\" style=\"margin-left:2px\"><path d=\"M7 5.2v13.6L18.5 12 7 5.2z\"/></svg></button>",
+      "css": ".ds-play-disc { width: 84px; height: 84px; display: inline-flex; align-items: center; justify-content: center; border: none; border-radius: 50%; background: #f5efdd; color: #2a2416; box-shadow: 0 14px 36px -8px rgba(0,0,0,0.55); cursor: pointer; transition: transform 220ms cubic-bezier(0.16,1,0.3,1), box-shadow 220ms ease; } .ds-play-disc:hover { transform: scale(1.05); } .ds-play-disc:active { transform: scale(0.96); } .ds-play-disc:focus-visible { outline: 2px solid #e9d27a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Save Button",
+      "kind": "button",
+      "refersTo": "button-save",
+      "description": "The primary action printed on paper: a full-width Ink block with Cream text, brand mark leading, arrow-out trailing.",
+      "html": "<a class=\"ds-save\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.4-.7.5-1 .3-2.8-1.7-6.4-2.1-10.6-1.2-.4.1-.8-.2-.9-.6-.1-.4.2-.8.6-.9 4.6-1 8.5-.6 11.6 1.3.4.2.5.7.3 1.1zm1.5-3.3c-.3.4-.8.6-1.3.3-3.2-2-8.2-2.6-12-1.4-.5.1-1-.1-1.2-.6-.1-.5.1-1 .6-1.2 4.4-1.3 9.8-.7 13.5 1.6.5.3.6.9.4 1.3zm.1-3.4C15.3 8.3 8.9 8.1 5.2 9.2c-.6.2-1.2-.2-1.4-.7-.2-.6.2-1.2.7-1.4 4.2-1.3 11.3-1 15.7 1.6.5.3.7 1 .4 1.5-.3.5-1 .7-1.5.4z\"/></svg>Save on Spotify<span class=\"ds-save-arrow\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17L17 7\"/><path d=\"M9 7h8v8\"/></svg></span></a>",
+      "css": ".ds-save { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #2a2416; color: #f5efdd; text-decoration: none; font-family: Geist, system-ui, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; border-radius: 0; transition: background 200ms ease, transform 200ms cubic-bezier(0.16,1,0.3,1); } .ds-save:hover { background: #3a3220; transform: translateY(-1px); } .ds-save:focus-visible { outline: 2px solid #e9d27a; outline-offset: 3px; border-radius: 2px; } .ds-save-arrow { margin-left: auto; opacity: 0.6; display: inline-flex; }"
+    },
+    {
+      "name": "Transport Seek",
+      "kind": "button",
+      "refersTo": "button-transport",
+      "description": "Unfilled 40px seek control on the deck: Cream at 70%, full Cream on hover, a tiny numeral inside the arrow.",
+      "html": "<button class=\"ds-seek\" aria-label=\"Forward 10 seconds\"><span class=\"ds-seek-glyph\"><svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><g stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4a8 8 0 1 1-7.4 5\"/><path d=\"M9.5 2 12 4 9.5 6.3\"/></g></svg><span class=\"ds-seek-num\" aria-hidden=\"true\">10</span></span></button>",
+      "css": ".ds-seek { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #241e18, #171310); border: none; color: rgba(245,239,221,0.7); cursor: pointer; transition: color 200ms ease; } .ds-seek:hover { color: #f5efdd; } .ds-seek:focus-visible { outline: 2px solid #e9d27a; outline-offset: 3px; border-radius: 2px; } .ds-seek-glyph { position: relative; display: inline-flex; align-items: center; justify-content: center; } .ds-seek-num { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -42%); font-family: Geist, system-ui, sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Printed Link",
+      "kind": "custom",
+      "refersTo": "link-printed",
+      "description": "A caption-sized link printed on card stock, underlined by a 1px Ink hairline at 35% that darkens on hover.",
+      "html": "<span class=\"ds-printed-row\"><span class=\"ds-printed-also\">Also on</span><a class=\"ds-printed-link\" href=\"#\"><svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M17.6 2.2L8.9 4.1c-.6.1-1 .6-1 1.2v10.1c-.5-.3-1.1-.4-1.8-.4C4.4 15 3 16.1 3 17.5S4.4 20 6.1 20s3.1-1.1 3.1-2.5V8.6l7.6-1.7v6.7c-.5-.3-1.1-.4-1.8-.4-1.7 0-3.1 1.1-3.1 2.5s1.4 2.5 3.1 2.5 3.1-1.1 3.1-2.5V3.4c0-.8-.7-1.3-1.5-1.2z\"/></svg><span>Apple Music</span></a></span>",
+      "css": ".ds-printed-row { display: inline-flex; align-items: center; gap: 12px; padding: 2px 16px; min-height: 48px; background: #efe6cf; font-family: Geist, system-ui, sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #6b5f48; } .ds-printed-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: #2a2416; text-decoration: none; } .ds-printed-link > span { border-bottom: 1px solid rgba(42,36,22,0.35); padding-bottom: 2px; transition: border-color 200ms ease; } .ds-printed-link:hover > span { border-color: #2a2416; } .ds-printed-link:focus-visible { outline: 2px solid #e9d27a; outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Home Link",
+      "kind": "nav",
+      "refersTo": "nav-home",
+      "description": "The only navigation on a house surface: an arrow and the band name in Cream at 62% on night, full Cream on hover.",
+      "html": "<a class=\"ds-home\" href=\"#\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 12H5\"/><path d=\"M11 6l-6 6 6 6\"/></svg> Homedays</a>",
+      "css": ".ds-home { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 18px; background: #1a1614; font-family: Geist, system-ui, sans-serif; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(245,239,221,0.62); text-decoration: none; transition: color 200ms ease; } .ds-home:hover { color: #f5efdd; } .ds-home:focus-visible { outline: 2px solid #e9d27a; outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Insert Panel",
+      "kind": "card",
+      "refersTo": "insert-panel",
+      "description": "A panel of the J-card: Card Stock with Ink print, a Theseasons title, a caption line, and the tracklist rule.",
+      "html": "<div class=\"ds-panel\"><h1 class=\"ds-panel-title\">Awry</h1><p class=\"ds-panel-meta\">Single · July 31, 2026 · Cleveland, Ohio</p><div class=\"ds-panel-track\"><span>A</span><span>Awry</span><span>3:05</span></div></div>",
+      "css": ".ds-panel { display: flex; flex-direction: column; padding: 26px 18px 22px; background: #efe6cf; color: #2a2416; border-radius: 0; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.7), 0 8px 18px -6px rgba(0,0,0,0.5); font-family: Geist, system-ui, sans-serif; } .ds-panel-title { font-family: Theseasons, Georgia, serif; font-weight: 700; font-size: 44px; line-height: 0.95; letter-spacing: -0.01em; margin: 0 0 8px; } .ds-panel-meta { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #6b5f48; margin: 0 0 22px; } .ds-panel-track { display: grid; grid-template-columns: 1.5rem 1fr auto; gap: 12px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; border-top: 1px solid rgba(42,36,22,0.35); padding: 10px 0; font-variant-numeric: tabular-nums; } .ds-panel-track span:first-child { color: #6b5f48; }"
+    },
+    {
+      "name": "Spine",
+      "kind": "custom",
+      "refersTo": "insert-panel-spine",
+      "description": "The folded strip of the insert: Spine Stock, Theseasons uppercase tracked artist, lowercase regular title, Geist year.",
+      "html": "<div class=\"ds-spine\" aria-hidden=\"true\"><span>Homedays</span><em>awry</em><small>2026</small></div>",
+      "css": ".ds-spine { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 18px; background: #e6dbbf; font-family: Theseasons, Georgia, serif; font-weight: 700; font-size: 15px; letter-spacing: 0.26em; text-transform: uppercase; color: #2a2416; } .ds-spine em { font-style: normal; font-weight: 400; text-transform: none; letter-spacing: 0.08em; font-size: 20px; } .ds-spine small { font-family: Geist, system-ui, sans-serif; font-size: 11px; letter-spacing: 0.22em; color: #6b5f48; }"
+    },
+    {
+      "name": "Tape Counter",
+      "kind": "custom",
+      "refersTo": "counter-digit",
+      "description": "Four Cream digit tiles sunk into a dark well on the deck, with a small Reset.",
+      "html": "<div class=\"ds-counter\"><span class=\"ds-counter-window\" role=\"img\" aria-label=\"Tape counter 0042\"><span class=\"ds-counter-digit\">0</span><span class=\"ds-counter-digit\">0</span><span class=\"ds-counter-digit\">4</span><span class=\"ds-counter-digit\">2</span></span><button class=\"ds-counter-reset\" type=\"button\">Reset</button></div>",
+      "css": ".ds-counter { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; background: linear-gradient(180deg, #241e18, #171310); font-family: Geist, system-ui, sans-serif; } .ds-counter-window { display: inline-flex; gap: 2px; padding: 4px 6px; background: #0b0907; border: 1px solid rgba(245,239,221,0.12); box-shadow: inset 0 2px 6px rgba(0,0,0,0.9); border-radius: 2px; } .ds-counter-digit { width: 14px; height: 22px; display: inline-flex; align-items: center; justify-content: center; background: #f5efdd; color: #2a2416; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; border-radius: 1px; } .ds-counter-reset { background: none; border: none; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,239,221,0.5); cursor: pointer; transition: color 200ms ease; } .ds-counter-reset:hover { color: #f5efdd; } .ds-counter-reset:focus-visible { outline: 2px solid #e9d27a; outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Time Slider",
+      "kind": "input",
+      "refersTo": "deck",
+      "description": "The deck's progress track: a 3px Cream-at-16% pill, Lamp Yellow fill, a Cream thumb that appears on hover/focus.",
+      "html": "<div class=\"ds-slider-wrap\"><span class=\"ds-time\">0:41</span><div class=\"ds-slider\" role=\"slider\" tabindex=\"0\" aria-valuemin=\"0\" aria-valuemax=\"185\" aria-valuenow=\"41\" aria-label=\"Seek\"><div class=\"ds-slider-track\"><div class=\"ds-slider-fill\"></div></div><div class=\"ds-slider-thumb\"></div></div><span class=\"ds-time\">3:05</span></div>",
+      "css": ".ds-slider-wrap { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: linear-gradient(180deg, #241e18, #171310); font-family: Geist, system-ui, sans-serif; } .ds-time { font-size: 12px; font-variant-numeric: tabular-nums; color: rgba(245,239,221,0.7); width: 36px; flex-shrink: 0; } .ds-time:first-child { text-align: right; } .ds-slider { position: relative; display: flex; align-items: center; height: 28px; flex: 1; min-width: 160px; cursor: pointer; } .ds-slider-track { position: absolute; left: 0; right: 0; height: 3px; background: rgba(245,239,221,0.16); border-radius: 9999px; } .ds-slider-fill { position: absolute; top: 0; left: 0; width: 22%; height: 100%; background: #e9d27a; border-radius: 9999px; } .ds-slider-thumb { position: absolute; left: 22%; width: 12px; height: 12px; background: #f5efdd; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.5); transform: translateX(-50%) scale(0); transition: transform 150ms ease; } .ds-slider:hover .ds-slider-thumb, .ds-slider:focus-visible .ds-slider-thumb { transform: translateX(-50%) scale(1); } .ds-slider:focus-visible { outline: 2px solid #e9d27a; outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Pitch CTA (scoped)",
+      "kind": "button",
+      "refersTo": "pitch-button-primary",
+      "description": "The per-venue pitch page's primary button: Pitch Blue block, white uppercase tracked text, 4px radius. Scoped to /welcome pages only.",
+      "html": "<a class=\"ds-pitch-cta\" href=\"#\">Listen to the set</a>",
+      "css": ".ds-pitch-cta { display: inline-block; background: #2B44FF; color: #ffffff; padding: 16px 40px; font-family: Geist, system-ui, sans-serif; font-size: 14px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; text-decoration: none; border-radius: 4px; transition: background 200ms ease; } .ds-pitch-cta:hover { background: rgba(43,68,255,0.85); } .ds-pitch-cta:focus-visible { outline: 2px solid #2B44FF; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Night-Lit Table",
+    "overview": "Everything Homedays puts on the web is an object you could pick up: a cassette deck, torn calendar pages, guitar picks, Polaroids, and now the unfolded J-card insert of a single. The screen is not a page; it is a dark wooden table late at night, lit from above by one warm lamp. Objects lie on that table and cast real shadows onto it. Paper is cream card stock with visible creases and a fine grain; hardware is walnut-black with a tape counter; text is printed in ink, never floating on a gradient.\n\nDensity is domestic rather than editorial. Small printed captions sit at the foot of things (a year, a catalogue line, \"Also on Spotify · Apple Music\"), big titles are set in the band's own display face, and the lamp's yellow is light, not paint: it pools on the ground, fills the progress track, rings a focused control, and highlights the lines printed on the NFC card. It never becomes a button colour. The site's atmosphere is the incumbent homepage's: warm, film-grained, nostalgic, a little hissy. The per-venue pitch pages are a separate, scoped surface (a bright blue-on-white one-sheet) and do not share this palette.\n\nTwo things this world is confirmed not to be: a smart-link page of stacked platform buttons, and a template artist site. Buttons exist (save-out links, the play disc, the transport), but they read as printed blocks and machined controls, not as a UI kit.",
+    "keyCharacteristics": [
+      "Objects on a dark ground: every surface is a lit thing casting a black, downward shadow onto night.",
+      "Card stock and ink: cream paper, dark brown ink, faded ink for secondary print, visible creases and grain.",
+      "One lamp: a single warm yellow used only as light (pool, fill, focus ring, highlight, selection).",
+      "Theseasons for titles and spines; Geist for everything printed; tabular numerals wherever numbers tick.",
+      "Square-cut paper, round discs, hairline-radius hardware; no soft radii on the house surfaces.",
+      "Authored inline SVG icons at one stroke weight (1.8), round caps."
+    ],
+    "rules": [
+      {
+        "name": "The One Lamp Rule",
+        "body": "Lamp Yellow is light, not paint. It may pool, fill a track, ring a focus, highlight a line, or colour selected text. It may not fill a button, a panel, or a heading. If a surface needs a \"primary button\", the answer is an Ink block with Cream text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Same Room Rule",
+        "body": "A new house surface starts from the Night Lift → Night Ground gradient the homepage loader uses. Objects on it are Card Stock or Walnut Black. Do not introduce a third ground.",
+        "section": "colors"
+      },
+      {
+        "name": "The Faded Ink Rule",
+        "body": "Secondary text on paper is Faded Ink, never Ink at reduced opacity; secondary text on night is Cream at reduced alpha (50–70%), never a grey.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Any number that changes while you watch it (time, counter, duration, a track index) is set in tabular numerals so the digits do not jitter.",
+        "section": "typography"
+      },
+      {
+        "name": "The Printed Caption Rule",
+        "body": "Small uppercase tracked text is a caption printed at the foot or margin of an object, or a subtitle under a title. It is never a kicker or eyebrow placed above a heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The Lamp Shadow Rule",
+        "body": "Every shadow is black, blurred, negatively spread, and cast down (or up, from the deck) as if from one overhead lamp. Coloured glows and hard offset shadows do not exist in this world.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Paper Has Grain Rule",
+        "body": "Card Stock is never a flat fill; the grain overlay and crease gradients are part of the material, not decoration to be removed for \"cleanliness\".",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do start every house surface from the Night Lift → Night Ground gradient with the 16% Lamp Yellow pool at top centre and 7% screen grain (The Same Room Rule).",
+      "Do place content as objects on that ground with the insert-on-table shadow, square corners, and multiply grain on paper.",
+      "Do set titles in Theseasons 700 and let the root h1–h3 rule do it; set all print in Geist, captions in 10–12px uppercase at 0.14–0.22em in Faded Ink.",
+      "Do use tabular-nums for anything that ticks (The Tabular Rule).",
+      "Do make the primary action on paper an Ink block with Cream text, and hover it to Ink Raised with a 1px lift.",
+      "Do author icons as inline SVG at 1.8 stroke with round caps, sized 13–30px to their context.",
+      "Do ring focus with 2px Lamp Yellow at 3px offset, and honour prefers-reduced-motion on every animation and scale transition.",
+      "Do keep tappable print at least 44px tall on paper and respect env(safe-area-inset-bottom) under fixed hardware."
+    ],
+    "donts": [
+      "Don't fill a button, panel, or heading with Lamp Yellow; it is light, not paint (The One Lamp Rule).",
+      "Don't use coloured glows, hard offset shadows, or drop shadows on text; every shadow is black, blurred, and negatively spread (The Lamp Shadow Rule).",
+      "Don't round the paper; 4px and larger radii belong only to the scoped pitch surface.",
+      "Don't put a kicker or eyebrow above a heading; small caps are captions at the foot or a subtitle beneath (The Printed Caption Rule).",
+      "Don't use icon fonts, Unicode glyphs, or system display faces; Theseasons is the only display face and icons are authored SVG.",
+      "Don't bring Pitch Blue onto the house surfaces, or the house palette onto the pitch pages; they are separate rooms.",
+      "Don't render secondary text as Ink at reduced opacity on paper; use Faded Ink (The Faded Ink Rule)."
+    ]
+  }
+}

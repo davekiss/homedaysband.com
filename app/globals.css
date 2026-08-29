@@ -21,6 +21,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Theseasons";
+  src: url("/fonts/theseasons-reg.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 /* Use local font for headings and the existing heading utility class */
 .bitcount-homedays,
 h1, h2, h3 {
