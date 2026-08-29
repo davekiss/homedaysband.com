@@ -167,8 +167,12 @@ export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: s
           position: relative;
           min-width: 0;
           transform-origin: 50% 0%;
+          backface-visibility: hidden;
           animation: jc-unfold-x 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
           animation-delay: calc(var(--i, 0) * 160ms);
+        }
+        .jc-panel.jc-cover {
+          animation: none;
         }
         /* crease: the paper darkens into the fold on both sides and each
            panel sits at its own value, the way a folded insert catches light */
@@ -1048,6 +1052,9 @@ function CoverPanel({ song }: { song: Song }) {
           alt={`${song.title} — single artwork`}
           fill
           priority
+          fetchPriority="high"
+          placeholder="blur"
+          blurDataURL={song.artworkBlur}
           sizes="(max-width: 900px) 100vw, 480px"
           className="object-cover"
         />

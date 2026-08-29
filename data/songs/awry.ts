@@ -31,6 +31,8 @@ export type Song = {
   src: string;
   artwork: string;
   artworkFull: string;
+  // Tiny inline version of the art, shown blurred until the real file lands.
+  artworkBlur: string;
   spotifyUrl: string;
   appleMusicUrl: string;
   credits: { role: string; name: string }[];
@@ -53,6 +55,7 @@ export const awry: Song = {
   src: "/music/awry.mp3",
   artwork: "/images/awry-single-1600.jpg",
   artworkFull: "/images/awry-single.jpg",
+  artworkBlur: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAkACQAAD/4QCARXhpZgAATU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAIdpAAQAAAABAAAATgAAAAAAAACQAAAAAQAAAJAAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAABSgAwAEAAAAAQAAABQAAAAA/8IAEQgAFAAUAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAMCBAEFAAYHCAkKC//EAMMQAAEDAwIEAwQGBAcGBAgGcwECAAMRBBIhBTETIhAGQVEyFGFxIweBIJFCFaFSM7EkYjAWwXLRQ5I0ggjhU0AlYxc18JNzolBEsoPxJlQ2ZJR0wmDShKMYcOInRTdls1V1pJXDhfLTRnaA40dWZrQJChkaKCkqODk6SElKV1hZWmdoaWp3eHl6hoeIiYqQlpeYmZqgpaanqKmqsLW2t7i5usDExcbHyMnK0NTV1tfY2drg5OXm5+jp6vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAQIAAwQFBgcICQoL/8QAwxEAAgIBAwMDAgMFAgUCBASHAQACEQMQEiEEIDFBEwUwIjJRFEAGMyNhQhVxUjSBUCSRoUOxFgdiNVPw0SVgwUThcvEXgmM2cCZFVJInotIICQoYGRooKSo3ODk6RkdISUpVVldYWVpkZWZnaGlqc3R1dnd4eXqAg4SFhoeIiYqQk5SVlpeYmZqgo6SlpqeoqaqwsrO0tba3uLm6wMLDxMXGx8jJytDT1NXW19jZ2uDi4+Tl5ufo6ery8/T19vf4+fr/2wBDAAcHBwcHBwwHBwwRDAwMERcRERERFx4XFxcXFx4kHh4eHh4eJCQkJCQkJCQrKysrKysyMjIyMjg4ODg4ODg4ODj/2wBDAQkJCQ4NDhkNDRk7KCEoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/2gAMAwEAAhEDEQAAAe0jnFc2vQxzqmCmF5UrJg482//aAAgBAQABBQIVL4PIh++IKfeo372C1QIoEAvAJf8A/9oACAEDEQE/Aez/2gAIAQIRAT8BeWbb/9oACAEBAAY/Au5OvS0/ynoGXR0D/8QAMxABAAMAAgICAgIDAQEAAAILAREAITFBUWFxgZGhscHw0RDh8SAwQFBgcICQoLDA0OD/2gAIAQEAAT8hEccNVWsVRC0+gyidsSUmqO80cM1YUxWo/9oADAMBAAIRAxEAABD4tbT/xAAzEQEBAQADAAECBQUBAQABAQkBABEhMRBBUWEgcfCRgaGx0cHh8TBAUGBwgJCgsMDQ4P/aAAgBAxEBPxDLC+bL/9oACAECEQE/EHT4t+mXdr63/9oACAEBAAE/EDEoRCXxzY0KmH/CrNh4qCgc3Ew+NiujLtGHyzjWBURJNjvmhxBEoRr7yst6Bqmke4f6v//Z",
   spotifyUrl: "https://open.spotify.com/track/2zcZjk3mxHtH2P4eiOiLis",
   appleMusicUrl: "https://music.apple.com/us/album/awry-single/6793744592",
   credits: [
