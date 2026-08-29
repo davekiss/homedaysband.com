@@ -60,7 +60,7 @@ export const awry: Song = {
     { role: "Bass", name: "Mark Shannon" },
     { role: "Drums", name: "Alex Christian" },
   ],
-  printsCaption: "Plastic Dino Recordings, spring 2026. These only live here.",
+  printsCaption: "Plastic Dino Recordings, March 2026. These only live here.",
   prints: [
     {
       src: "/images/studio/awry/awry-session-03.jpg",
@@ -81,34 +81,10 @@ export const awry: Song = {
       alt: "Mark tracking bass by the control-room window",
     },
     {
-      src: "/images/studio/awry/awry-session-07.jpg",
-      width: 1200,
-      height: 1600,
-      alt: "The tracking notebook: the weekend's schedule and a to-do list",
-    },
-    {
-      src: "/images/studio/awry/awry-session-06.jpg",
-      width: 1200,
-      height: 1600,
-      alt: "Dave mid-session, Mark on bass behind him",
-    },
-    {
       src: "/images/studio/awry/awry-session-02.jpg",
       width: 1200,
       height: 1600,
       alt: "The studio couch between takes",
-    },
-    {
-      src: "/images/studio/awry/awry-session-08.jpg",
-      width: 1600,
-      height: 1200,
-      alt: "The piano, a lamp, and a red hollow-body at night",
-    },
-    {
-      src: "/images/studio/awry/awry-session-05.jpg",
-      width: 1600,
-      height: 1200,
-      alt: "A banana on the fence outside",
     },
   ],
   // Mark the lines printed on the NFC card with `onCard: true`, and give
