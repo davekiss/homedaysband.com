@@ -8,7 +8,7 @@ web
 
 ## Users
 
-- **Fans** — people who saw Homedays live in Northeast Ohio. Reach the site from Instagram, show flyers, and physical merch. For `/songs/awry` specifically: someone who bought an "Awry" NFC card at the merch table and tapped it with their phone — at the show (dark, loud, one thumb) or later at home.
+- **Fans** — people who saw Homedays live in Northeast Ohio. Reach the site from Instagram, show flyers, and physical merch. For `/c/awry` specifically: someone who bought an "Awry" NFC card at the merch table and tapped it with their phone — at the show (dark, loud, one thumb) or later at home.
 - **Bookers, venues, and press** — evaluate the band via `/epk` and per-venue pitch pages (`/welcome/[band]`). Desktop, time-poor, want the songs and a credible picture fast.
 
 ## Product Purpose
@@ -28,10 +28,10 @@ Homedays is "just a band from Cleveland, Ohio" — the site is deliberately pers
 ## Capabilities and Constraints
 
 - Next.js 16 App Router, React 19, Tailwind 4, react-three-fiber for the homepage scene, `@videojs/react` v10 (beta) for headless custom audio players.
-- Song page `/songs/awry`: on-site playback plus links to Spotify (`open.spotify.com/track/2zcZjk3mxHtH2P4eiOiLis`) and Apple Music (`music.apple.com/us/album/awry-single/6793744592`).
+- Song page `/c/awry`: on-site playback plus links to Spotify (`open.spotify.com/track/2zcZjk3mxHtH2P4eiOiLis`) and Apple Music (`music.apple.com/us/album/awry-single/6793744592`).
 - Band name is **Homedays** — one word, no space.
-- NFC "Awry" card (sold at the merch table): album art on the front, a lyric snippet printed on the back, taps to `/songs/awry`. Card holders' perk is the full lyrics / liner notes on the page (no download). The page stays public and stream-only.
-- Lyrics for Awry are in `data/songs/awry.ts`; the lines printed on the card back are not yet marked (`onCard: true`).
+- NFC "Awry" card (sold at the merch table): album art on the front, a lyric snippet printed on the back, taps to `/c/awry`, optionally with the card's own number (`/c/awry/017`), which the page prints on the back panel. Card holders' perk is the full lyrics / liner notes on the page (no download). The page stays public and stream-only.
+- Lyrics for Awry are in `data/c/awry.ts`; the lines printed on the card back are not yet marked (`onCard: true`).
 
 ## Brand Commitments
 
@@ -47,7 +47,7 @@ Homedays is "just a band from Cleveland, Ohio" — the site is deliberately pers
 - Shows in `data/shows.ts`; venue notes in `data/venues.ts`.
 - EPK press quotes and highlights in `app/components/EPKPage.tsx` — treat as unverified copy, do not propagate.
 - Awry credits (confirmed): recorded at Plastic Dino Recordings; produced by Tuck Mindrum; Dave Kiss — guitar, vocals, lyrics; Mark Shannon — bass; Alex Christian — drums.
-- Lyrics for Awry: in `data/songs/awry.ts` (supplied by the band Aug 28 2026). "Homedays Song Card 01" prints the "I was so fed up" and "went a little too far" verses, one chorus line, and the bedtime outro; those sections are marked `onCard`.
+- Lyrics for Awry: in `data/c/awry.ts` (supplied by the band Aug 28 2026). "Homedays Song Card 01" prints the "I was so fed up" and "went a little too far" verses, one chorus line, and the bedtime outro; those sections are marked `onCard`.
 
 ## Product Principles
 

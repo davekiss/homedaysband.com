@@ -19,7 +19,7 @@ import { audioFeatures, Audio } from "@videojs/react/audio";
 
 const Player = createPlayer({ features: audioFeatures });
 
-export default function JCard({ song }: { song: Song }) {
+export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: string }) {
   const hasLyrics = !!song.lyrics && song.lyrics.length > 0;
 
   return (
@@ -37,7 +37,7 @@ export default function JCard({ song }: { song: Song }) {
               <CoverPanel song={song} />
               <Spine song={song} />
               {hasLyrics && <LyricFold sections={song.lyrics!} cardLabel={song.cardLabel} />}
-              <BackPanel song={song} />
+              <BackPanel song={song} cardNumber={cardNumber} />
             </section>
           </div>
 
@@ -460,6 +460,14 @@ export default function JCard({ song }: { song: Song }) {
           letter-spacing: 0;
           color: var(--ink-2);
           font-family: var(--mono);
+        }
+        .jc-back-foot {
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+        }
+        .jc-card-no {
+          color: var(--ink-2);
         }
         .jc-back-foot a {
           color: var(--ink);
@@ -933,7 +941,7 @@ function LyricFold({ sections, cardLabel }: { sections: LyricSection[]; cardLabe
   );
 }
 
-function BackPanel({ song }: { song: Song }) {
+function BackPanel({ song, cardNumber }: { song: Song; cardNumber?: string }) {
   const i = song.lyrics && song.lyrics.length > 0 ? 3 : 2;
   return (
     <div className="jc-panel jc-back" style={{ "--i": i } as React.CSSProperties}>
@@ -982,6 +990,7 @@ function BackPanel({ song }: { song: Song }) {
 
       <p className="jc-back-foot">
         <Link href="/">homedaysband.com</Link>
+        {cardNumber && <span className="jc-card-no">No. {cardNumber}</span>}
       </p>
     </div>
   );

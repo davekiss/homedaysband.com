@@ -10,7 +10,7 @@ const cousine = Cousine({
 });
 
 const DIRECTION_CONTRACT = `
-THESIS: /songs/awry is the unfolded J-card insert of the single, not a smart-link
+THESIS: /c/awry is the unfolded J-card insert of the single, not a smart-link
 page of stacked buttons. The insert lies open on the night-lit table of the
 homepage's room; the deck's transport sits beneath it.
 OWN-WORLD: cream card stock (#efe6cf) with visible creases on a night ground
