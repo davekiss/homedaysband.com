@@ -6,6 +6,7 @@ colors:
   night-lift: "#1a1614"
   lamp-yellow: "#e9d27a"
   card-stock: "#efe6cf"
+  print-white: "#fbf7ec"
   spine-stock: "#e6dbbf"
   ink: "#2a2416"
   faded-ink: "#6b5f48"
@@ -166,6 +167,7 @@ A warm near-monochrome: two dark browns for the ground and the hardware, two cre
 - **Card Stock** (`card-stock`): the paper of the insert; cover panel, lyric fold, and the base of every panel. Carries a 26% multiply-blended grain so it reads as stock, not a flat fill.
 - **Spine Stock** (`spine-stock`): one value darker than Card Stock, used for the spine panel so the folded strip catches less light. The back panel sits at its own slightly darker value (`#e9dfc6`) for the same reason; that value is panel-local, not a token.
 - **Ink** (`ink`): all primary printed text on paper, the save-button block, the play disc's glyph, and the counter digits' numerals.
+- **Print White** (`print-white`): the border of a photographic print lying on the table — a touch brighter than card stock so the prints read as a different paper.
 - **Faded Ink** (`faded-ink`): secondary print on paper: captions, credit roles, the tracklist side letter, time marks in the lyric margin, and the printed foot line.
 - **Ink Raised** (`ink-raised`): the save button on hover, the block lifting one shade as it rises 1px.
 - **Lake Fog** (`lake-fog`): the placeholder colour under the single art while it loads; taken from the foggy Lake Erie shoreline in the artwork.
@@ -272,6 +274,10 @@ All icons are authored inline SVG on a `24` viewBox: strokes at `1.8` with round
 
 ### Motion
 The insert unfolds on load: each panel rotates from `-62deg` (X on phones, Y on desktop) to flat over `1100ms` on `cubic-bezier(0.16, 1, 0.3, 1)`, staggered `160ms` per panel via `--i`, under `perspective: 1600px`. The cover art breathes to `scale(1.02)` over `1200ms` while playing. Hover and colour transitions are `200ms ease`; press and lift transitions use the spring curve. `prefers-reduced-motion` removes the unfold and the scale transitions entirely.
+
+### Prints on the table
+
+Behind-the-scenes photos sit beneath the insert as physical prints: a horizontal, snap-scrolling strip of `.jc-print` buttons, each a `#fbf7ec` print border (7px sides, 20px foot) around an image 168px tall on phones and 210px on desktop, tilted −2.6° to 2.4° in a fixed sequence, lifted flat and 4px up on hover. Tapping one opens a native `<dialog>` lightbox: the same print border at full size on the night backdrop (`rgba(16,14,11,0.94)`), a mono caption "n / N — alt", and 44px round prev / next / close controls. Arrow keys step, Escape and backdrop click close. Images are the band's own photos with provenance embedded; never stock.
 
 ## Do's and Don'ts
 

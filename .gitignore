@@ -42,3 +42,7 @@ next-env.d.ts
 
 # impeccable review captures (transient)
 .impeccable/review/
+
+# raw iPhone originals; the page serves the resized copies in studio/awry
+public/images/studio/IMG_*
+public/images/studio/.DS_Store

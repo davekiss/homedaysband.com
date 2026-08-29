@@ -1,9 +1,9 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Song, LyricSection } from "@/data/songs/awry";
+import type { Song, LyricSection, Print } from "@/data/songs/awry";
 
 import "@videojs/react/audio/skin.css";
 import {
@@ -39,6 +39,8 @@ export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: s
               {hasLyrics && <LyricFold sections={song.lyrics!} cardLabel={song.cardLabel} />}
               <BackPanel song={song} cardNumber={cardNumber} />
             </section>
+
+            {song.prints.length > 0 && <Prints prints={song.prints} caption={song.printsCaption} />}
           </div>
 
           <Deck song={song} />
@@ -705,6 +707,139 @@ export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: s
           height: 9px;
         }
 
+        /* ---------- prints on the table ---------- */
+        .jc-prints {
+          margin-top: 36px;
+        }
+        .jc-prints-head {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          padding: 0 16px 6px;
+        }
+        .jc-prints h2 {
+          font-size: 22px;
+          margin: 0;
+          color: var(--cream);
+        }
+        .jc-prints-caption {
+          font-family: var(--mono);
+          font-size: 11px;
+          color: rgba(245, 239, 221, 0.62);
+          margin: 0;
+        }
+        .jc-prints-strip {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          overflow-x: auto;
+          padding: 18px 16px 28px;
+          scroll-snap-type: x proximity;
+          scroll-padding-inline: 16px;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(245, 239, 221, 0.25) transparent;
+        }
+        .jc-print {
+          flex: 0 0 auto;
+          padding: 7px 7px 20px;
+          background: #fbf7ec;
+          border: 0;
+          box-shadow:
+            0 16px 30px -14px rgba(0, 0, 0, 0.75),
+            0 2px 6px rgba(0, 0, 0, 0.35);
+          transform: rotate(var(--tilt, 0deg));
+          scroll-snap-align: start;
+          cursor: zoom-in;
+          transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms ease;
+        }
+        .jc-print:hover,
+        .jc-print:focus-visible {
+          transform: rotate(0deg) translateY(-4px);
+          box-shadow:
+            0 24px 40px -16px rgba(0, 0, 0, 0.8),
+            0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+        .jc-print img {
+          display: block;
+          height: 168px;
+          width: auto;
+          background: var(--fog);
+        }
+        .jc-lightbox {
+          width: 100vw;
+          height: 100dvh;
+          max-width: none;
+          max-height: none;
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: transparent;
+          color: var(--cream);
+        }
+        .jc-lightbox::backdrop {
+          background: rgba(16, 14, 11, 0.94);
+        }
+        .jc-lightbox-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 14px;
+          padding: 16px;
+        }
+        .jc-lightbox-print {
+          padding: 10px 10px 28px;
+          background: #fbf7ec;
+          box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.9);
+        }
+        .jc-lightbox-print img {
+          display: block;
+          width: auto;
+          height: auto;
+          max-width: calc(100vw - 52px);
+          max-height: calc(100dvh - 150px);
+        }
+        .jc-lightbox-caption {
+          font-family: var(--mono);
+          font-size: 12px;
+          color: rgba(245, 239, 221, 0.75);
+          text-align: center;
+          max-width: 60ch;
+        }
+        .jc-lightbox-btn {
+          position: absolute;
+          width: 44px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          color: var(--cream);
+          background: rgba(245, 239, 221, 0.08);
+          transition: background 200ms ease;
+          cursor: pointer;
+        }
+        .jc-lightbox-btn:hover {
+          background: rgba(245, 239, 221, 0.18);
+        }
+        .jc-lightbox-close {
+          top: 14px;
+          right: 14px;
+        }
+        .jc-lightbox-prev {
+          left: 10px;
+          top: 50%;
+          margin-top: -22px;
+        }
+        .jc-lightbox-next {
+          right: 10px;
+          top: 50%;
+          margin-top: -22px;
+        }
+
         /* ---------- motion ---------- */
         @keyframes jc-unfold-x {
           from {
@@ -741,6 +876,7 @@ export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: s
           .jc-cover-art img,
           .jc-slider-thumb,
           .jc-play,
+          .jc-print,
           .jc-cover-play {
             transition: none !important;
           }
@@ -831,6 +967,29 @@ export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: s
           }
           .jc-back h1 {
             font-size: 56px;
+          }
+          .jc-prints-head {
+            flex-direction: row;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 0 0 6px;
+          }
+          .jc-prints-caption {
+            text-align: right;
+          }
+          .jc-prints-strip {
+            padding: 20px 0 30px;
+            scroll-padding-inline: 0;
+          }
+          .jc-print img {
+            height: 210px;
+          }
+          .jc-lightbox-prev {
+            left: 28px;
+          }
+          .jc-lightbox-next {
+            right: 28px;
           }
           .jc-deck {
             padding: 12px 24px calc(12px + env(safe-area-inset-bottom));
@@ -993,6 +1152,93 @@ function BackPanel({ song, cardNumber }: { song: Song; cardNumber?: string }) {
         {cardNumber && <span className="jc-card-no">No. {cardNumber}</span>}
       </p>
     </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* prints on the table                                                 */
+/* ------------------------------------------------------------------ */
+
+const TILTS = [-2.2, 1.6, -1.1, 2.4, -1.8, 1.2, -2.6, 1.9];
+
+function Prints({ prints, caption }: { prints: Print[]; caption: string }) {
+  const [open, setOpen] = useState<number | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const d = dialogRef.current;
+    if (!d) return;
+    if (open !== null && !d.open) d.showModal();
+    if (open === null && d.open) d.close();
+  }, [open]);
+
+  const step = useCallback(
+    (dir: 1 | -1) => setOpen((i) => (i === null ? null : (i + dir + prints.length) % prints.length)),
+    [prints.length]
+  );
+
+  return (
+    <section className="jc-prints" aria-label="Photos from the session">
+      <div className="jc-prints-head">
+        <h2>From the session</h2>
+        <p className="jc-prints-caption">{caption}</p>
+      </div>
+      <div className="jc-prints-strip">
+        {prints.map((p, i) => (
+          <button
+            key={p.src}
+            type="button"
+            className="jc-print"
+            style={{ "--tilt": `${TILTS[i % TILTS.length]}deg` } as React.CSSProperties}
+            onClick={() => setOpen(i)}
+            aria-label={`Open photo ${i + 1} of ${prints.length}: ${p.alt}`}
+          >
+            <Image src={p.src} alt="" width={p.width} height={p.height} sizes="320px" />
+          </button>
+        ))}
+      </div>
+
+      <dialog
+        ref={dialogRef}
+        className="jc-lightbox"
+        aria-label="Photo"
+        onClose={() => setOpen(null)}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setOpen(null);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowRight") step(1);
+          if (e.key === "ArrowLeft") step(-1);
+        }}
+      >
+        {open !== null && (
+          <div className="jc-lightbox-inner" onClick={(e) => e.stopPropagation()}>
+            <figure className="jc-lightbox-print">
+              <Image
+                src={prints[open].src}
+                alt={prints[open].alt}
+                width={prints[open].width}
+                height={prints[open].height}
+                sizes="100vw"
+                priority
+              />
+            </figure>
+            <p className="jc-lightbox-caption">
+              {open + 1} / {prints.length} — {prints[open].alt}
+            </p>
+            <button type="button" className="jc-lightbox-btn jc-lightbox-prev" onClick={() => step(-1)} aria-label="Previous photo">
+              <ArrowIcon direction="left" />
+            </button>
+            <button type="button" className="jc-lightbox-btn jc-lightbox-next" onClick={() => step(1)} aria-label="Next photo">
+              <ArrowIcon direction="right" />
+            </button>
+            <button type="button" className="jc-lightbox-btn jc-lightbox-close" onClick={() => setOpen(null)} aria-label="Close">
+              <CloseIcon />
+            </button>
+          </div>
+        )}
+      </dialog>
+    </section>
   );
 }
 
@@ -1195,20 +1441,35 @@ function VolumeGlyph({ muted = false }: { muted?: boolean }) {
   );
 }
 
-function ArrowIcon({ direction }: { direction: "left" | "out" }) {
+function ArrowIcon({ direction }: { direction: "left" | "right" | "out" }) {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      {direction === "left" ? (
+      {direction === "left" && (
         <>
           <path d="M20 12H5" />
           <path d="M11 6l-6 6 6 6" />
         </>
-      ) : (
+      )}
+      {direction === "right" && (
+        <>
+          <path d="M4 12h15" />
+          <path d="M13 6l6 6-6 6" />
+        </>
+      )}
+      {direction === "out" && (
         <>
           <path d="M7 17L17 7" />
           <path d="M9 7h8v8" />
         </>
       )}
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
+      <path d="M6 6l12 12M18 6L6 18" />
     </svg>
   );
 }
