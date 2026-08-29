@@ -292,7 +292,13 @@ export default function JCard({ song }: { song: Song }) {
 
         /* lyric fold */
         .jc-lyrics {
+          padding: 0;
+        }
+        .jc-lyrics-scroll {
           padding: 26px 18px 30px;
+        }
+        .jc-lyrics-fade {
+          display: none;
         }
         .jc-lyrics h2 {
           font-size: 22px;
@@ -301,9 +307,12 @@ export default function JCard({ song }: { song: Song }) {
         }
         .jc-lyric-section {
           display: grid;
-          grid-template-columns: 3.25rem 1fr;
+          grid-template-columns: 1fr;
           gap: 0 10px;
           margin: 0 0 16px;
+        }
+        .jc-lyrics[data-times="true"] .jc-lyric-section {
+          grid-template-columns: 3.25rem 1fr;
         }
         .jc-lyric-time {
           font-size: 11px;
@@ -325,7 +334,7 @@ export default function JCard({ song }: { song: Song }) {
           padding: 0 4px;
         }
         .jc-lyric-card-note {
-          grid-column: 2;
+          grid-column: -1 / -2;
           margin-top: 6px;
           font-size: 11px;
           letter-spacing: 0.16em;
@@ -762,9 +771,30 @@ export default function JCard({ song }: { song: Song }) {
             padding: 18px 0;
             justify-content: space-between;
           }
+          .jc-insert {
+            min-height: 580px;
+          }
           .jc-lyrics {
-            padding: 34px 28px 34px;
-            overflow: auto;
+            min-height: 0;
+          }
+          .jc-lyrics-scroll {
+            position: absolute;
+            inset: 0;
+            overflow-y: auto;
+            padding: 34px 28px 56px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(42, 36, 22, 0.35) transparent;
+          }
+          .jc-lyrics-fade {
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 64px;
+            background: linear-gradient(180deg, rgba(239, 230, 207, 0), var(--stock));
+            pointer-events: none;
+            z-index: 2;
           }
           .jc-back {
             padding: 34px 28px 26px;
@@ -850,12 +880,14 @@ function Spine({ song }: { song: Song }) {
 }
 
 function LyricFold({ sections }: { sections: LyricSection[] }) {
+  const hasTimes = sections.some((s) => s.time);
   return (
-    <div className="jc-panel jc-lyrics" style={{ "--i": 2 } as React.CSSProperties}>
+    <div className="jc-panel jc-lyrics" style={{ "--i": 2 } as React.CSSProperties} data-times={hasTimes}>
+      <div className="jc-lyrics-scroll">
       <h2>Lyrics</h2>
       {sections.map((section, i) => (
         <div key={i} className="jc-lyric-section" data-on-card={!!section.onCard}>
-          <span className="jc-lyric-time">{section.time ?? ""}</span>
+          {hasTimes && <span className="jc-lyric-time">{section.time ?? ""}</span>}
           <p className="jc-lyric-lines">
             {section.lines.map((line, j) => (
               <span key={j}>
@@ -867,6 +899,8 @@ function LyricFold({ sections }: { sections: LyricSection[] }) {
           {section.onCard && <span className="jc-lyric-card-note">Printed on the card</span>}
         </div>
       ))}
+      </div>
+      <div className="jc-lyrics-fade" aria-hidden />
     </div>
   );
 }

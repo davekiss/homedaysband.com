@@ -17,4 +17,4 @@ Chosen direction: The Cassette J-Card (seed 9a1c93e4, surface scope, persuade). 
 
 Kept from the round's declined challengers: ruled credits caption (Sapeur plate), night ground (Sleeping City), one continuous sheet (Ebru), margin time-marks for the lyric fold (Orizuru).
 
-Unresolved: the lyrics text and which lines are printed on the card (mark with `onCard: true` and `time` in data/songs/awry.ts). Anti-goals: no WebGL, no stacked smart-link page, no autoplay, no invented credits or quotes.
+Unresolved: which lyric lines are printed on the card (mark with `onCard: true` in data/songs/awry.ts) and song-time marks for the margin column (`time`). On desktop the lyric fold scrolls inside the flat insert under a paper fade; on phones it is fully expanded. Anti-goals: no WebGL, no stacked smart-link page, no autoplay, no invented credits or quotes.

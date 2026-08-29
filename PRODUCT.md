@@ -31,7 +31,7 @@ Homedays is "just a band from Cleveland, Ohio" — the site is deliberately pers
 - Song page `/songs/awry`: on-site playback plus links to Spotify (`open.spotify.com/track/2zcZjk3mxHtH2P4eiOiLis`) and Apple Music (`music.apple.com/us/album/awry-single/6793744592`).
 - Band name is **Homedays** — one word, no space.
 - NFC "Awry" card (sold at the merch table): album art on the front, a lyric snippet printed on the back, taps to `/songs/awry`. Card holders' perk is the full lyrics / liner notes on the page (no download). The page stays public and stream-only.
-- Lyrics for Awry will be supplied by the band later; the page carries a slot for them.
+- Lyrics for Awry are in `data/songs/awry.ts`; the lines printed on the card back are not yet marked (`onCard: true`).
 
 ## Brand Commitments
 
@@ -47,7 +47,7 @@ Homedays is "just a band from Cleveland, Ohio" — the site is deliberately pers
 - Shows in `data/shows.ts`; venue notes in `data/venues.ts`.
 - EPK press quotes and highlights in `app/components/EPKPage.tsx` — treat as unverified copy, do not propagate.
 - Awry credits (confirmed): recorded at Plastic Dino Recordings; produced by Tuck Mindrum; Dave Kiss — guitar, vocals, lyrics; Mark Shannon — bass; Alex Christian — drums.
-- Lyrics for Awry: to be supplied by the band; not yet in the repo. The card back prints several lines from the song; which lines is not yet recorded.
+- Lyrics for Awry: in `data/songs/awry.ts` (supplied by the band Aug 28 2026). The card back prints several lines from the song; which lines is not yet recorded.
 
 ## Product Principles
 

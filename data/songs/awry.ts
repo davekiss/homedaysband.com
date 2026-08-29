@@ -46,7 +46,90 @@ export const awry: Song = {
     { role: "Bass", name: "Mark Shannon" },
     { role: "Drums", name: "Alex Christian" },
   ],
-  // Lyrics to come from the band. Mark the card's printed lines with
-  // `onCard: true` and give sections a `time` for the margin column.
-  lyrics: null,
+  // Mark the lines printed on the NFC card with `onCard: true`, and give
+  // sections a `time` ("0:41") to fill the margin column.
+  lyrics: [
+    {
+      lines: [
+        "not quite what I had in mind",
+        "took a turn and got lost",
+        "somewhere along the way",
+        "things went awry",
+      ],
+    },
+    {
+      lines: [
+        "we were all lined up",
+        "perfect cursive",
+        "over time you",
+        "started acting aversive",
+      ],
+    },
+    {
+      lines: [
+        "went a little too hard",
+        "burned out like a campfire",
+        "smoldering through the night",
+      ],
+    },
+    {
+      lines: [
+        "had all the makings",
+        "to be the next big thing",
+        "an overnight success",
+        "that never came to be",
+      ],
+    },
+    {
+      lines: [
+        "so tell me",
+        "where did all our plans go awry?",
+        "where did all our plans go awry?",
+      ],
+    },
+    {
+      lines: [
+        "not right in my scattered mind",
+        "Brushed it off took the loss",
+        "somehow we’ve gone astray",
+        "things went awry",
+      ],
+    },
+    {
+      lines: [
+        "I was so fed up",
+        "With your coercion",
+        "Tryna control me",
+        "But i’m my own person",
+      ],
+    },
+    {
+      lines: [
+        "Went a little too far",
+        "I snapped",
+        "like a winter coat",
+        "Braving the cold",
+      ],
+    },
+    {
+      lines: [
+        "we were so fixated",
+        "on moments long past",
+        "barely even noticed",
+        "the opportunity pass",
+      ],
+    },
+    {
+      lines: [
+        "where did all our plans go awry?",
+        "where did all our plans go awry?",
+        "where did all our plans go awry?",
+        "where did all our plans go awry?",
+        "where did all our plans go?",
+      ],
+    },
+    {
+      lines: ["let’s stay up past our bedtime and talk"],
+    },
+  ],
 };
