@@ -1,13 +1,4 @@
-import { Cousine } from "next/font/google";
-
-// The printed text on the physical song card is Andale Mono. It ships on
-// Macs but not phones, so Cousine (same proportions) rides as the fallback.
-const cousine = Cousine({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-cousine",
-  display: "swap",
-});
+import { cousine } from "@/app/fonts";
 
 const DIRECTION_CONTRACT = `
 THESIS: /c/awry is the unfolded J-card insert of the single, not a smart-link

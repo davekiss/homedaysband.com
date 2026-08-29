@@ -18,6 +18,7 @@ export type Print = {
 };
 
 export type Song = {
+  slug: string;
   title: string;
   artist: string;
   releaseDate: string;
@@ -40,6 +41,7 @@ export type Song = {
 };
 
 export const awry: Song = {
+  slug: "awry",
   title: "Awry",
   artist: "Homedays",
   releaseDate: "July 31, 2026",

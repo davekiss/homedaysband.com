@@ -4,6 +4,9 @@ import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Song, LyricSection, Print } from "@/data/songs/awry";
+import Shelf from "@/app/components/Shelf";
+import { useShelf } from "@/app/components/useShelf";
+import "./shelf.css";
 
 import "@videojs/react/audio/skin.css";
 import {
@@ -22,6 +25,16 @@ const Player = createPlayer({ features: audioFeatures });
 export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: string }) {
   const hasLyrics = !!song.lyrics && song.lyrics.length > 0;
 
+  // A serial in the URL is a physical tap: the card goes on the shelf.
+  // With one card the shelf sits quietly under the insert; from the
+  // second card on, it is the first thing on the table.
+  const shelf = useShelf();
+  useEffect(() => {
+    if (cardNumber) shelf.add(song.slug, cardNumber);
+  }, [cardNumber, song.slug, shelf.add]);
+  const showShelf = shelf.ready && shelf.cards.length > 0;
+  const shelfLeads = shelf.cards.length >= 2;
+
   return (
     <main className="jc-room" data-lyrics={hasLyrics}>
       <Player.Provider>
@@ -33,12 +46,16 @@ export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: s
               <ArrowIcon direction="left" /> Homedays
             </Link>
 
+            {showShelf && shelfLeads && <Shelf cards={shelf.cards} variant="inline" share />}
+
             <section className="jc-insert" aria-label={`${song.title} — cassette insert`}>
               <CoverPanel song={song} />
               <Spine song={song} />
               {hasLyrics && <LyricFold sections={song.lyrics!} cardLabel={song.cardLabel} />}
               <BackPanel song={song} cardNumber={cardNumber} />
             </section>
+
+            {showShelf && !shelfLeads && <Shelf cards={shelf.cards} variant="inline" share />}
 
             {song.prints.length > 0 && <Prints prints={song.prints} caption={song.printsCaption} />}
           </div>
@@ -61,7 +78,7 @@ export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: s
           --deck: #171310;
           --deck-2: #241e18;
           --cream: #f5efdd;
-          --mono: "Andale Mono", var(--font-cousine), ui-monospace, Menlo, monospace;
+          --mono: "Andale Mono", var(--font-cousine, Cousine), ui-monospace, Menlo, monospace;
           --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
           position: relative;
           min-height: 100dvh;
@@ -710,6 +727,9 @@ export default function JCard({ song, cardNumber }: { song: Song; cardNumber?: s
         /* ---------- prints on the table ---------- */
         .jc-prints {
           margin-top: 36px;
+        }
+        .jc-room .shelf[data-variant="inline"] + .jc-insert {
+          margin-top: 34px;
         }
         .jc-prints-head {
           display: flex;

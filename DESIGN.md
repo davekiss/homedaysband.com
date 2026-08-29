@@ -279,6 +279,10 @@ The insert unfolds on load: each panel rotates from `-62deg` (X on phones, Y on 
 
 Behind-the-scenes photos sit beneath the insert as physical prints: a horizontal, snap-scrolling strip of `.jc-print` buttons, each a `#fbf7ec` print border (7px sides, 20px foot) around an image 168px tall on phones and 210px on desktop, tilted −2.6° to 2.4° in a fixed sequence, lifted flat and 4px up on hover. Tapping one opens a native `<dialog>` lightbox: the same print border at full size on the night backdrop (`rgba(16,14,11,0.94)`), a mono caption "n / N — alt", and 44px round prev / next / close controls. Arrow keys step, Escape and backdrop click close. Images are the band's own photos with provenance embedded; never stock.
 
+### The shelf
+
+A wooden shelf on the night ground, on the song page (inline, under the insert until the second card) and at `/shelf` (full). Twelve `.shelf-slot`s on a 4-column grid (6 on desktop) with walnut planks (`#3a2a1c → #221810`, 10–12px) under each row. A held slot is a Card Stock card: 6–8px padding, square art, a mono line with the slot number in Faded Ink and "No. 017" in Ink, lifted 3px on hover. An empty slot is the same card at 6% cream with a 1px dashed 16% cream border and its number at 45% cream — dimmed, never padlocked, never captioned. Foot: the share button (Cream on Ink, mono 12px) and a mono link. The share image at `/shelf/og` is the same shelf drawn with `next/og`: flat colors only (satori), no box shadows, Cousine for print.
+
 ## Do's and Don'ts
 
 ### Do:

@@ -1,5 +1,12 @@
 ---
 version: 1
+slug: "app-c-song-jcard-tsx"
+primary_target: "app/c/[song]/JCard.tsx"
+related_targets: ["app/c/[song]/[[...card]]/page.tsx","app/c/[song]/layout.tsx","data/songs/awry.ts","data/cards.ts","app/components/Shelf.tsx"]
+---
+
+---
+version: 1
 slug: "app-c-awry-jcard-tsx"
 primary_target: "app/c/awry/JCard.tsx"
 related_targets: ["app/c/awry/[[...card]]/page.tsx","app/c/awry/layout.tsx","data/songs/awry.ts"]
@@ -24,4 +31,4 @@ Chosen direction: The Cassette J-Card (seed 9a1c93e4, surface scope, persuade). 
 
 Kept from the round's declined challengers: ruled credits caption (Sapeur plate), night ground (Sleeping City), one continuous sheet (Ebru), margin time-marks for the lyric fold (Orizuru).
 
-Unresolved: which lyric lines are printed on the card (mark with `onCard: true` in data/c/awry.ts) and song-time marks for the margin column (`time`). On desktop the lyric fold scrolls inside the flat insert under a paper fade; on phones it is fully expanded. Anti-goals: no WebGL, no stacked smart-link page, no autoplay, no invented credits or quotes.
+Card taps with a serial land the card on the visitor's shelf (see PRODUCT.md, "The shelf"): with one card the shelf sits under the insert; from the second card it leads the page, above the insert. Unresolved: which lyric lines are printed on the card (mark with `onCard: true` in data/c/awry.ts) and song-time marks for the margin column (`time`). On desktop the lyric fold scrolls inside the flat insert under a paper fade; on phones it is fully expanded. Anti-goals: no WebGL, no stacked smart-link page, no autoplay, no invented credits or quotes.
