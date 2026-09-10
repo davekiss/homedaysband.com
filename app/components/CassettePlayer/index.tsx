@@ -131,6 +131,12 @@ const TRACKS: Track[] = [
   },
 ];
 
+// URL slug for a tape: "High Fly Ball" -> "high-fly-ball". Deep links
+// (/?tape=imposter) insert that tape on load, and the address bar keeps
+// the current tape so any moment is shareable by copying the URL.
+export const tapeSlug = (title: string) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
 export default function CassettePlayer() {
   const player = useAudioPlayer(TRACKS);
   const [sceneReady, setSceneReady] = useState(false);
@@ -145,6 +151,32 @@ export default function CassettePlayer() {
   const handleSelectTrack = (index: number) => {
     player.loadTrack(index, true, 850);
   };
+
+  // ?tape=imposter — insert that tape once the scene is on screen. The
+  // play attempt usually gets blocked without a gesture, in which case
+  // the tape sits cued in the deck and one press starts it.
+  const deepLinkDone = useRef(false);
+  useEffect(() => {
+    if (!sceneReady || deepLinkDone.current) return;
+    deepLinkDone.current = true;
+    const slug = new URLSearchParams(window.location.search).get("tape");
+    if (!slug) return;
+    const index = TRACKS.findIndex((t) => tapeSlug(t.title) === slug.toLowerCase());
+    if (index === -1) return;
+    const timer = window.setTimeout(() => player.loadTrack(index, true, 850), 500);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sceneReady]);
+
+  // Keep the address bar pointing at the inserted tape (and clean after
+  // an eject) without adding history entries.
+  useEffect(() => {
+    if (!deepLinkDone.current && player.currentTrackIndex === null) return;
+    const url = new URL(window.location.href);
+    if (player.currentTrackIndex === null) url.searchParams.delete("tape");
+    else url.searchParams.set("tape", tapeSlug(TRACKS[player.currentTrackIndex].title));
+    window.history.replaceState(null, "", url);
+  }, [player.currentTrackIndex]);
 
   return (
     <div className="fixed inset-0 w-screen h-screen">

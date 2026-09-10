@@ -262,9 +262,14 @@ export function useAudioPlayer(tracks: Track[]) {
           // sound the transport play button makes when pressed manually).
           playClickSound();
           // HTMLAudioElement.play() will wait until the source is loaded
-          // enough to begin playback, so we can call it directly.
-          audioRef.current.play().catch(() => {});
-          setState("playing");
+          // enough to begin playback, so we can call it directly. If the
+          // browser blocks it (no user gesture yet — e.g. a ?tape= deep
+          // link), leave the tape inserted and cued as "paused" so the
+          // play button does the rest.
+          audioRef.current
+            .play()
+            .then(() => setState("playing"))
+            .catch(() => setState("paused"));
         };
         if (autoplayDelayMs > 0) {
           playTimeoutRef.current = window.setTimeout(
